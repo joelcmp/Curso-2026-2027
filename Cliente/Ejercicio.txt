@@ -1,0 +1,47 @@
+Se pide:     Resultado (string)   Tipo          isNaN()         Number.isNaN()
+'1' + '2'    12                   String        true            
+'1' + 2      12                   String                  
+'1 + '2'    12                   
+'1 + 2       12                                false  
+'1' - 0      1               
+'1' * 2      2                  
+'6' / '3'    2                
+'5' - '2'    3                 
+true + 1     2              
+false + 1    1                 
+null + 1      1                
+undefined + 1  Nan                     
+[] + []         -                       
+[] + {}         [object Object]              
+({} + [])       [object Object]              
+({} + {})       [object Object][object Object]              
+0 == false         true           
+0 === false        false           
+'' == false         true           
+'' === false        false           
+'1' == 1           true            
+'1' === 1           false           
+null == undefined     true              
+null === undefined     false                   
+NaN == NaN              false      
+NaN === NaN            false       
+Object.is(NaN, NaN)     true                  
+isNaN('foo')             true           
+Number.isNaN('foo')       false                
+isNaN('1')                 false   
+Number.isNaN('1')                   
+#ERROR!                       
+#ERROR!                       
+parseInt('08')                      
+Number('08')                        
+typeof null                   
+typeof undefined                    
+typeof []                     
+typeof {}                     
+Array.isArray([])                   
+[] == false                   
+[0] == 0                      
+' ' == 0                       
+'' == 0                        
+0' == false                   
+undefined == false
