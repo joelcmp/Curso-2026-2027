@@ -1,27 +1,27 @@
-Se pide:     Resultado (string)   Tipo          isNaN()         Number.isNaN()
-'1' + '2'    12                   String        true            
-'1' + 2      12                   String                  
-'1 + '2'    12                   
-'1 + 2       12                                false  
-'1' - 0      1               
-'1' * 2      2                  
-'6' / '3'    2                
-'5' - '2'    3                 
-true + 1     2              
-false + 1    1                 
-null + 1      1                
-undefined + 1  Nan                     
-[] + []         -                       
-[] + {}         [object Object]              
-({} + [])       [object Object]              
-({} + {})       [object Object][object Object]              
-0 == false         true           
-0 === false        false           
-'' == false         true           
-'' === false        false           
-'1' == 1           true            
-'1' === 1           false           
-null == undefined     true              
+Se pide:     Resultado (string)                 Tipo          isNaN()         Number.isNaN()
+'1' + '2'    12                                  String        true            false
+'1' + 2      12                                  String                         false
+'1 + '2'    12                                   string 
+'1 + 2       12                                   string              false  
+'1' - 0      1                                    number
+'1' * 2      2                                      number
+'6' / '3'    2                                        number  
+'5' - '2'    3                                          number
+true + 1     2                                          number
+false + 1    1                                          number
+null + 1      1                                         number
+undefined + 1  Nan                                      number
+[] + []         -                                       string
+[] + {}         [object Object]                         string
+({} + [])       [object Object]                         string
+({} + {})       [object Object][object Object]            string  
+0 == false         true                                 boolean
+0 === false        false                                boolean
+'' == false         true                                boolean
+'' === false        false                               boolean
+'1' == 1           true                                 boolean
+'1' === 1           false                               booelan
+null == undefined     true                              
 null === undefined     false                   
 NaN == NaN              false      
 NaN === NaN            false       
@@ -29,19 +29,19 @@ Object.is(NaN, NaN)     true              
 isNaN('foo')             true           
 Number.isNaN('foo')       false                
 isNaN('1')                 false   
-Number.isNaN('1')                   
-#ERROR!                       
-#ERROR!                       
-parseInt('08')                      
-Number('08')                        
-typeof null                   
-typeof undefined                    
-typeof []                     
-typeof {}                     
-Array.isArray([])                   
-[] == false                   
-[0] == 0                      
-' ' == 0                       
-'' == 0                        
-0' == false                   
-undefined == false
+Number.isNaN('1')          false        
+#ERROR!                    non null   
+#ERROR!                       non null
+parseInt('08')                8      
+Number('08')                   8     
+typeof null                   object
+typeof undefined              undefined      
+typeof []                     object
+typeof {}                     object
+Array.isArray([])              true     
+[] == false                   true 
+[0] == 0                      true 
+' ' == 0                       true 
+'' == 0                       true  
+0' == false                  true  
+undefined == false              false
