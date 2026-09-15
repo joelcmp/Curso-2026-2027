@@ -5,7 +5,7 @@
     <title>Adivinar numero</title>
 </head>
 <body>
-    <h2>Prueba un número</h2>
+    <h2>Adivinar el número</h2>
 
     <form method="post" action=>
         <label for="nombre">Número:</label>
@@ -13,19 +13,25 @@
 
         <input type="submit" value="Probar">
     </form>
-
 <?php
-    $numero_secreto=random_int;
+    $numero_secreto=random_int(1,100);
     $numero_intento=$_POST['numero'];
     $numero_intentados=range(1,10);
     $intentos_restantes=10;
 
-    while ($numero_intento != $numero_secreto && $intentos_restantes>0) {
-        echo "Sigue intentandolo, te quedan "."$intentos_restantes"." intentos"
+    while ($numero_intento != $numero_secreto || $intentos_restantes>0) {
+        $intentos_restantes--;
+        echo "Sigue intentandolo, te quedan "."$intentos_restantes"." intentos";
+
+        if ($numero_intento>$numero_secreto) {
+            echo "Te has pasado";
+        }else {
+            echo "Te has quedado corto";
+        }
     }
 
     if ($intentos_restantes===0) {
-        echo "Has superado el numero de intentos"
+        echo "Has superado el numero de intentos";
     }else{
         
         echo "Correcto!"; 
