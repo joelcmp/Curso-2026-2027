@@ -1,47 +1,47 @@
-Se pide:     Resultado (string)                 Tipo          isNaN()         Number.isNaN()
-'1' + '2'    12                                  String        true            false
-'1' + 2      12                                  String                         false
-'1 + '2'    12                                   string 
-'1 + 2       12                                   string              false  
-'1' - 0      1                                    number
-'1' * 2      2                                      number
-'6' / '3'    2                                        number  
-'5' - '2'    3                                          number
-true + 1     2                                          number
-false + 1    1                                          number
-null + 1      1                                         number
-undefined + 1  Nan                                      number
-[] + []         -                                       string
-[] + {}         [object Object]                         string
-({} + [])       [object Object]                         string
-({} + {})       [object Object][object Object]            string  
-0 == false         true                                 boolean
-0 === false        false                                boolean
-'' == false         true                                boolean
-'' === false        false                               boolean
-'1' == 1           true                                 boolean
-'1' === 1           false                               booelan
-null == undefined     true                              
-null === undefined     false                   
-NaN == NaN              false      
-NaN === NaN            false       
-Object.is(NaN, NaN)     true                  
-isNaN('foo')             true           
-Number.isNaN('foo')       false                
-isNaN('1')                 false   
-Number.isNaN('1')          false        
-#ERROR!                    non null   
-#ERROR!                       non null
-parseInt('08')                8      
-Number('08')                   8     
-typeof null                   object
-typeof undefined              undefined      
-typeof []                     object
-typeof {}                     object
-Array.isArray([])              true     
-[] == false                   true 
-[0] == 0                      true 
-' ' == 0                       true 
-'' == 0                       true  
-0' == false                  true  
-undefined == false              false
+Se pide:     Resultado (string)                 Tipo                    isNaN()          Number.isNaN()
+'1' + '2'    12                                  String                 true            false
+'1' + 2      12                                  String                  false               false
+'1 + '2'    12                                   string                  false              false
+'1 + 2       12                                   string              false                 false
+'1' - 0      1                                    number                false               false
+'1' * 2      2                                      number              false               false
+'6' / '3'    2                                        number             false              false
+'5' - '2'    3                                          number          false               false
+true + 1     2                                          number           false              false
+false + 1    1                                          number            false             false
+null + 1      1                                         number              false           false
+undefined + 1  Nan                                      number              false           true
+[] + []         -                                       string              false           false
+[] + {}         [object Object]                         string              false           false
+({} + [])       [object Object]                         string              false           false
+({} + {})       [object Object][object Object]            string            false           false
+0 == false         true                                 boolean             false           false
+0 === false        false                                boolean             false           false
+'' == false         true                                boolean             false           false
+'' === false        false                               boolean             false           false
+'1' == 1           true                                 boolean             false           false
+'1' === 1           false                               booelan             false           false
+null == undefined     true                              boolean             false           false
+null === undefined     false                            boolean             false           false
+NaN == NaN              false                           boolean             false           false
+NaN === NaN            false                            boolean             false           false
+Object.is(NaN, NaN)     true                            boolean             false           false
+isNaN('foo')             true                           boolean             
+Number.isNaN('foo')       false                         boolean             
+isNaN('1')                 false                        boolean             
+Number.isNaN('1')          false                        boolean             
+#ERROR!                       nada                           nada          nada             nada 
+#ERROR!                       nada                  nada                    nada            nada            
+parseInt('08')                8                         number              false           false
+Number('08')                   8                        number          false               false
+typeof null                   object                    string          true               false
+typeof undefined              undefined                 string          true               false
+typeof []                     object                    string          true               false
+typeof {}                     object                    string          true               false
+Array.isArray([])              true                     boolean         false               false
+[] == false                   true                      boolean         false               false
+[0] == 0                      true                      booelan         false               false
+' ' == 0                       true                     boolean         false               false
+'' == 0                       true                      boolean         false               false
+0' == false                  true                       booelan         false               false
+undefined == false              false                   booelan         false               false
