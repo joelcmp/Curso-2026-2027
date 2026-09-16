@@ -14,32 +14,33 @@
         <input type="submit" value="Probar">
     </form>
 <?php
-    $numero_secreto=random_int(1,100);
-    $numero_intento=$_POST['numero'];
-    $numero_intentados=range(1,10);
-    $intentos_restantes=10;
-
-    while ($numero_intento != $numero_secreto || $intentos_restantes>0) {
-        $intentos_restantes--;
-        echo "Sigue intentandolo, te quedan "."$intentos_restantes"." intentos";
-
-        if ($numero_intento>$numero_secreto) {
-            echo "Te has pasado";
-        }else {
-            echo "Te has quedado corto";
-        }
+    session_start();
+    if (!isset($_SESSION['numero_secreto'])) {
+        $_SESSION['numero_secreto']=random_int(1,100);
+        $_SESSION['numeros_intentados']=range(1,10);
+        $_SESSION['numero_intento']=$_POST['numero'];
+        $_SESSION['intentos_restantes']=10;
     }
-
-    if ($intentos_restantes===0) {
-        echo "Has superado el numero de intentos";
-    }else{
+            echo $_SESSION['numero_secreto'];
         
-        echo "Correcto!"; 
-    }
-
+        if (!empty($_SESSION['numero_intento'])) {
+            if ($_SESSION['intentos_restantes']>0) {
+                 if ($_SESSION['numero_intento']==$_SESSION['numero_secreto']) {
+                    echo "Correcto! <br>";
+                 }else{
+                    $_SESSION['intentos_restantes']--;
+                    echo "Sigue intentadolo, te quedan ".$_SESSION['intentos_restantes']." intentos <br>";
+                    if ($_SESSION['numero_intento']>$_SESSION['numero_secreto']) {
+                        echo "Te has pasado";
+                    } else {
+                        echo "Te has queado corto";
+                    }
+                    
+                 }
+            }
+        }
+        
     
-
-
 ?>
 <br/>
 

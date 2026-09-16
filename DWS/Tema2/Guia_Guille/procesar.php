@@ -17,7 +17,7 @@
             { echo "<p>Hola <strong>$nombre</strong>, tienes <strong>$edad</strong> años y eres mayor de edad.</p>"; }
         else 
             { echo "<p>Hola <strong>$nombre</strong>, tienes <strong>$edad</strong> años. Eres menor de edad.</p>"; }
-    } else { echo "<p>No se han recibido datos del formulario.</p>"; }
+        } else { echo "<p>No se han recibido datos del formulario.</p>"; }
 ?>
 <br/>
 <a href="condicional2paginas.html">Volver al formulario</a>

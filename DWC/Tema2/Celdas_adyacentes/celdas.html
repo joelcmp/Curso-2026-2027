@@ -1,25 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Juego de celdas adyacentes</title>
-</head>
-<body >
+  </head>
+  <body>
     <h1>Juego de celdas adyacentes</h1>
-    <table border="1px">
+    <div class="casillas">
+      <table>
         <tr>
-            <td></td>
-            <td></td>
+          <td id="cas1"></td>
+          <td id="cas2"></td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
+          <td id="cas3"></td>
+          <td id="cas4"></td>
         </tr>
-    </table>
+      </table>
+    </div>
 
+    <script>
+      let c1 = document.getElementById("cas1");
+      let c2 = document.getElementById("cas2");
+      let c3 = document.getElementById("cas3");
+      let c4 = document.getElementById("cas4");
 
-
-</body>
+      c1.addEventListener("click", cambioColor);
+        c2.addEventListener("click", cambioColor);
+        c3.addEventListener("click", cambioColor);
+        c4.addEventListener("click", cambioColor);
+      function cambioColor() {
+        if (c1.style.backgroundColor == "red") {
+          c1.style.backgroundColor = "blue";
+        } else {
+          c1.style.backgroundColor = "red";
+        }
+      }
+    </script>
+  </body>
 </html>
