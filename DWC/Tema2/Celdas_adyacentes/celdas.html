@@ -27,36 +27,49 @@
       let c3 = document.getElementById("cas3");
       let c4 = document.getElementById("cas4");
 
-      c1.addEventListener("click", cambioColorc1);
+      if (c1.addEventListener("click",cambioColorc1)) {
+        
+      } {
+        c1.addEventListener("click", cambioColorc1);
         c2.addEventListener("click", cambioColorc2);
         c3.addEventListener("click", cambioColorc3);
-        c4.addEventListener("click", cambioColorc4);
+      }
+
+      c2.addEventListener("click", cambioColorc2);
+      c3.addEventListener("click", cambioColorc3);
+      c4.addEventListener("click", cambioColorc4);
+
       function cambioColorc1() {
-        if (c1.style.backgroundColor == "red") {
-          c1.style.backgroundColor = "blue";
-        } else {
+        if (c1.style.backgroundColor == "blue") {
           c1.style.backgroundColor = "red";
+          if (c2.style.backgroundColor="red") {
+            c2.style.backgroundColor="blue"
+          } else {
+            c2.style.backgroundColor="red"
+          }
+        } else {
+          c1.style.backgroundColor = "blue";
         }
       }
       function cambioColorc2() {
-        if (c2.style.backgroundColor == "red") {
-          c2.style.backgroundColor = "blue";
-        } else {
+        if (c2.style.backgroundColor == "blue") {
           c2.style.backgroundColor = "red";
+        } else {
+          c2.style.backgroundColor = "blue";
         }
       }
       function cambioColorc3() {
-        if (c3.style.backgroundColor == "red") {
-          c3.style.backgroundColor = "blue";
-        } else {
+        if (c3.style.backgroundColor == "blue") {
           c3.style.backgroundColor = "red";
+        } else {
+          c3.style.backgroundColor = "blue";
         }
       }
       function cambioColorc4() {
-        if (c4.style.backgroundColor == "red") {
-          c4.style.backgroundColor = "blue";
-        } else {
+        if (c4.style.backgroundColor == "blue") {
           c4.style.backgroundColor = "red";
+        } else {
+          c4.style.backgroundColor = "blue";
         }
       }
     </script>
