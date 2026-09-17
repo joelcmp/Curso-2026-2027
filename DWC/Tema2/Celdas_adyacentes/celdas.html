@@ -27,15 +27,36 @@
       let c3 = document.getElementById("cas3");
       let c4 = document.getElementById("cas4");
 
-      c1.addEventListener("click", cambioColor);
-        c2.addEventListener("click", cambioColor);
-        c3.addEventListener("click", cambioColor);
-        c4.addEventListener("click", cambioColor);
-      function cambioColor() {
+      c1.addEventListener("click", cambioColorc1);
+        c2.addEventListener("click", cambioColorc2);
+        c3.addEventListener("click", cambioColorc3);
+        c4.addEventListener("click", cambioColorc4);
+      function cambioColorc1() {
         if (c1.style.backgroundColor == "red") {
           c1.style.backgroundColor = "blue";
         } else {
           c1.style.backgroundColor = "red";
+        }
+      }
+      function cambioColorc2() {
+        if (c2.style.backgroundColor == "red") {
+          c2.style.backgroundColor = "blue";
+        } else {
+          c2.style.backgroundColor = "red";
+        }
+      }
+      function cambioColorc3() {
+        if (c3.style.backgroundColor == "red") {
+          c3.style.backgroundColor = "blue";
+        } else {
+          c3.style.backgroundColor = "red";
+        }
+      }
+      function cambioColorc4() {
+        if (c4.style.backgroundColor == "red") {
+          c4.style.backgroundColor = "blue";
+        } else {
+          c4.style.backgroundColor = "red";
         }
       }
     </script>
