@@ -17,29 +17,21 @@
     session_start();
     if (!isset($_SESSION['numero_secreto'])) {
         $_SESSION['numero_secreto']=random_int(1,100);
-        $_SESSION['numeros_intentados']=range(1,10);
-        $_SESSION['numero_intento']=$_POST['numero'];
+        $_SESSION['numeros_intentados']=[];
         $_SESSION['intentos_restantes']=10;
-    }
-            echo $_SESSION['numero_secreto'];
         
-        if (!empty($_SESSION['numero_intento'])) {
-            if ($_SESSION['intentos_restantes']>0) {
-                 if ($_SESSION['numero_intento']==$_SESSION['numero_secreto']) {
-                    echo "Correcto! <br>";
-                 }else{
-                    $_SESSION['intentos_restantes']--;
-                    echo "Sigue intentadolo, te quedan ".$_SESSION['intentos_restantes']." intentos <br>";
-                    if ($_SESSION['numero_intento']>$_SESSION['numero_secreto']) {
-                        echo "Te has pasado";
-                    } else {
-                        echo "Te has queado corto";
-                    }
-                    
-                 }
-            }
+    }  
+    
+    if (!empty($_POST)&& $_SESSION['intentos_restantes']) {
+        $_SESSION['numero_intento']=$_POST['numero'];
+        $_SESSION['numeros_intentados']=$_POST['numero'];
+
+        if ($_SESSION['numero_intento']) {
+            
         }
-        
+
+    }
+       
     
 ?>
 <br/>
