@@ -1,0 +1,25 @@
+div{
+}
+#header{
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+}
+#titulo{
+    background-color: orange;
+    
+}
+
+#usuario{
+    
+}
+
+#formulario{
+    background-color: blanchedalmond;
+    padding: 30px;
+}
+
+footer,img{
+}
