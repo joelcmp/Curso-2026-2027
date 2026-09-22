@@ -1,25 +1,60 @@
-div{
+* {
+    outline:1px solid red;
 }
+body{
+    background-color: #B6C4D6;
+}    
+
 #header{
-    background-color: black;
+    background-color: #7DA1DB;
     color: white;
     display: flex;
-    align-items: center;
     border-radius: 15px;
-}
+    justify-content: space-between;
+}    
 #titulo{
-    background-color: orange;
+    padding-left: 30px;
     
 }
 
-#usuario{
-    
-}
 
 #formulario{
-    background-color: blanchedalmond;
-    padding: 30px;
+    height: 500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+    
+}
+#cuenta{
+    display: flex;
+    align-items: baseline;
+    gap: 40px;
+    padding-top: 20px;
+}
+#cuenta button{
+    border-radius: 10px;
+    background-color: gold;
+}
+#usuario{
+    display: flex;
+
+    justify-content: center;
 }
 
-footer,img{
+footer{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    justify-content: center;
+    
+
+
+}
+footer a{
+    width: 25%;
+    box-sizing: border-box;
+}
+footer img{
+    max-width: 300px;
 }
