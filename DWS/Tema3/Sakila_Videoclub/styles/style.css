@@ -1,8 +1,8 @@
 * {
-    outline:1px solid red;
+    
 }
 body{
-    background-color: #B6C4D6;
+    background-image: url(../img/Gemini_Generated_Image_zb45qhzb45qhzb45.jpg);
 }    
 
 #header{
@@ -11,6 +11,7 @@ body{
     display: flex;
     border-radius: 15px;
     justify-content: space-between;
+    padding-right: 30px
 }    
 #titulo{
     padding-left: 30px;
@@ -20,26 +21,46 @@ body{
 
 #formulario{
     height: 500px;
-    width: 100%;
+    
     display: flex;
     justify-content: center;
-    
+    flex-wrap: wrap;
+    max-width: 55%;
+    box-sizing: border-box;
     
 }
 #cuenta{
     display: flex;
     align-items: baseline;
+    justify-content: center;
     gap: 40px;
     padding-top: 20px;
+    width: 100%;
 }
-#cuenta button{
+#cuenta button{ 
     border-radius: 10px;
     background-color: gold;
 }
 #usuario{
     display: flex;
-
     justify-content: center;
+}
+#inicio_sesion form{
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    gap: 20px;
+}
+#correo input{
+border-radius: 10px;
+border-color: azure;
+background-color: rgb(215, 227, 245);
+}
+
+#contraseña input{
+    border-radius: 10px;
+border-color: azure;
+background-color: rgb(215, 227, 245);
 }
 
 footer{
@@ -47,9 +68,6 @@ footer{
     flex-wrap: wrap;
     max-width: 100%;
     justify-content: center;
-    
-
-
 }
 footer a{
     width: 25%;
