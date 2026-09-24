@@ -1,14 +1,37 @@
 <?php
-$servidor = "localhost";
-$usuario  = "root";
-$password = "";
-$bd       = "nombre_bd";
 
-$conexion = new mysqli($servidor, $usuario, $password, $bd);
+$host = '127.0.0.1';
+$port = 3306;
+$database = 'sakila';
+$username = 'JoelcmpDB';
+$password = 'Mbappedictador';
 
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
-}
+mysqli_report(MYSQLI_REPORT_OFF);
+$connection = @new mysqli($host, $username, $password, $database, $port);
 
-echo "Conexión exitosa";
-?>
+$error = '';
+$films = [];
+$totalFilms = 0;
+$averageRating = 0;
+$averageLength = 0;
+$totalAlquileres = 0;
+
+if ($error === '') {
+        $alquileresResult = $connection->query("CALL TotalAlquileres()");
+ 
+        if ($alquileresResult) {
+ 
+            $alquileres = $alquileresResult->fetch_assoc();
+            $totalAlquileres = (int) $alquileres['total_aquileres'];
+            $alquileresResult->free();
+
+        } else {
+ 
+            $error = 'No se pudo ejecutar el procedimiento TotalAlquileres: '
+                . $connection->error;
+ 
+        }
+    }
+
+
+$connection->close();
