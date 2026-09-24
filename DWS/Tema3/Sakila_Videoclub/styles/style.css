@@ -38,8 +38,8 @@ body{
     width: 100%;
 }
 #cuenta button{ 
-    border-radius: 10px;
-    background-color: gold;
+    border-bottom: 2px solid #7DA1DB;
+    
 }
 #usuario{
     display: flex;
