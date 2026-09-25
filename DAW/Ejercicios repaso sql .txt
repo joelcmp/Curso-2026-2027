@@ -1,0 +1,41 @@
+-- 1. Número total de alquileres que ha hecho la compañía
+DELIMITER //
+CREATE PROCEDURE total_alquileres(OUT total INT)
+BEGIN
+    SELECT COUNT(*) INTO total
+    FROM rental;
+END //
+DELIMITER ;
+
+
+-- 2. Actores con un apellido determinado
+DELIMITER //
+CREATE PROCEDURE actores_por_apellido(IN p_apellido VARCHAR(45))
+BEGIN
+    SELECT actor_id, first_name, last_name
+    FROM actor
+    WHERE last_name LIKE p_apellido;
+END //
+DELIMITER ;
+
+-- 3. Películas en las que ha participado un actor determinado
+DELIMITER //
+CREATE PROCEDURE peliculas_de_actor(IN p_actor_id INT)
+BEGIN
+    SELECT f.film_id, f.title
+    FROM film f
+    INNER JOIN film_actor fa ON f.film_id = fa.film_id
+    WHERE fa.actor_id = p_actor_id;
+END //
+DELIMITER ;
+
+
+-- 4. Dinero generado por un empleado concreto
+DELIMITER //
+CREATE PROCEDURE dinero_por_empleado(IN p_staff_id INT, OUT total DECIMAL(10,2))
+BEGIN
+    SELECT SUM(amount) INTO total
+    FROM payment
+    WHERE staff_id = p_staff_id;
+END //
+DELIMITER ;
