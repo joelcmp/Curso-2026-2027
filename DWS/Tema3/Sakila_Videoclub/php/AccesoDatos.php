@@ -50,6 +50,8 @@ function PA_Registrar(string $nombre, string $apellido, string $email, int $tien
 
     return $fila['resultado'];
 }
+
+
 function PA_Login(string $usuario, string $contrasena){
     global $connection;
 
