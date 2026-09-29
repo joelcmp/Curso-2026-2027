@@ -10,8 +10,11 @@ $usuario = '';
 $resultado = null;
 $error = null;
 
-if ($_POST['action'] === 'registro') {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if ($_POST['action'] === 'registrar') {
+
         $nombre = trim($_POST['nombre'] ?? '');
         $apellido = trim($_POST['apellido'] ?? '');
         $email = trim($_POST['email'] ?? '');
@@ -35,22 +38,16 @@ if ($_POST['action'] === 'registro') {
                 $error = $exception->getMessage();
             }
         }
-    }
-} else if ($_POST['action'] === 'login') {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $usuario = trim($_POST['nombre'] ??'');
-        $email = trim($_POST['email'] ?? '');
-        $contrasena = trim($_POST[''] ?? '');
+    } else if ($_POST['action'] === 'login') {
 
-        if ($tienda === false || $tienda === null) {
-            $error = 'El número de tienda no es válido.';
+        $usuario = trim($_POST['usuario'] ?? '');
+        $contrasena = trim($_POST['contrasena'] ?? '');
+
+        if (empty($usuario) || empty($contrasena))  {
+            $error = 'El usuario o la contraseña no son validos';
         } else {
             try {
                 $resultado = PA_Login(
-                    $nombre,
-                    $apellido,
-                    $email,
-                    $tienda,
                     $usuario,
                     $contrasena
                 );
@@ -58,10 +55,8 @@ if ($_POST['action'] === 'registro') {
                 $error = $exception->getMessage();
             }
         }
-
     }
-
-} 
+}
 
 ?>
 
@@ -100,6 +95,17 @@ if ($_POST['action'] === 'registro') {
         <?php endif; ?>
 
         <form method="POST" action="">
+            
+            <label for="usuario">Usuario o email:</label>
+            <input type="text" id="usuario" name="usuario" value="<?= $usuario ?>" required>
+
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena" required>
+            
+            <button type="submit" name="action" value="login" onclick="return ;">Iniciar sesion</button>
+        </form>
+
+        <form method="POST" action="">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" value="<?= $nombre ?>" required>
 
@@ -120,7 +126,7 @@ if ($_POST['action'] === 'registro') {
             <label for="confirmaContrasena">Confirmar Contraseña:</label>
             <input type="password" id="confirmaContrasena" name="confirmaContrasena" required>
 
-            <button type="submit" onclick="return validarFormulario();">Registrar</button>
+            <button type="submit" name="action" value="registrar" onclick="return ;">Registrar</button>
         </form>
 
 
