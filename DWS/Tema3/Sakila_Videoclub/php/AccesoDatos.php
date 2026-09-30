@@ -58,13 +58,13 @@
         if ($connection->connect_errno) {
             throw new RuntimeException('Error de conexión: ' . $connection->connect_error);
         }
-        $sql= 'CALL Login(?,?,?,@resultado)';
+        $sql= 'CALL Login(?,?,@resultado)';
         $stmt=$connection->prepare($sql);
         if (!$stmt) {
             throw new RuntimeException('Error al preparar el procedimiento: '. $connection->error);
         }
         $contrasenaHash=md5($contrasena);
-        $stmt->bind_param('sss', $usuario , $usuario , $contrasenaHash);
+        $stmt->bind_param('ss', $usuario , $contrasenaHash);
 
         if (!$stmt->execute()) {
             $error=$stmt->error;

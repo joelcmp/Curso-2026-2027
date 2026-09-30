@@ -1,0 +1,58 @@
+drop procedure if exists Registro;
+
+SELECT * FROM sakila.staff;DELIMITER $$
+CREATE DEFINER=`JoelcmpDB`@`%` PROCEDURE `Registro`(
+in _first_name varchar(45),
+in _last_name varchar(45),
+in _email varchar(50),
+in _store_id tinyint ,
+in _username varchar(16),
+in _password varchar(40),
+out _res int -- CODIGO DE ERROR DE SALIDA
+)
+begin
+	declare aux varchar(16);
+    set aux=null;
+    select username from staff where username like _username into aux;
+ IF(_username like "")then
+	set _res =-1;
+elseif(aux is not null)then
+	set _res=-2;
+else
+insert into staff (first_name,last_name,address_id,picture,
+email,store_id,active,username,password,last_update)
+values(_first_name,_last_name,56,null,
+_email,_store_id,1,_username,_password,current_timestamp());
+set _res=0;
+end if;
+end$$
+DELIMITER ;
+
+drop procedure if exists Login;
+
+delimiter $$	
+create procedure Login (
+					in _inicio_sesion varchar(90),
+                    in _password varchar(40),
+                    out _res int)
+                    begin
+						declare aux varchar(40);
+                        set aux=null;
+                        select password
+                        into aux
+                        from staff
+                        where username=_inicio_sesion or email=_inicio_sesion;
+					if (aux is null)then
+                    set _res=-1;
+                    elseif(aux !=_password)then
+					set _res=-2;
+					else
+                    set _res=0;
+end if;
+end$$
+delimiter ;
+
+
+
+CALL Registro('Joel', 'Campo', 'joel@ejemplo.com', 1, 'joelcmp', 'clave123', @resultado);
+SELECT @resultado;
