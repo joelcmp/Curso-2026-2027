@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__ . '/AccesoDatos.php';
+require_once __DIR__ .'../php/login.php';
+require_once __DIR__ .'../php/registro.php';
 
 $nombre = '';
 $apellido = '';
