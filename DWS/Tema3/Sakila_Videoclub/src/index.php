@@ -1,9 +1,5 @@
 <?php
 
-require_once __DIR__ . '/AccesoDatos.php';
-require_once __DIR__ .'../php/login.php';
-require_once __DIR__ .'../php/registro.php';
-
 $nombre = '';
 $apellido = '';
 $email = '';
@@ -11,57 +7,18 @@ $tienda = '';
 $usuario = '';
 $resultado = null;
 $error = null;
-$contrasena='';
+$contrasena = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($_POST['action'] === 'registrar') {
-
-        $nombre = trim($_POST['nombre'] ?? '');
-        $apellido = trim($_POST['apellido'] ?? '');
-        $email = trim($_POST['email'] ?? '');
-        $tienda = filter_var($_POST['tienda'] ?? null, FILTER_VALIDATE_INT);
-        $usuario = trim($_POST['usuario'] ?? '');
-        $contrasena = $_POST['contrasena'] ?? '';
-
-        if ($tienda === false || $tienda === null) {
-            $error = 'El número de tienda no es válido.';
-        } else {
-            try {
-                $resultado = PA_Registrar(
-                    $nombre,
-                    $apellido,
-                    $email,
-                    $tienda,
-                    $usuario,
-                    $contrasena
-                );
-            } catch (Throwable $exception) {
-                $error = $exception->getMessage();
-            }
-        }
+        require_once __DIR__ . '/../php/registro.php';
     } else if ($_POST['action'] === 'login') {
-
-        $usuario = trim($_POST['usuario'] ?? '');
-        $contrasena = trim($_POST['contrasena'] ?? '');
-
-        if (empty($usuario) || empty($contrasena))  {
-            $error = 'El usuario o la contraseña no son validos';
-        } else {
-            try {
-                $resultado = PA_Login(
-                    $usuario,
-                    $contrasena
-                );
-            } catch (Throwable $exception) {
-                $error = $exception->getMessage();
-            }
-        }
+        require_once __DIR__ . '/../php/login.php';
     }
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -78,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (contrasena !== confirmaContrasena) {
                 alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
-                return false; // Evita que el formulario se envíe
+                return false;
             }
-            return true; // Permite que el formulario se envíe
+            return true;
         }
     </script>
 </head>
@@ -97,13 +54,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <form method="POST" action="">
-            
+
             <label for="usuario">Usuario o email:</label>
             <input type="text" id="usuario" name="usuario" value="<?= htmlspecialchars($usuario) ?>" required>
 
             <label for="contrasena">Contraseña:</label>
             <input type="password" id="contrasena" name="contrasena" required>
-            
+
             <button type="submit" name="action" value="login" onclick="return ;">Iniciar sesion</button>
         </form>
 
@@ -130,9 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <button type="submit" name="action" value="registrar" onclick="return ;">Registrar</button>
         </form>
-
-
-
 </body>
 
 </html>
