@@ -27,25 +27,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo Sakila | Film</title>
-    <link rel="stylesheet" href="style/estilos.css">
-    <script>
-        function validarFormulario() {
-            var contrasena = document.getElementById("contrasena").value;
-            var confirmaContrasena = document.getElementById("confirmaContrasena").value;
-
-            if (contrasena !== confirmaContrasena) {
-                alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
-                return false;
-            }
-            return true;
-        }
-    </script>
+    <link rel="stylesheet" href="../styles/style.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Catálogo Sakila</h1>
-        <h2>Registro de Usuario</h2>
+        <header >
+            <div>
+                <h1>Catálogo Sakila</h1>
+
+
+                <a href=""><img src="../res/" alt=""></a>
+            </div>    
+        
+        
+            
+
+
+        </header>
+        
+
+
         <?php if ($error !== null): ?>
             <p class="error">Error: <?= $error ?></p>
         <?php elseif ($resultado !== null): ?>
@@ -53,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>Resultado: <?= $resultado ?></p>
         <?php endif; ?>
 
+    <div id="login">
         <form method="POST" action="">
 
             <label for="usuario">Usuario o email:</label>
@@ -63,7 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <button type="submit" name="action" value="login" onclick="return ;">Iniciar sesion</button>
         </form>
+    </div>    
 
+    <div id="registro">
         <form method="POST" action="">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($nombre) ?>" required>
@@ -87,6 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <button type="submit" name="action" value="registrar" onclick="return ;">Registrar</button>
         </form>
+    </div>    
 </body>
 
 </html>
