@@ -1,0 +1,104 @@
+:root {
+    --dry-sage: #CCD5AE;
+    --beige: #E9EDC9;
+    --cornsilk: #FEFAE0;
+    --papaya-whip: #FAEDCD;
+    --light-bronze: #D4A373;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--cornsilk);
+    color: #4a3f2f;
+}
+
+header {
+    background-color: var(--light-bronze);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+header h1 {
+    font-size: 1.8rem;
+}
+
+header img {
+    max-height: 50px;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px 20px;
+}
+
+.form-card {
+    background-color: var(--papaya-whip);
+    border-radius: 12px;
+    padding: 30px;
+    width: 320px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-card h2 {
+    margin-bottom: 20px;
+    color: var(--light-bronze);
+}
+
+.form-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-card label {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.form-card input {
+    padding: 10px;
+    border: 1px solid var(--dry-sage);
+    border-radius: 6px;
+    background-color: var(--beige);
+    font-size: 1rem;
+}
+
+.form-card input:focus {
+    outline: none;
+    border-color: var(--light-bronze);
+}
+
+.form-card button {
+    margin-top: 10px;
+    padding: 12px;
+    background-color: var(--light-bronze);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.form-card button:hover {
+    background-color: var(--dry-sage);
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 12px;
+    text-align: center;
+}

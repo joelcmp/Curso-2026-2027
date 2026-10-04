@@ -36,13 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1>Catálogo Sakila</h1>
 
 
-                <a href=""><img src="../res/" alt=""></a>
+                <a href=""><img src="../res/logo web.jpg" alt=""></a>
             </div>    
-        
-        
-            
-
-
         </header>
         
 
