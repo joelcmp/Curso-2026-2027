@@ -28,19 +28,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo Sakila | Film</title>
     <link rel="stylesheet" href="../styles/style.css">
+    
 </head>
 
 <body>
         <header >
-            <div>
-                <h1>Catálogo Sakila</h1>
-
-
-                <a href=""><img src="../res/logo web.jpg" alt=""></a>
+            <div id="logo-nombre">
+            <a href=""><img src="../res/logo sakila.png" alt=""></a>    
+            <h1>Catálogo Sakila</h1>
+            </div>
+            <div id="portal-empleado">
+                <a href="#">Portal del Empleado</a>
             </div>    
         </header>
-        
-
 
         <?php if ($error !== null): ?>
             <p class="error">Error: <?= $error ?></p>
@@ -48,8 +48,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>Registro realizado correctamente.</p>
             <p>Resultado: <?= $resultado ?></p>
         <?php endif; ?>
+    
 
+    <div id="panel-control">
+            <form action="">
+                <button type="button" id="panel-login">Iniciar sesión</button>
+                <button type="button" id="panel-registro" >Registrarse</button>
+            </form>
+    </div>    
     <div id="login">
+        
         <form method="POST" action="">
 
             <label for="usuario">Usuario o email:</label>
@@ -64,29 +72,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div id="registro">
         <form method="POST" action="">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($nombre) ?>" required>
+            <label for="nombre-registro">Nombre:</label>
+            <input type="text" id="nombre-registro" name="nombre" value="<?= htmlspecialchars($nombre) ?>" required>
 
             <label for="apellido">Apellido:</label>
             <input type="text" id="apellido" name="apellido" value="<?= htmlspecialchars($apellido) ?>" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="<?= htmlspecialchars($email) ?>" required>
+            <label for="email-registro">Email:</label>
+            <input type="email" id="email-registro" name="email" value="<?= htmlspecialchars($email) ?>" required>
 
             <label for="tienda">Tienda:</label>
             <input type="number" id="tienda" name="tienda" value="<?= htmlspecialchars($tienda) ?>" required>
 
-            <label for="usuario">Usuario:</label>
-            <input type="text" id="usuario" name="usuario" value="<?= htmlspecialchars($usuario) ?>" required>
+            <label for="usuario-registro">Usuario:</label>
+            <input type="text" id="usuario-registro" name="usuario" value="<?= htmlspecialchars($usuario) ?>" required>
 
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" name="contrasena" required>
+            <label for="contrasena-registro">Contraseña:</label>
+            <input type="password" id="contrasena-registro" name="contrasena" required>
             <label for="confirmaContrasena">Confirmar Contraseña:</label>
             <input type="password" id="confirmaContrasena" name="confirmaContrasena" required>
 
             <button type="submit" name="action" value="registrar" onclick="return ;">Registrar</button>
         </form>
-    </div>    
+    </div>
+    <script src="../script/script.js"></script>    
 </body>
 
 </html>

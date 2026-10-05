@@ -1,7 +1,144 @@
-* {
-    
+:root {
+    --almond-cream: #ede0d4;
+    --desert-sand: #e6ccb2;
+    --tan: #ddb892;
+    --faded-copper: #b08968;
+    --coffee-bean: #7f5539;
+    --toffee-brown: #9c6644;
 }
-body{
-    
-}    
-/* background-image: url(../res/fondo_videoclub.jpg);
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background-color: var(--almond-cream);
+    color: var(--coffee-bean);
+}
+
+
+header {
+    background-color: var(--coffee-bean);
+    color: var(--almond-cream);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 15px 40px;
+}
+
+
+#logo-nombre {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+header img {
+    max-height: 100px;
+    width: auto;      
+}
+
+header h1 {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+
+
+#portal-empleado a {
+    color: var(--almond-cream);
+    text-decoration: none; 
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 10px 15px;
+    border: 1px solid var(--almond-cream); 
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#portal-empleado a:hover {
+    background-color: var(--almond-cream);
+    color: var(--coffee-bean);
+}
+
+
+#panel-control {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+#panel-control button {
+    background: none;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--toffee-brown);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+#panel-control button:hover {
+    color: var(--coffee-bean);
+}
+
+#login,
+#registro {
+    max-width: 380px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(127, 85, 57, 0.15);
+}
+
+#login form,
+#registro form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+#login label,
+#registro label {
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+#login input,
+#registro input {
+    padding: 12px;
+    border: 1px solid var(--tan);
+    border-radius: 8px;
+    background-color: var(--almond-cream);
+    font-size: 1rem;
+}
+
+#login input:focus,
+#registro input:focus {
+    outline: none;
+    border-color: var(--faded-copper);
+    background-color: white;
+}
+
+#login button[type="submit"],
+#registro button[type="submit"] {
+    margin-top: 10px;
+    padding: 14px;
+    background-color: var(--toffee-brown);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#login button[type="submit"]:hover,
+#registro button[type="submit"]:hover {
+    background-color: var(--coffee-bean);
+}
