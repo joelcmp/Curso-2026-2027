@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <header>
         <div id="header-principal">
-            <a href="../src/index.php"><img src="../res/Logo DinoCards.png" alt="Logo DinoCards"></a>
+            <a href="../src/index.php"><img src="../res/logo sin fondo.png" alt="Logo DinoCards"></a>
             <a href="../src/cartas.php">
                 <h2>Cartas</h2>
             </a>

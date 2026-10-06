@@ -25,10 +25,43 @@
     </header>
 
     <main>
-        <div id="imagen-portada">
-            <img src="../res/imagen portada principal.jpg" alt="Imagen portada principal">
+        <div>
+            <section>
+                <h2>Trabaja con nosotros</h2>
+                <p> ¿Te gustan los dinosaurios, las cartas y el mundo digital? Únete a nuestro equipo y ayúdanos a hacer crecer el proyecto. </p>
+            </section>
+            <section>
+                <h2>Buscamos nuevos talentos</h2>
+                <article>
+                    <h3>Desarrollo web</h3>
+                    <p> Personas con conocimientos de HTML, CSS, JavaScript, PHP y bases de datos. </p>
+                </article>
+                <article>
+                    <h3>Diseño e ilustración</h3>
+                    <p> Personas creativas para diseñar la página y crear las ilustraciones de nuestras cartas. </p>
+                </article>
+                <article>
+                    <h3>Creación de contenido</h3>
+                    <p> Personas interesadas en crear noticias y contenido para nuestra comunidad. </p>
+                </article>
+            </section>
+            <section>
+                <h2>Envía tu candidatura</h2>
+                <form action="#" method="post">
+                    <div> <label for="nombre-candidatura">Nombre</label> <input type="text" id="nombre-candidatura" name="nombre" required> </div>
+                    <div> <label for="email-candidatura">Correo electrónico</label> <input type="email" id="email-candidatura" name="email" required> </div>
+                    <div> <label for="puesto">Puesto</label> <select id="puesto-candidatura" name="puesto" required>
+                            <option value="">Selecciona un puesto</option>
+                            <option value="desarrollo">Desarrollo web</option>
+                            <option value="diseno">Diseño e ilustración</option>
+                            <option value="contenido">Creación de contenido</option>
+                        </select> </div>
+                    <div> <label for="mensaje">Mensaje</label> <textarea id="mensaje" name="mensaje" rows="5" required></textarea> </div>
+                    <button type="submit">Enviar candidatura</button>
+                </form>
+            </section>
         </div>
-        
+
     </main>
 
     <footer>

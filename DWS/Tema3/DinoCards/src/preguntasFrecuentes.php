@@ -25,10 +25,66 @@
     </header>
 
     <main>
-        <div id="imagen-portada">
-            <img src="../res/imagen portada principal.jpg" alt="Imagen portada principal">
+        <div>
+            <p> Aquí encontrarás las respuestas a las preguntas más frecuentes sobre nuestra colección de cartas y su funcionamiento. </p>
+        <section>
+            <h2>Sobre las cartas</h2>
+            <article>
+                <h3>¿Qué es esta página?</h3>
+                <p> Es una página de colección de cartas en la que podrás conseguir diferentes cartas y completar tu colección. </p>
+            </article>
+            <article>
+                <h3>¿Cómo consigo una carta?</h3>
+                <p> Cada vez que esté disponible una nueva apertura podrás abrir una carta y conseguir una carta aleatoria. </p>
+            </article>
+            <article>
+                <h3>¿La carta que recibo es aleatoria?</h3>
+                <p> Sí. La carta que obtengas se seleccionará aleatoriamente entre las cartas disponibles. </p>
+            </article>
+        </section>
+        <section>
+            <h2>Apertura de cartas</h2>
+            <article>
+                <h3>¿Cada cuánto puedo abrir una carta?</h3>
+                <p> Puedes abrir una nueva carta cuando hayan pasado 24 horas desde tu última apertura. </p>
+            </article>
+            <article>
+                <h3>¿Tengo que abrir la carta exactamente a la misma hora?</h3>
+                <p> No es necesario que abras la carta todos los días a la misma hora. El tiempo comienza a contar desde el momento en el que realizaste tu última apertura. </p>
+            </article>
+            <article>
+                <h3>¿Puedo acumular aperturas?</h3>
+                <p> No. Aunque no entres durante varios días, solo tendrás disponible una apertura cuando hayan pasado 24 horas desde la última. </p>
+            </article>
+        </section>
+        <section>
+            <h2>Mi colección</h2>
+            <article>
+                <h3>¿Dónde puedo ver mis cartas?</h3>
+                <p> Puedes consultar todas las cartas que has conseguido desde el apartado de colección. </p>
+            </article>
+            <article>
+                <h3>¿Puedo conseguir una carta que ya tengo?</h3>
+                <p> Sí. Las cartas se obtienen de forma aleatoria, por lo que puedes recibir una carta que ya forme parte de tu colección. </p>
+            </article>
+        </section>
+        <section>
+            <h2>Funciones futuras</h2>
+            <article>
+                <h3>¿Puedo combatir contra otros jugadores?</h3>
+                <p> Todavía no. Actualmente el proyecto está centrado en la colección de cartas. En el futuro se podrán añadir combates y otras funcionalidades. </p>
+            </article>
+            <article>
+                <h3>¿Se añadirán nuevas cartas y funciones?</h3>
+                <p> Sí. El proyecto podrá incorporar nuevas cartas y funcionalidades con el tiempo. </p>
+            </article>
+        </section>
+        <section>
+            <h2>¿Tienes alguna otra pregunta?</h2>
+            <p> Si no encuentras la respuesta que buscas, puedes ponerte en contacto con nosotros. </p> <a href="contacto.html">Ir a contacto</a>
+        </section>
         </div>
-        
+
     </main>
 
     <footer>

@@ -25,10 +25,42 @@
     </header>
 
     <main>
-        <div id="imagen-portada">
-            <img src="../res/imagen portada principal.jpg" alt="Imagen portada principal">
+        <h2>ULTIMAS NOTICIAS</h2>
+        <div>
+            <p> Descubre las últimas novedades de nuestra colección, nuevas cartas, actualizaciones y futuras funcionalidades. </p>
+            </header>
+            <section>
+                <article> <img src="../res/fotosNoticias/noticia1.jpg" alt="Cartas preparadas para un combate">
+                    <div>
+                        <p>PRÓXIMAMENTE</p>
+                        <h2>Los combates están en camino</h2>
+                        <p> 6 de octubre de 2026 </p>
+                        <p> Estamos trabajando en una nueva funcionalidad que permitirá utilizar las cartas de tu colección para enfrentarte a otros jugadores. </p> <a href="noticia-combates.html">Leer noticia</a>
+                    </div>
+                </article>
+            </section>
+            <section>
+                <article> <img src="../res/fotosNoticias/noticia2.jpg" alt="Nueva carta añadida a la colección">
+                    <p>ACTUALIZACIÓN</p>
+                    <h3>Nuevas cartas disponibles</h3>
+                    <p>4 de octubre de 2026</p>
+                    <p> Hemos añadido nuevas cartas a la colección. Entra cada 24 horas para descubrir cuál será tu próxima carta. </p> <a href="noticia-nuevas-cartas.html">Leer noticia</a>
+                </article>
+                <article> <img src="../res/fotosNoticias/noticia3.jpg" alt="Colección de diferentes cartas">
+                    <p>COLECCIÓN</p>
+                    <h3>Completa tu colección</h3>
+                    <p>1 de octubre de 2026</p>
+                    <p> Descubre todas las cartas disponibles y comprueba cuáles has conseguido y cuáles todavía te faltan. </p> <a href="noticia-coleccion.html">Leer noticia</a>
+                </article>
+                <article> <img src="../res/fotosNoticias/noticia4.jpg" alt="Apertura de una nueva carta">
+                    <p>FUNCIONAMIENTO</p>
+                    <h3>Una nueva carta cada 24 horas</h3>
+                    <p>28 de septiembre de 2026</p>
+                    <p> Recuerda que podrás conseguir una nueva carta cuando hayan pasado 24 horas desde tu última apertura. </p> <a href="noticia-apertura.html">Leer noticia</a>
+                </article>
+            </section>
         </div>
-        
+
     </main>
 
     <footer>

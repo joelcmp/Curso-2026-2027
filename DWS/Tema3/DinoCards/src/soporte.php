@@ -25,10 +25,47 @@
     </header>
 
     <main>
-        <div id="imagen-portada">
-            <img src="../res/imagen portada principal.jpg" alt="Imagen portada principal">
+        <div>
+            <section>
+                <h2>¿En qué podemos ayudarte?</h2>
+                <p> Si tienes algún problema con tu colección, necesitas ayuda con tu cuenta o tienes alguna duda sobre el funcionamiento de la página, estamos aquí para ayudarte. </p>
+            </section>
+            <section>
+                <h2>¿Con qué necesitas ayuda?</h2>
+                <article>
+                    <h3>Problemas con mi cuenta</h3>
+                    <p> ¿Tienes problemas para iniciar sesión o acceder a tu cuenta? </p>
+                </article>
+                <article>
+                    <h3>Problemas con las cartas</h3>
+                    <p> ¿Has tenido algún problema al abrir o conseguir una carta? </p>
+                </article>
+                <article>
+                    <h3>Mi colección</h3>
+                    <p> Si tienes algún problema con las cartas de tu colección, ponte en contacto con nosotros. </p>
+                </article>
+                <article>
+                    <h3>Otro problema</h3>
+                    <p> Si tu problema no aparece aquí, puedes explicárnoslo mediante el formulario de contacto. </p>
+                </article>
+            </section>
+            <section>
+                <h2>Contacta con soporte</h2>
+                <form action="#" method="post">
+                    <div> <label for="nombre">Nombre</label> <input type="text" id="nombre" name="nombre" required> </div>
+                    <div> <label for="email">Correo electrónico</label> <input type="email" id="email" name="email" required> </div>
+                    <div> <label for="motivo">Motivo de la consulta</label> <select id="motivo" name="motivo" required>
+                            <option value="">Selecciona un motivo</option>
+                            <option value="cuenta">Problema con mi cuenta</option>
+                            <option value="cartas">Problema con las cartas</option>
+                            <option value="coleccion">Problema con mi colección</option>
+                            <option value="otro">Otro</option>
+                        </select> </div>
+                    <div> <label for="mensaje">Describe tu problema</label> <textarea id="mensaje" name="mensaje" rows="6" placeholder="Cuéntanos qué ha ocurrido..." required></textarea> </div> <button type="submit">Enviar consulta</button>
+                </form>
+            </section>
         </div>
-        
+
     </main>
 
     <footer>

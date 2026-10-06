@@ -25,10 +25,38 @@
     </header>
 
     <main>
-        <div id="imagen-portada">
-            <img src="../res/imagen portada principal.jpg" alt="Imagen portada principal">
+        <div>
+            <section>
+                <h2>¿Qué es DinoCards?</h2>
+                <p> DinoCards es una plataforma de colección de cartas de dinosaurios creada para todos los amantes de estas criaturas y de los juegos de cartas coleccionables. </p>
+                <p> Cada 24 horas podrás descubrir una nueva carta aleatoria y ampliar poco a poco tu colección. </p>
+            </section>
+            <section>
+                <h2>Nuestra colección</h2>
+                <p> En DinoCards encontrarás diferentes especies de dinosaurios, cada una representada en una carta única. Nuestro objetivo es que puedas descubrir nuevas especies y completar tu colección. </p>
+                <article>
+                    <h3>Descubre</h3>
+                    <p> Consigue nuevas cartas y descubre diferentes dinosaurios. </p>
+                </article>
+                <article>
+                    <h3>Colecciona</h3>
+                    <p> Guarda tus cartas y completa tu colección. </p>
+                </article>
+                <article>
+                    <h3>Próximamente</h3>
+                    <p> En el futuro podrás utilizar tus cartas para enfrentarte a otros jugadores en combates. </p>
+                </article>
+            </section>
+            <section>
+                <h2>Nuestra misión</h2>
+                <p> Queremos crear una experiencia sencilla y divertida para descubrir, coleccionar y disfrutar de cartas de dinosaurios, mientras seguimos incorporando nuevas especies y funcionalidades a DinoCards. </p>
+            </section>
+            <section>
+                <h2>El futuro de DinoCards</h2>
+                <p> DinoCards seguirá creciendo con nuevas cartas, nuevas funcionalidades y diferentes formas de utilizar tu colección. Los combates entre jugadores serán una de las próximas novedades del proyecto. </p>
+            </section>
         </div>
-        
+
     </main>
 
     <footer>
