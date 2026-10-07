@@ -52,9 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main>
         <div id="imagen-portada">
-            <img src="../res/imagen portada principal.jpg" alt="Imagen portada principal">
+            <img src="../res/portadaprincipal.jpg" alt="Imagen portada principal">
         </div>
         <div id="login-registro">
+            <div id="botones-tab">
+                <button type="submit" id="boton-login">Inicio sesión</button>
+                <button type="submit" id="boton-registro">Registrarse</button>
+            </div>
             <div id="login">
                 <form method="POST" action="">
 
@@ -96,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <label for="contrasena">Contraseña</label>
                     <input type="password" id="contrasena" name="contrasena" required>
-                    <label for="confirmaContrasena">Confirmar Contraseña:</label>
+                    <label for="confirmaContrasena">Confirmar Contraseña</label>
                     <input type="password" id="confirmaContrasena" name="confirmaContrasena" required>
 
                     <button type="submit" name="action" value="registrar" onclick="return ;">Registrar</button>
@@ -107,6 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <footer>
         <div id="patrocinadores">
+            
             <a href=""><img src="../res/patrocinadores/patro1.jpg" alt=""></a>
             <a href=""><img src="../res/patrocinadores/patro2.jpg" alt=""></a>
             <a href=""><img src="../res/patrocinadores/patro3.jpg" alt=""></a>
@@ -151,6 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h3>Calle de los Robles, 27, 28805 Alcalá de Henares, Madrid </h3>
         </div>
     </footer>
+    <script src="../script/script.js"></script>
 </body>
 
 </html>
