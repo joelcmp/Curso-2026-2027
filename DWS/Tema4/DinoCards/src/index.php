@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DinoCards | Tu colección de cartas</title>
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -54,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div id="login">
                 <form method="POST" action="">
 
-                    <label for="usuario">Usuario o email:</label>
+                    <label for="usuario">Usuario o email</label>
                     <input type="text" id="usuario" name="usuario" value="<?= htmlspecialchars($usuario) ?>" required>
 
                     <label for="contrasena">Contraseña:</label>
@@ -62,29 +66,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <button type="submit" name="action" value="login" onclick="return ;">Iniciar sesion</button>
                 </form>
-                <a href=""><h4>¿Has olvidado la contraseña?</h4></a>
-                <a href=""><h4>¿Has olvidado el usaurio?</h4></a>
-                <a href=""><h4>No tengo cuenta</h4></a>
+                <a href="">
+                    <h4>¿Has olvidado la contraseña?</h4>
+                </a>
+                <a href="">
+                    <h4>¿Has olvidado el usaurio?</h4>
+                </a>
+                <a href="">
+                    <h4>No tengo cuenta</h4>
+                </a>
             </div>
 
             <div id="registro">
                 <form method="POST" action="">
-                    <label for="nombre">Nombre:</label>
+                    <label for="nombre">Nombre</label>
                     <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($nombre) ?>" required>
 
-                    <label for="apellido">Apellido:</label>
+                    <label for="apellido">Apellido</label>
                     <input type="text" id="apellido" name="apellido" value="<?= htmlspecialchars($apellido) ?>" required>
 
-                    <label for="email">Email:</label>
+                    <label for="email">Email</label>
                     <input type="email" id="email" name="email" value="<?= htmlspecialchars($email) ?>" required>
 
-                    <label for="tienda">Tienda:</label>
+                    <label for="tienda">Tienda</label>
                     <input type="number" id="tienda" name="tienda" value="<?= htmlspecialchars($tienda) ?>" required>
 
-                    <label for="usuario">Usuario:</label>
+                    <label for="usuario">Usuario</label>
                     <input type="text" id="usuario" name="usuario" value="<?= htmlspecialchars($usuario) ?>" required>
 
-                    <label for="contrasena">Contraseña:</label>
+                    <label for="contrasena">Contraseña</label>
                     <input type="password" id="contrasena" name="contrasena" required>
                     <label for="confirmaContrasena">Confirmar Contraseña:</label>
                     <input type="password" id="confirmaContrasena" name="confirmaContrasena" required>
