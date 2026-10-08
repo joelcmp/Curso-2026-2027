@@ -6,9 +6,28 @@
 
 body {
     display: flex;
-    flex-direction: column; 
-                
-            
+    flex-direction: column;
+    font-family: 'Barlow condensed',sans-serif;
+
+}
+button:hover {
+    background-color: #38A3A5;
+}
+input:focus {
+    outline: 2px solid #38A3A5;
+}
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+h2,h3{
+    font-weight: 700;
+}
+input, button { 
+    font-family: inherit; font-size: 1rem; 
 }
 
 #header-principal {
@@ -16,58 +35,67 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    align-items: center;   
+    align-items: center;
     font-size: 13px;
-    padding: 10px;         
+    padding: 10px;
 }
 
 #header-principal img {
     height: auto;
     width: 70px;
-    display: block;        
+    display: block;
 }
+
 #header-principal a {
-    font-family:barlow condensed bold;
+    font-family: barlow condensed ;
     text-decoration: none;
     color: #22577A;
-    
+
 }
+
 #imagen-portada img {
-    
+
     width: 100%;
-    display: block;           
+    display: block;
 }
-#botones-tab{
+
+#botones-tab {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #57cc99;
-    
+
 }
-#login-registro{
+
+#login-registro {
     color: #22577A;
 }
-#login-registro div{
+
+#login-registro div {
     padding: 10px;
 }
-#login-registro input{
-    font-family: roboto condensed bold;
+
+#login-registro input {
+    font-family: roboto condensed;
     background-color: #c7f9cc;
     border-color: #c7f9cc;
-    
+
 }
-#login-registro button{
-    font-family: barlow semi condensed ;
-    background-color:#22577A ;
-     border-color: #22577A;
-     color: #c7f9cc;
-     width: 200px;
+
+#login-registro button {
+    font-family: barlow semi condensed;
+    background-color: #22577A;
+    border-color: #22577A;
+    color: #c7f9cc;
+    width: 200px;
 }
-#login-registro a{
+
+#login-registro a {
     text-decoration: none;
     color: #22577A;
 }
-#login{
+
+#login {
     background-color: #57cc99;
     display: flex;
     flex-direction: column;
@@ -75,7 +103,8 @@ body {
     align-items: center;
     gap: 20px;
 }
-#login form{
+
+#login form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -83,34 +112,109 @@ body {
     gap: 10px;
 }
 
-#registro{
+#login-registro .enlace-texto {
     background-color: #57cc99;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    width: auto;   
 }
 
-footer{
+
+#registro {
+    background-color: #57cc99;
+
+}
+#registro form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+footer {
     background-color: #22577A;
     display: flex;
-
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    
 }
-#patrocinadores{
+footer h3{
+    color: #c7f9cc;
+}
+
+#patrocinadores {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 600px;
     gap: 15px;
     padding: 10px 0px 0px 10px;
+    
 }
-#patrocinadores a img{
+
+#patrocinadores a img {
     width: 120px;
     height: 120px;
     border-radius: 20px;
 }
-#redes-sociales{
+
+#redes-sociales {
     display: flex;
     flex-wrap: wrap;
     width: 150px;
 }
-#redes-sociales img{
+
+#redes-sociales img {
     width: 40px;
     height: 40px;
+}
+
+#zona-ayuda {}
+
+#zona-ayuda a {
+    text-decoration: none;
+
+}
+
+#zona-ayuda a h3 {
+    padding-bottom: 7px;
+}
+
+#newsletter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 350px;
+    padding: 7px;
+    background-color: #c7f9cc;
+    border-radius: 10px;
+}
+
+#newsletter form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}
+
+#newsletter form input {
+    border: none;
+    background-color: #57cc99;
+    font-family: barlow semi condensed bold;
+    border-radius: 5px;
+}
+
+#enviar-newsletter input[type="submit"] {
+    background-color: #38A3A5;
+    border-radius: 10px;
+    width: 170px;
 }

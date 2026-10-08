@@ -35,11 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <header>
+    <nav>
+        <header>
         <div id="header-principal">
             <a href="../src/index.php"><img src="../res/logo sin fondo.png" alt="Logo DinoCards"></a>
             <a href="../src/cartas.php">
-                <h2>Cartas</h2>
+                <h2>Colección</h2>
             </a>
             <a href="../src/soporte.php">
                 <h2>Soporte</h2>
@@ -49,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </a>
         </div>
     </header>
+    </nav>
 
     <main>
         <div id="imagen-portada">
@@ -56,8 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div id="login-registro">
             <div id="botones-tab">
-                <button type="submit" id="boton-login">Inicio sesión</button>
-                <button type="submit" id="boton-registro">Registrarse</button>
+                <button type="button" id="boton-login">Inicio sesión</button>
+                <button type="button" id="boton-registro">Registrarse</button>
             </div>
             <div id="login">
                 <form method="POST" action="">
@@ -65,20 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="usuario">Usuario o email</label>
                     <input type="text" id="usuario" name="usuario" value="<?= htmlspecialchars($usuario) ?>" required>
 
-                    <label for="contrasena">Contraseña:</label>
+                    <label for="contrasena">Contraseña</label>
                     <input type="password" id="contrasena" name="contrasena" required>
 
-                    <button type="submit" name="action" value="login" onclick="return ;">Iniciar sesion</button>
+                    <button type="submit" name="action" value="login">Iniciar sesion</button>
                 </form>
-                <a href="">
-                    <h4>¿Has olvidado la contraseña?</h4>
-                </a>
-                <a href="">
-                    <h4>¿Has olvidado el usaurio?</h4>
-                </a>
-                <a href="">
-                    <h4>No tengo cuenta</h4>
-                </a>
+                <button type="button" class="enlace-texto" >¿Has olvidado la contraseña?</button>
+                <button type="button" class="enlace-texto" >¿Has olvidado el usuario?</button>
+                <button type="button" class="enlace-texto" >No tengo cuenta</button>
             </div>
 
             <div id="registro">
@@ -89,21 +85,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="apellido">Apellido</label>
                     <input type="text" id="apellido" name="apellido" value="<?= htmlspecialchars($apellido) ?>" required>
 
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="<?= htmlspecialchars($email) ?>" required>
+                    <label for="email-registro">Email</label>
+                    <input type="email" id="email" name="email-registro" value="<?= htmlspecialchars($email) ?>" required>
 
-                    <label for="tienda">Tienda</label>
-                    <input type="number" id="tienda" name="tienda" value="<?= htmlspecialchars($tienda) ?>" required>
+                    <label for="usuario-registro">Usuario</label>
+                    <input type="text" id="usuario" name="usuario-registro" value="<?= htmlspecialchars($usuario) ?>" required>
 
-                    <label for="usuario">Usuario</label>
-                    <input type="text" id="usuario" name="usuario" value="<?= htmlspecialchars($usuario) ?>" required>
-
-                    <label for="contrasena">Contraseña</label>
-                    <input type="password" id="contrasena" name="contrasena" required>
+                    <label for="contrasena-registro">Contraseña</label>
+                    <input type="password" id="contrasena-registro" name="contrasena" required>
                     <label for="confirmaContrasena">Confirmar Contraseña</label>
                     <input type="password" id="confirmaContrasena" name="confirmaContrasena" required>
 
-                    <button type="submit" name="action" value="registrar" onclick="return ;">Registrar</button>
+                    <button type="submit" name="action" value="registrar">Registrar</button>
                 </form>
             </div>
         </div>
@@ -111,23 +104,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <footer>
         <div id="patrocinadores">
-            
-            <a href=""><img src="../res/patrocinadores/patro1.jpg" alt=""></a>
-            <a href=""><img src="../res/patrocinadores/patro2.jpg" alt=""></a>
-            <a href=""><img src="../res/patrocinadores/patro3.jpg" alt=""></a>
-            <a href=""><img src="../res/patrocinadores/patro4.jpg" alt=""></a>
-            <a href=""><img src="../res/patrocinadores/patro5.jpg" alt=""></a>
-            <a href=""><img src="../res/patrocinadores/patro6.jpg" alt=""></a>
-            <a href=""><img src="../res/patrocinadores/patro7.jpg" alt=""></a>
-            <a href=""><img src="../res/patrocinadores/patro8.jpg" alt=""></a>
+            <a href="index.php"><img src="../res/patrocinadores/patro1.jpg" alt="patrocinador1"></a>
+            <a href="index.php"><img src="../res/patrocinadores/patro2.jpg" alt="patrocinador2"></a>
+            <a href="index.php"><img src="../res/patrocinadores/patro3.jpg" alt="patrocinador3"></a>
+            <a href="index.php"><img src="../res/patrocinadores/patro4.jpg" alt="patrocinador4"></a>
+            <a href="index.php"><img src="../res/patrocinadores/patro5.jpg" alt="patrocinador5"></a>
+            <a href="index.php"><img src="../res/patrocinadores/patro6.jpg" alt="patrocinador6"></a>
+            <a href="index.php"><img src="../res/patrocinadores/patro7.jpg" alt="patrocinador7"></a>
+            <a href="index.php"><img src="../res/patrocinadores/patro8.jpg" alt="patrocinador8"></a>
         </div>
         <div id="redes-sociales">
-            <a href=""><img src="../res/rrss/icons8-facebook-48.png" alt=""></a>
-            <a href=""><img src="../res/rrss/icons8-facebook-messenger-48.png" alt=""></a>
-            <a href=""><img src="../res/rrss/icons8-instagram-48.png" alt=""></a>
-            <a href=""><img src="../res/rrss/icons8-youtube-48.png" alt=""></a>
-            <a href=""><img src="../res/rrss/icons8-tiktok-48.png" alt=""></a>
-            <a href=""><img src="../res/rrss/icons8-reddit-48.png" alt=""></a>
+            <a href="index.php"><img src="../res/rrss/icons8-facebook-48.png" alt="Facebook"></a>
+            <a href="index.php"><img src="../res/rrss/icons8-facebook-messenger-48.png" alt="Messenger"></a>
+            <a href="index.php"><img src="../res/rrss/icons8-instagram-48.png" alt="Instagram"></a>
+            <a href="index.php"><img src="../res/rrss/icons8-youtube-48.png" alt="Youtube"></a>
+            <a href="index.php"><img src="../res/rrss/icons8-tiktok-48.png" alt="Tiktok"></a>
+            <a href="index.php"><img src="../res/rrss/icons8-reddit-48.png" alt="Reddit"></a>
         </div>
         <div id="zona-ayuda">
             <a href="../src/preguntasFrecuentes.php">
@@ -147,9 +139,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2>Suscribete a nuestra newsletter</h2>
             <form action="">
                 <label for=""></label>
-                <input type="text" name="Nombre" value="Nombre">
-                <input type="text" name="email" value="Email">
-                <input type="submit" value="Suscribirme!">
+                <input type="text" name="Nombre" placeholder="Nombre" >
+                <input type="text" name="email" placeholder="Email" >
+                <div id="enviar-newsletter">
+                    <input type="submit" value="Suscribirme!">
+                </div>
             </form>
         </div>
         <div id="ubicacion">
