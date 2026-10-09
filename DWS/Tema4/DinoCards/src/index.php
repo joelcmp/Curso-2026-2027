@@ -35,30 +35,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <nav>
-        <header>
-        <div id="header-principal">
-            <a href="../src/index.php"><img src="../res/logo sin fondo.png" alt="Logo DinoCards"></a>
-            <a href="../src/cartas.php">
-                <h2>Colección</h2>
+    <header id="header-principal">
+        <div class="header-container">
+            <a href="../src/index.php" class="logo">
+                <img src="../res/logo sin fondo.png" alt="Logo DinoCards">
             </a>
-            <a href="../src/soporte.php">
-                <h2>Soporte</h2>
-            </a>
-            <a href="../src/cuenta.php">
-                <h2>Cuenta</h2>
-            </a>
+            <nav class="nav-links">
+                <a href="../src/index.php">Inicio</a>
+                <a href="../src/cartas.php">Colección</a>
+                <a href="../src/noticias.php">Noticias</a>
+                <a href="../src/soporte.php">Soporte</a>
+                <a href="../src/cuenta.php" class="btn-cuenta">Cuenta</a>
+            </nav>
         </div>
     </header>
-    </nav>
 
     <main>
         <div id="imagen-portada">
-            <img src="../res/portadaprincipal.jpg" alt="Imagen portada principal">
+            <img src="../res/portadav.jpg" alt="Imagen portada principal">
         </div>
         <div id="login-registro">
             <div id="botones-tab">
-                <button type="button" id="boton-login">Inicio sesión</button>
+                <button type="button" id="boton-login" class="activo">Inicio sesión</button>
                 <button type="button" id="boton-registro">Registrarse</button>
             </div>
             <div id="login">
@@ -72,12 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <button type="submit" name="action" value="login">Iniciar sesion</button>
                 </form>
-                <button type="button" class="enlace-texto" >¿Has olvidado la contraseña?</button>
-                <button type="button" class="enlace-texto" >¿Has olvidado el usuario?</button>
-                <button type="button" class="enlace-texto" >No tengo cuenta</button>
+                <button type="button" id="enlace-contrasena" class="enlace-texto">¿Has olvidado la contraseña?</button>
+                <button type="button" id="enlace-usuario" class="enlace-texto">¿Has olvidado el usuario?</button>
+                <button type="button" id="enlace-registro" class="enlace-texto">No tengo cuenta</button>
             </div>
 
-            <div id="registro">
+            <div id="registro" class="oculto">
                 <form method="POST" action="">
                     <label for="nombre">Nombre</label>
                     <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($nombre) ?>" required>
@@ -103,53 +101,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 
     <footer>
-        <div id="patrocinadores">
-            <a href="index.php"><img src="../res/patrocinadores/patro1.jpg" alt="patrocinador1"></a>
-            <a href="index.php"><img src="../res/patrocinadores/patro2.jpg" alt="patrocinador2"></a>
-            <a href="index.php"><img src="../res/patrocinadores/patro3.jpg" alt="patrocinador3"></a>
-            <a href="index.php"><img src="../res/patrocinadores/patro4.jpg" alt="patrocinador4"></a>
-            <a href="index.php"><img src="../res/patrocinadores/patro5.jpg" alt="patrocinador5"></a>
-            <a href="index.php"><img src="../res/patrocinadores/patro6.jpg" alt="patrocinador6"></a>
-            <a href="index.php"><img src="../res/patrocinadores/patro7.jpg" alt="patrocinador7"></a>
-            <a href="index.php"><img src="../res/patrocinadores/patro8.jpg" alt="patrocinador8"></a>
+    <div class="footer-container">
+        <div class="footer-col">
+            <h3>Patrocinadores</h3>
+            <div id="patrocinadores">
+                <a href="index.php"><img src="../res/patrocinadores/patro1.jpg" alt="patrocinador1"></a>
+                <a href="index.php"><img src="../res/patrocinadores/patro2.jpg" alt="patrocinador2"></a>
+                <a href="index.php"><img src="../res/patrocinadores/patro3.jpg" alt="patrocinador3"></a>
+                <a href="index.php"><img src="../res/patrocinadores/patro4.jpg" alt="patrocinador4"></a>
+                <a href="index.php"><img src="../res/patrocinadores/patro5.jpg" alt="patrocinador5"></a>
+                <a href="index.php"><img src="../res/patrocinadores/patro6.jpg" alt="patrocinador6"></a>
+                <a href="index.php"><img src="../res/patrocinadores/patro7.jpg" alt="patrocinador7"></a>
+                <a href="index.php"><img src="../res/patrocinadores/patro8.jpg" alt="patrocinador8"></a>
+            </div>
         </div>
-        <div id="redes-sociales">
-            <a href="index.php"><img src="../res/rrss/icons8-facebook-48.png" alt="Facebook"></a>
-            <a href="index.php"><img src="../res/rrss/icons8-facebook-messenger-48.png" alt="Messenger"></a>
-            <a href="index.php"><img src="../res/rrss/icons8-instagram-48.png" alt="Instagram"></a>
-            <a href="index.php"><img src="../res/rrss/icons8-youtube-48.png" alt="Youtube"></a>
-            <a href="index.php"><img src="../res/rrss/icons8-tiktok-48.png" alt="Tiktok"></a>
-            <a href="index.php"><img src="../res/rrss/icons8-reddit-48.png" alt="Reddit"></a>
+
+        <div class="footer-col">
+            <h3>Síguenos</h3>
+            <div id="redes-sociales">
+                <a href="index.php"><img src="../res/rrss/icons8-facebook-48.png" alt="Facebook"></a>
+                <a href="index.php"><img src="../res/rrss/icons8-facebook-messenger-48.png" alt="Messenger"></a>
+                <a href="index.php"><img src="../res/rrss/icons8-instagram-48.png" alt="Instagram"></a>
+                <a href="index.php"><img src="../res/rrss/icons8-youtube-48.png" alt="Youtube"></a>
+                <a href="index.php"><img src="../res/rrss/icons8-tiktok-48.png" alt="Tiktok"></a>
+                <a href="index.php"><img src="../res/rrss/icons8-reddit-48.png" alt="Reddit"></a>
+            </div>
         </div>
-        <div id="zona-ayuda">
-            <a href="../src/preguntasFrecuentes.php">
-                <h3>Preguntas frecuentes</h3>
-            </a>
-            <a href="../src/sobreNosotros.php">
-                <h3>Sobre nosotros</h3>
-            </a>
-            <a href="../src/noticias.php">
-                <h3>Noticias</h3>
-            </a>
-            <a href="../src/trabajaConNosotros.php">
-                <h3>Trabaja con nosotros</h3>
-            </a>
+
+        <div class="footer-col">
+            <h3>Enlaces</h3>
+            <div id="zona-ayuda">
+                <a href="../src/preguntasFrecuentes.php"><h3>Preguntas frecuentes</h3></a>
+                <a href="../src/sobreNosotros.php"><h3>Sobre nosotros</h3></a>
+                <a href="../src/noticias.php"><h3>Noticias</h3></a>
+                <a href="../src/trabajaConNosotros.php"><h3>Trabaja con nosotros</h3></a>
+            </div>
         </div>
-        <div id="newsletter">
-            <h2>Suscribete a nuestra newsletter</h2>
-            <form action="">
-                <label for=""></label>
-                <input type="text" name="Nombre" placeholder="Nombre" >
-                <input type="text" name="email" placeholder="Email" >
-                <div id="enviar-newsletter">
-                    <input type="submit" value="Suscribirme!">
-                </div>
-            </form>
+
+        <div class="footer-col">
+            <div id="newsletter">
+                <h2>Suscribete a nuestra newsletter</h2>
+                <form action="">
+                    <input type="text" name="Nombre" placeholder="Nombre">
+                    <input type="text" name="email" placeholder="Email">
+                    <div id="enviar-newsletter">
+                        <input type="submit" value="Suscribirme!">
+                    </div>
+                </form>
+            </div>
         </div>
-        <div id="ubicacion">
-            <h3>Calle de los Robles, 27, 28805 Alcalá de Henares, Madrid </h3>
-        </div>
-    </footer>
+    </div>
+
+    <div id="ubicacion">
+        <h3>Calle de los Robles, 27, 28805 Alcalá de Henares, Madrid </h3>
+    </div>
+</footer>
     <script src="../script/script.js"></script>
 </body>
 
