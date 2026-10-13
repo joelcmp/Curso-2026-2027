@@ -1,0 +1,262 @@
+-- SCRIPT de Generacion de BBDD en MySQL
+CREATE DATABASE IF NOT EXISTS DinoCards;
+
+-- DROPS
+DROP TABLE IF EXISTS colecciones;
+DROP TABLE IF EXISTS dinosaurios;
+DROP TABLE IF EXISTS usuarios;
+
+-- CREATE TABLES
+CREATE TABLE usuarios(id INT primary key auto_increment,
+					  username VARCHAR(64)not null UNIQUE,
+                      email VARCHAR(256)not null UNIQUE,
+                      password_hash VARCHAR(1024) not null,
+                      fecha_registro DATETIME,
+                      ultima_obtencion DATETIME);
+CREATE TABLE dinosaurios(id INT primary key auto_increment,
+					  nombre VARCHAR(64),
+                      especie VARCHAR(1024),
+                      periodo VARCHAR(1024),
+                      image_url VARCHAR(1024),
+                      altura DECIMAL(4,2),
+                      largo DECIMAL(4,2),
+                      peso DECIMAL(6,3),
+                      hp INT,
+                      vigor INT,
+                      ataque INT,
+                      defensa INT,
+                      agilidad INT);
+CREATE TABLE colecciones(id INT primary key auto_increment,
+						usuario_id INT,
+						dinosaurio_id INT,
+                        fecha_adquisicion DATETIME,
+              foreign key (usuario_id) REFERENCES usuarios(id),
+              foreign key (dinosaurio_id) REFERENCES dinosaurios(id)
+			);
+
+
+-- PROCEDIMIENTOS ALMACENADOS
+	-- PA REGISTRO
+DROP PROCEDURE IF EXISTS Registro;
+DELIMITER $$
+CREATE PROCEDURE Registro(IN _username VARCHAR(64),
+                          IN _email VARCHAR(256),
+                          IN _password VARCHAR(1024),
+                          OUT _res INT -- CODIGO DE ERROR DE SALIDA
+                          )
+BEGIN
+	DECLARE aux INT;
+    SET aux = 0;
+
+    -- Validar vacíos primero
+    IF (_username = "" OR _email = "") THEN
+        SET _res = -1;
+    ELSEIF (_password = "") THEN
+        SET _res = -3;
+    ELSE
+        -- Comprobar duplicados
+        SELECT COUNT(*) INTO aux FROM usuarios 
+        WHERE username = _username OR email = _email;
+
+        IF aux > 0 THEN
+            SET _res = -2;
+        ELSE
+            INSERT INTO usuarios(username, email, password_hash, fecha_registro)
+            VALUES(_username, _email, _password, SYSDATE());
+            SET _res = 0;
+        END IF;
+    END IF;
+END$$
+DELIMITER ;
+
+    -- PA LOGIN
+DROP PROCEDURE IF EXISTS Login;
+DELIMITER $$
+CREATE PROCEDURE Login(IN _email VARCHAR(256),
+						IN _password VARCHAR(1024),
+						OUT _res INT
+                        )
+BEGIN
+	DECLARE aux VARCHAR(64);
+    SET aux = NULL;
+    
+    SELECT username FROM usuarios WHERE email = _email and password_hash = _password
+    INTO aux;
+    -- CASO -1 - El parametro _username o _email esta vacio
+    IF(_email = "") THEN
+		SET _res = -1;
+    -- CASO -2 - Contraseña vacia
+	ELSEIF(_password = "") THEN
+		SET _res = -2;
+    -- CASO -3 - El usuario o contraseña no es correcto
+    ELSEIF(aux IS NULL) THEN
+		SET _res = -3;
+	ELSE
+	-- CASO 0 - Instruccion nuclear. Todo esta OK. Devolver el Perfil de usuario
+		SET _res = 0;
+        SELECT * FROM usuarios WHERE email = _email and password_hash = _password;
+	end if;
+END$$
+DELIMITER ;
+
+    -- PA AñadirNuevaCartaAColeccion
+DROP PROCEDURE IF EXISTS AñadirNuevaCartaAColeccion;
+DELIMITER $$
+CREATE PROCEDURE AñadirNuevaCartaAColeccion(IN _usuario_id INT,
+											OUT _res INT
+											)
+BEGIN
+	DECLARE auxUsuarioExiste INT;
+DECLARE v_ultima_obtencion DATETIME;
+SET auxUsuarioExiste = NULL;
+SET v_ultima_obtencion = NULL;
+
+SELECT id, ultima_obtencion INTO auxUsuarioExiste, v_ultima_obtencion
+FROM usuarios WHERE id = _usuario_id;
+    
+    
+    
+    IF(auxUsuarioExiste IS NULL) THEN -- CASO -1 - Usuario no existe
+		SET _res = -1;
+    ELSE -- CASO 0 - Todo OK
+		if(TIMESTAMPDIFF(HOUR, v_ultima_obtencion, NOW()) >= 24 or v_ultima_obtencion is null)
+        then
+		INSERT INTO colecciones(usuario_id,dinosaurio_id,fecha_adquisicion)
+						VALUES(_usuario_id, floor(1+rand()*100),SYSDATE());
+		update usuarios set ultima_obtencion=sysdate()
+		where id=_usuario_id;
+		SET _res = 0;
+        else set _res=-2;
+		end if;
+    END IF;
+END$$   
+DELIMITER ;   
+
+    -- PA ObtenerColeccion
+DROP PROCEDURE IF EXISTS ObtenerColeccion;
+DELIMITER $$
+CREATE PROCEDURE ObtenerColeccion(IN _usuario_id INT,
+								  OUT _res INT
+								  )
+BEGIN
+	DECLARE aux int;
+    SET aux = NULL;
+    
+    select id from usuarios where id=_usuario_id
+    into aux;
+    if(aux is null)
+    then 
+    set _res=-1;
+    -- Caso 0 - Todo OK, devuelvo la coleccion
+		else
+        SET _res = 0;
+        SELECT d.* FROM colecciones c
+		JOIN dinosaurios d ON c.dinosaurio_id = d.id
+		WHERE c.usuario_id = _usuario_id;
+    end if;    
+END$$
+DELIMITER ;
+
+-- INSERTS DINOSAURIOS
+
+INSERT INTO dinosaurios (id, nombre, especie, periodo, image_url, altura, largo, peso, hp, vigor, ataque, defensa, agilidad) VALUES
+(1, 'Tyrannosaurus', 'Tyrannosaurus rex', 'Cretácico tardío', NULL, 4.00, 12.00, 8.000, 700, 180, 230, 120, 60),
+(2, 'Triceratops', 'Triceratops horridus', 'Cretácico tardío', NULL, 3.00, 9.00, 6.000, 550, 150, 130, 180, 60),
+(3, 'Velociraptor', 'Velociraptor mongoliensis', 'Cretácico tardío', NULL, 0.50, 2.00, 0.015, 80, 110, 90, 40, 140),
+(4, 'Brachiosaurus', 'Brachiosaurus altithorax', 'Jurásico tardío', NULL, 12.00, 22.00, 35.000, 1200, 250, 100, 200, 30),
+(5, 'Stegosaurus', 'Stegosaurus stenops', 'Jurásico tardío', NULL, 4.00, 9.00, 5.000, 500, 130, 80, 250, 40),
+(6, 'Diplodocus', 'Diplodocus carnegii', 'Jurásico tardío', NULL, 5.00, 25.00, 15.000, 1100, 240, 90, 180, 35),
+(7, 'Ankylosaurus', 'Ankylosaurus magniventris', 'Cretácico tardío', NULL, 2.00, 8.00, 6.000, 600, 140, 90, 300, 30),
+(8, 'Parasaurolophus', 'Parasaurolophus walkeri', 'Cretácico tardío', NULL, 4.00, 10.00, 2.500, 500, 170, 60, 100, 90),
+(9, 'Spinosaurus', 'Spinosaurus aegyptiacus', 'Cretácico tardío', NULL, 4.00, 14.00, 7.000, 750, 190, 210, 130, 55),
+(10, 'Allosaurus', 'Allosaurus fragilis', 'Jurásico tardío', NULL, 3.00, 9.00, 2.000, 400, 140, 160, 80, 90),
+(11, 'Giganotosaurus', 'Giganotosaurus carolinii', 'Cretácico tardío', NULL, 4.00, 13.00, 8.000, 720, 185, 235, 125, 58),
+(12, 'Carnotaurus', 'Carnotaurus sastrei', 'Cretácico tardío', NULL, 3.00, 8.00, 1.500, 350, 130, 150, 70, 100),
+(13, 'Compsognathus', 'Compsognathus longipes', 'Jurásico tardío', NULL, 0.30, 1.00, 0.003, 50, 100, 60, 30, 150),
+(14, 'Archaeopteryx', 'Archaeopteryx lithographica', 'Jurásico tardío', NULL, 0.20, 0.50, 0.001, 40, 90, 50, 25, 160),
+(15, 'Gallimimus', 'Gallimimus bullatus', 'Cretácico tardío', NULL, 2.00, 6.00, 0.400, 200, 150, 70, 50, 130),
+(16, 'Therizinosaurus', 'Therizinosaurus cheloniformis', 'Cretácico tardío', NULL, 4.00, 10.00, 5.000, 550, 160, 110, 120, 60),
+(17, 'Deinonychus', 'Deinonychus antirrhopus', 'Cretácico temprano', NULL, 1.20, 3.50, 0.080, 120, 120, 110, 50, 135),
+(18, 'Utahraptor', 'Utahraptor ostrommaysorum', 'Cretácico temprano', NULL, 2.00, 6.00, 0.500, 300, 140, 140, 70, 120),
+(19, 'Microraptor', 'Microraptor gui', 'Cretácico temprano', NULL, 0.30, 0.80, 0.001, 45, 95, 55, 30, 155),
+(20, 'Dilophosaurus', 'Dilophosaurus wetherilli', 'Jurásico temprano', NULL, 2.00, 6.00, 0.400, 250, 130, 120, 60, 110),
+(21, 'Ceratosaurus', 'Ceratosaurus nasicornis', 'Jurásico tardío', NULL, 2.50, 6.00, 1.000, 320, 135, 135, 75, 105),
+(22, 'Iguanodon', 'Iguanodon bernissartensis', 'Cretácico temprano', NULL, 3.00, 10.00, 3.000, 450, 150, 70, 110, 80),
+(23, 'Maiasaura', 'Maiasaura peeblesorum', 'Cretácico tardío', NULL, 3.00, 9.00, 3.000, 480, 160, 60, 100, 85),
+(24, 'Pachycephalosaurus', 'Pachycephalosaurus wyomingensis', 'Cretácico tardío', NULL, 2.00, 4.50, 0.450, 280, 140, 100, 90, 100),
+(25, 'Protoceratops', 'Protoceratops andrewsi', 'Cretácico tardío', NULL, 0.80, 2.00, 0.180, 150, 120, 70, 100, 90),
+(26, 'Oviraptor', 'Oviraptor philoceratops', 'Cretácico tardío', NULL, 0.80, 2.00, 0.040, 100, 110, 65, 45, 125),
+(27, 'Citipati', 'Citipati osmolskae', 'Cretácico tardío', NULL, 1.00, 2.50, 0.075, 120, 115, 70, 50, 120),
+(28, 'Sinosauropteryx', 'Sinosauropteryx prima', 'Cretácico temprano', NULL, 0.40, 1.00, 0.001, 55, 100, 65, 35, 145),
+(29, 'Yutyrannus', 'Yutyrannus huali', 'Cretácico temprano', NULL, 3.00, 9.00, 1.400, 500, 160, 180, 100, 75),
+(30, 'Qianzhousaurus', 'Qianzhousaurus sinensis', 'Cretácico tardío', NULL, 3.00, 9.00, 0.750, 450, 150, 170, 90, 80),
+(31, 'Albertosaurus', 'Albertosaurus sarcophagus', 'Cretácico tardío', NULL, 3.00, 9.00, 2.000, 550, 165, 190, 110, 70),
+(32, 'Daspletosaurus', 'Daspletosaurus torosus', 'Cretácico tardío', NULL, 3.00, 9.00, 2.500, 600, 170, 200, 115, 65),
+(33, 'Tarbosaurus', 'Tarbosaurus bataar', 'Cretácico tardío', NULL, 3.50, 12.00, 5.000, 680, 175, 220, 120, 62),
+(34, 'Carcharodontosaurus', 'Carcharodontosaurus saharicus', 'Cretácico tardío', NULL, 4.00, 13.00, 7.000, 710, 180, 230, 125, 58),
+(35, 'Acrocanthosaurus', 'Acrocanthosaurus atokensis', 'Cretácico temprano', NULL, 3.50, 11.00, 6.000, 650, 170, 210, 115, 60),
+(36, 'Baryonyx', 'Baryonyx walkeri', 'Cretácico temprano', NULL, 2.50, 8.00, 2.000, 400, 140, 140, 80, 95),
+(37, 'Suchomimus', 'Suchomimus tenerensis', 'Cretácico temprano', NULL, 3.00, 11.00, 5.000, 550, 160, 160, 100, 85),
+(38, 'Megalosaurus', 'Megalosaurus bucklandii', 'Jurásico medio', NULL, 2.50, 6.00, 1.000, 350, 140, 140, 80, 100),
+(39, 'Eustreptospondylus', 'Eustreptospondylus oxoniensis', 'Jurásico medio', NULL, 2.00, 5.00, 0.500, 280, 130, 120, 70, 110),
+(40, 'Afrovenator', 'Afrovenator abakensis', 'Jurásico medio', NULL, 2.50, 7.00, 1.000, 380, 145, 150, 85, 105),
+(41, 'Cryolophosaurus', 'Cryolophosaurus ellioti', 'Jurásico temprano', NULL, 2.00, 6.00, 0.500, 300, 135, 130, 75, 115),
+(42, 'Herrerasaurus', 'Herrerasaurus ischigualastensis', 'Triásico tardío', NULL, 2.00, 6.00, 0.350, 260, 130, 125, 65, 120),
+(43, 'Eoraptor', 'Eoraptor lunensis', 'Triásico tardío', NULL, 0.40, 1.00, 0.010, 60, 100, 60, 35, 140),
+(44, 'Plateosaurus', 'Plateosaurus engelhardti', 'Triásico tardío', NULL, 2.50, 8.00, 0.700, 320, 140, 70, 90, 95),
+(45, 'Coelophysis', 'Coelophysis bauri', 'Triásico tardío', NULL, 1.00, 3.00, 0.030, 90, 110, 80, 40, 135),
+(46, 'Massospondylus', 'Massospondylus carinatus', 'Jurásico temprano', NULL, 1.50, 4.00, 1.000, 280, 130, 60, 80, 100),
+(47, 'Riojasaurus', 'Riojasaurus incertus', 'Triásico tardío', NULL, 2.00, 6.00, 1.000, 300, 135, 65, 85, 90),
+(48, 'Apatosaurus', 'Apatosaurus ajax', 'Jurásico tardío', NULL, 5.00, 21.00, 18.000, 1150, 245, 95, 190, 32),
+(49, 'Brontosaurus', 'Brontosaurus excelsus', 'Jurásico tardío', NULL, 5.50, 22.00, 15.000, 1100, 240, 90, 185, 34),
+(50, 'Camarasaurus', 'Camarasaurus supremus', 'Jurásico tardío', NULL, 6.00, 18.00, 18.000, 1120, 242, 92, 188, 33),
+(51, 'Cetiosaurus', 'Cetiosaurus oxoniensis', 'Jurásico medio', NULL, 4.50, 16.00, 11.000, 1000, 230, 88, 175, 36),
+(52, 'Mamenchisaurus', 'Mamenchisaurus constructus', 'Jurásico tardío', NULL, 7.00, 22.00, 25.000, 1250, 260, 98, 210, 28),
+(53, 'Shunosaurus', 'Shunosaurus lii', 'Jurásico tardío', NULL, 3.00, 9.00, 3.000, 500, 160, 80, 140, 50),
+(54, 'Omeisaurus', 'Omeisaurus tianfuensis', 'Jurásico medio', NULL, 4.00, 15.00, 4.000, 700, 190, 85, 160, 45),
+(55, 'Amargasaurus', 'Amargasaurus cazaui', 'Cretácico temprano', NULL, 3.00, 10.00, 2.500, 480, 155, 75, 150, 55),
+(56, 'Saltasaurus', 'Saltasaurus loricatus', 'Cretácico tardío', NULL, 4.00, 12.00, 7.000, 800, 200, 85, 220, 40),
+(57, 'Alamosaurus', 'Alamosaurus sanjuanensis', 'Cretácico tardío', NULL, 6.00, 21.00, 30.000, 1300, 270, 100, 220, 25),
+(58, 'Argentinosaurus', 'Argentinosaurus huinculensis', 'Cretácico tardío', NULL, 8.00, 30.00, 80.000, 1800, 320, 110, 250, 20),
+(59, 'Patagotitan', 'Patagotitan mayorum', 'Cretácico tardío', NULL, 7.50, 31.00, 70.000, 1700, 310, 105, 245, 22),
+(60, 'Dreadnoughtus', 'Dreadnoughtus schrani', 'Cretácico tardío', NULL, 7.00, 26.00, 49.000, 1500, 290, 100, 235, 24),
+(61, 'Puertasaurus', 'Puertasaurus reuili', 'Cretácico tardío', NULL, 8.00, 30.00, 50.000, 1550, 295, 102, 240, 23),
+(62, 'Futalognkosaurus', 'Futalognkosaurus dukei', 'Cretácico tardío', NULL, 7.00, 26.00, 40.000, 1450, 285, 98, 230, 26),
+(63, 'Nigersaurus', 'Nigersaurus taqueti', 'Cretácico temprano', NULL, 3.00, 9.00, 4.000, 520, 165, 70, 145, 60),
+(64, 'Ampelosaurus', 'Ampelosaurus atacis', 'Cretácico tardío', NULL, 4.00, 15.00, 8.000, 850, 210, 88, 200, 38),
+(65, 'Europasaurus', 'Europasaurus holgeri', 'Jurásico tardío', NULL, 2.00, 6.00, 1.000, 300, 140, 65, 120, 70),
+(66, 'Kentrosaurus', 'Kentrosaurus aethiopicus', 'Jurásico tardío', NULL, 1.50, 4.50, 1.000, 350, 130, 75, 200, 50),
+(67, 'Huayangosaurus', 'Huayangosaurus taibaii', 'Jurásico medio', NULL, 1.50, 4.00, 0.500, 300, 120, 70, 180, 55),
+(68, 'Tuojiangosaurus', 'Tuojiangosaurus multispinus', 'Jurásico tardío', NULL, 2.50, 7.00, 4.000, 450, 140, 80, 220, 45),
+(69, 'Gigantspinosaurus', 'Gigantspinosaurus sichuanensis', 'Jurásico tardío', NULL, 1.50, 4.00, 0.700, 320, 125, 75, 190, 52),
+(70, 'Euoplocephalus', 'Euoplocephalus tutus', 'Cretácico tardío', NULL, 2.00, 6.00, 3.000, 500, 145, 85, 280, 35),
+(71, 'Edmontonia', 'Edmontonia rugosidens', 'Cretácico tardío', NULL, 2.00, 6.00, 3.000, 480, 140, 80, 260, 38),
+(72, 'Sauropelta', 'Sauropelta edwardsorum', 'Cretácico temprano', NULL, 1.80, 5.00, 1.500, 400, 135, 75, 230, 42),
+(73, 'Polacanthus', 'Polacanthus foxii', 'Cretácico temprano', NULL, 1.50, 4.00, 1.000, 350, 130, 70, 210, 48),
+(74, 'Scelidosaurus', 'Scelidosaurus harrisonii', 'Jurásico temprano', NULL, 1.20, 4.00, 0.250, 250, 120, 60, 180, 60),
+(75, 'Minmi', 'Minmi paravertebra', 'Cretácico temprano', NULL, 1.00, 3.00, 0.300, 220, 115, 55, 160, 65),
+(76, 'Styracosaurus', 'Styracosaurus albertensis', 'Cretácico tardío', NULL, 2.50, 5.50, 2.700, 520, 150, 130, 190, 55),
+(77, 'Centrosaurus', 'Centrosaurus apertus', 'Cretácico tardío', NULL, 2.50, 6.00, 2.500, 510, 148, 125, 185, 58),
+(78, 'Chasmosaurus', 'Chasmosaurus belli', 'Cretácico tardío', NULL, 2.00, 5.00, 2.000, 480, 145, 120, 175, 60),
+(79, 'Pachyrhinosaurus', 'Pachyrhinosaurus canadensis', 'Cretácico tardío', NULL, 2.50, 6.00, 4.000, 560, 155, 135, 200, 52),
+(80, 'Kosmoceratops', 'Kosmoceratops richardsoni', 'Cretácico tardío', NULL, 2.00, 4.50, 1.200, 450, 140, 115, 170, 62),
+(81, 'Nasutoceratops', 'Nasutoceratops titusi', 'Cretácico tardío', NULL, 2.00, 4.50, 1.500, 460, 142, 118, 172, 61),
+(82, 'Einiosaurus', 'Einiosaurus procurvicornis', 'Cretácico tardío', NULL, 2.00, 4.50, 1.300, 455, 141, 116, 171, 63),
+(83, 'Corythosaurus', 'Corythosaurus casuarius', 'Cretácico tardío', NULL, 3.00, 9.00, 3.000, 490, 165, 62, 105, 88),
+(84, 'Lambeosaurus', 'Lambeosaurus lambei', 'Cretácico tardío', NULL, 3.50, 9.00, 3.500, 500, 168, 63, 108, 86),
+(85, 'Edmontosaurus', 'Edmontosaurus regalis', 'Cretácico tardío', NULL, 4.00, 12.00, 4.000, 550, 175, 65, 115, 82),
+(86, 'Shantungosaurus', 'Shantungosaurus giganteus', 'Cretácico tardío', NULL, 5.00, 15.00, 16.000, 900, 220, 75, 140, 70),
+(87, 'Ouranosaurus', 'Ouranosaurus nigeriensis', 'Cretácico temprano', NULL, 3.00, 7.00, 3.000, 470, 160, 68, 110, 80),
+(88, 'Muttaburrasaurus', 'Muttaburrasaurus langdoni', 'Cretácico temprano', NULL, 3.00, 8.00, 2.800, 460, 158, 66, 108, 82),
+(89, 'Hypsilophodon', 'Hypsilophodon foxii', 'Cretácico temprano', NULL, 0.80, 2.00, 0.050, 120, 110, 45, 60, 130),
+(90, 'Dryosaurus', 'Dryosaurus altus', 'Jurásico tardío', NULL, 1.00, 3.00, 0.100, 150, 115, 50, 65, 125),
+(91, 'Tenontosaurus', 'Tenontosaurus tilletti', 'Cretácico temprano', NULL, 2.00, 6.00, 1.000, 380, 145, 60, 90, 95),
+(92, 'Thescelosaurus', 'Thescelosaurus neglectus', 'Cretácico tardío', NULL, 1.20, 4.00, 0.300, 220, 120, 55, 75, 110),
+(93, 'Heterodontosaurus', 'Heterodontosaurus tucki', 'Jurásico temprano', NULL, 0.50, 1.20, 0.010, 80, 105, 60, 40, 140),
+(94, 'Pisanosaurus', 'Pisanosaurus mertii', 'Triásico tardío', NULL, 0.40, 1.00, 0.005, 70, 100, 40, 50, 135),
+(95, 'Lesothosaurus', 'Lesothosaurus diagnosticus', 'Jurásico temprano', NULL, 0.60, 2.00, 0.010, 90, 105, 45, 55, 130),
+(96, 'Scutellosaurus', 'Scutellosaurus lawleri', 'Jurásico temprano', NULL, 0.40, 1.20, 0.003, 85, 100, 40, 80, 120),
+(97, 'Mussaurus', 'Mussaurus patagonicus', 'Triásico tardío', NULL, 1.00, 3.00, 0.100, 160, 115, 50, 70, 115),
+(98, 'Anchisaurus', 'Anchisaurus polyzelus', 'Jurásico temprano', NULL, 0.80, 2.50, 0.027, 140, 110, 48, 65, 118),
+(99, 'Melanorosaurus', 'Melanorosaurus readi', 'Triásico tardío', NULL, 2.50, 8.00, 1.500, 350, 140, 65, 100, 85),
+(100, 'Saturnalia', 'Saturnalia tupiniquim', 'Triásico tardío', NULL, 0.50, 1.50, 0.010, 100, 105, 45, 55, 125);
