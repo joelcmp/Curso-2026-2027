@@ -100,13 +100,13 @@ END$$
 DELIMITER ;
 
     -- PA AñadirNuevaCartaAColeccion
-DROP PROCEDURE IF EXISTS AñadirNuevaCartaAColeccion;
+DROP PROCEDURE IF EXISTS AnadirNuevaCartaAColeccion;
 DELIMITER $$
-CREATE PROCEDURE AñadirNuevaCartaAColeccion(IN _usuario_id INT,
+CREATE PROCEDURE AnadirNuevaCartaAColeccion(IN _usuario_id INT,
 											OUT _res INT
 											)
 BEGIN
-	DECLARE auxUsuarioExiste INT;
+DECLARE auxUsuarioExiste INT;
 DECLARE v_ultima_obtencion DATETIME;
 SET auxUsuarioExiste = NULL;
 SET v_ultima_obtencion = NULL;
