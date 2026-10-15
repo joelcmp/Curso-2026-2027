@@ -5,6 +5,7 @@ require_once __DIR__ . '/../php/mensajes.php';
 
 function registrarUsuario(string $usuario, string $email, string $password, string $confirmarPassword)
 {
+    global $mensajes;
 
     if (empty($usuario)) {
 
@@ -12,31 +13,37 @@ function registrarUsuario(string $usuario, string $email, string $password, stri
     }
     if (empty($email)) {
 
-        return ['exito' => false,'mensaje'=> $mensajes['servicio'][-13]];
+        return ['exito' => false, 'mensaje' => $mensajes['servicio'][-13]];
     }
     if ($password !== $confirmarPassword) {
 
-        return ['exito' => false,'mensaje'=> $mensajes['servicio'][-14]];
+        return ['exito' => false, 'mensaje' => $mensajes['servicio'][-14]];
     }
 
-    return PA_Registrar(
-        $usuario,
-        $email,
-        $password
-    );
+    $codigo = PA_Registrar($usuario, $email, $password);
+
+    $exito = ((int)$codigo === 0);
+    $mensaje = $mensajes['sp_registro'][$codigo] ?? 'Error desconocido en el registro.';
+
+    return ['exito' => $exito, 'mensaje' => $mensaje];
 }
 function loginUsuario(string $usuario, string $password)
 {
+    global $mensajes;
 
     if (empty($usuario)) {
-        return ['exito' => false,'mensaje'=> $mensajes['servicio'][-15]];
+        return ['exito' => false, 'mensaje' => $mensajes['servicio'][-15]];
     }
     if (empty($password)) {
-        return ['exito' => false,'mensaje'=> $mensajes['servicio'][-16]];
+        return ['exito' => false, 'mensaje' => $mensajes['servicio'][-16]];
     }
 
-    return  PA_Login(
-        $usuario,
-        $password
-    );
+    $codigo = PA_Login($usuario, $password);
+    
+    $exito = ((int)$codigo['resultado'] === 0);
+
+    $mensaje = $mensajes['sp_login'][$codigo['resultado']] ?? 'Error desconocido en el login.';
+    
+
+    return ['exito' => $exito, 'mensaje' => $mensaje,'usuario'=>$codigo['usuario']];
 }

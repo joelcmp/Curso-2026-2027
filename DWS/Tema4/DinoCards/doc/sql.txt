@@ -42,19 +42,23 @@ DELIMITER $$
 CREATE PROCEDURE Registro(IN _username VARCHAR(64),
                           IN _email VARCHAR(256),
                           IN _password VARCHAR(1024),
-                          OUT _res INT -- CODIGO DE ERROR DE SALIDA
+                          OUT _res INT
                           )
 BEGIN
 	DECLARE aux INT;
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        SET _res = -99;
+    END;
+
     SET aux = 0;
 
-    -- Validar vacíos primero
     IF (_username = "" OR _email = "") THEN
         SET _res = -1;
     ELSEIF (_password = "") THEN
         SET _res = -1;
     ELSE
-        -- Comprobar duplicados
         SELECT COUNT(*) INTO aux FROM usuarios 
         WHERE username = _username OR email = _email;
 
@@ -78,21 +82,24 @@ CREATE PROCEDURE Login(IN _email VARCHAR(256),
                         )
 BEGIN
 	DECLARE aux VARCHAR(64);
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        SET _res = -99;
+    END;
+
     SET aux = NULL;
-    
+
     SELECT username FROM usuarios WHERE email = _email and password_hash = _password
     INTO aux;
-    -- CASO -1 - El parametro _username o _email esta vacio
+
     IF(_email = "") THEN
 		SET _res = -1;
-    -- CASO -2 - Contraseña vacia
 	ELSEIF(_password = "") THEN
 		SET _res = -1;
-    -- CASO -3 - El usuario o contraseña no es correcto
     ELSEIF(aux IS NULL) THEN
 		SET _res = -3;
 	ELSE
-	-- CASO 0 - Instruccion nuclear. Todo esta OK. Devolver el Perfil de usuario
 		SET _res = 0;
         SELECT * FROM usuarios WHERE email = _email and password_hash = _password;
 	end if;
@@ -108,18 +115,22 @@ CREATE PROCEDURE AnadirNuevaCartaAColeccion(IN _usuario_id INT,
 BEGIN
 DECLARE auxUsuarioExiste INT;
 DECLARE v_ultima_obtencion DATETIME;
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN
+    SET _res = -99;
+END;
+
 SET auxUsuarioExiste = NULL;
 SET v_ultima_obtencion = NULL;
 
 SELECT id, ultima_obtencion INTO auxUsuarioExiste, v_ultima_obtencion
 FROM usuarios WHERE id = _usuario_id;
-    
-    
-    
-    IF(auxUsuarioExiste IS NULL) THEN -- CASO -1 - Usuario no existe
+
+    IF(auxUsuarioExiste IS NULL) THEN
 		SET _res = -8;
-    ELSE -- CASO 0 - Todo OK
-		if(TIMESTAMPDIFF(HOUR, v_ultima_obtencion, NOW()) >= 24 or v_ultima_obtencion is null)
+    ELSE
+		if(TIMESTAMPDIFF(SECOND, v_ultima_obtencion, NOW()) >= 24 or v_ultima_obtencion is null)
         then
 		INSERT INTO colecciones(usuario_id,dinosaurio_id,fecha_adquisicion)
 						VALUES(_usuario_id, floor(1+rand()*100),SYSDATE());
@@ -129,8 +140,29 @@ FROM usuarios WHERE id = _usuario_id;
         else set _res=-9;
 		end if;
     END IF;
-END$$   
-DELIMITER ;   
+END$$
+DELIMITER ;
+
+    -- PA Obtener todas las cartas con estado
+DROP PROCEDURE IF EXISTS ObtenerTodasLasCartasConEstado;
+DELIMITER $$
+CREATE PROCEDURE ObtenerTodasLasCartasConEstado(IN _usuario_id INT, OUT _res INT)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        SET _res = -99;
+    END;
+
+    SET _res = 0;
+
+    SELECT d.*,
+           CASE WHEN c.usuario_id IS NOT NULL THEN 1 ELSE 0 END AS tiene
+    FROM dinosaurios d
+    LEFT JOIN colecciones c
+        ON d.id = c.dinosaurio_id AND c.usuario_id = _usuario_id
+    ORDER BY d.id;
+END$$
+DELIMITER ;
 
     -- PA ObtenerColeccion
 DROP PROCEDURE IF EXISTS ObtenerColeccion;
@@ -140,14 +172,20 @@ CREATE PROCEDURE ObtenerColeccion(IN _usuario_id INT,
 								  )
 BEGIN
 	DECLARE aux int;
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        SET _res = -99;
+    END;
+
     SET aux = NULL;
-    
+
     select id from usuarios where id=_usuario_id
     into aux;
+
     if(aux is null)
     then 
     set _res=-10;
-    -- Caso 0 - Todo OK, devuelvo la coleccion
 		else
         SET _res = 0;
         SELECT d.* FROM colecciones c

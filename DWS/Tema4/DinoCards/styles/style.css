@@ -116,6 +116,18 @@ main {
     display: block;
 }
 
+#bienvenida {
+    position: relative;
+    z-index: 1;
+    background-color: #ffffff;
+    padding: 40px 60px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(34, 87, 122, 0.4);
+    color: #22577A;
+    text-align: center;
+    max-width: 500px;
+}
+
 #login-registro {
     background-color: #ffffff;
     width: 100%;

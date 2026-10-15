@@ -1,0 +1,130 @@
+body {
+    background: linear-gradient(180deg, #f0faf5 0%, #d8ece8 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+#faq-intro {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+#faq-intro h2 {
+    font-size: 3rem;
+    color: #22577A;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+#faq-intro h2::after {
+    content: '';
+    display: block;
+    width: 90px;
+    height: 4px;
+    background: #38A3A5;
+    border-radius: 2px;
+    margin: 15px auto 0;
+}
+
+#faq-intro p {
+    font-size: 1.2rem;
+    color: #22577A;
+    line-height: 1.6;
+    background: #c7f9cc;
+    padding: 15px 25px;
+    border-radius: 12px;
+    max-width: 750px;
+    margin: 25px auto 0;
+}
+
+.faq-seccion {
+    margin-bottom: 50px;
+}
+
+.faq-seccion h2 {
+    font-size: 1.8rem;
+    color: #22577A;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    border-left: 5px solid #38A3A5;
+}
+
+.faq-seccion article {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px 28px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+    transition: transform .3s, box-shadow .3s;
+    border-left: 4px solid transparent;
+}
+
+.faq-seccion article:hover {
+    transform: translateX(5px);
+    box-shadow: 0 10px 25px rgba(34, 87, 122, .15);
+    border-left-color: #38A3A5;
+}
+
+.faq-seccion article h3 {
+    font-size: 1.15rem;
+    color: #22577A;
+    margin-bottom: 10px;
+}
+
+.faq-seccion article p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+#faq-final {
+    text-align: center;
+    background: #22577A;
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: 16px;
+    margin-top: 50px;
+}
+
+#faq-final h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #c7f9cc;
+}
+
+#faq-final p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+#faq-final a {
+    display: inline-block;
+    background: #c7f9cc;
+    color: #22577A;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all .3s;
+}
+
+#faq-final a:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(199, 249, 204, .4);
+}
+
+@media (max-width: 768px) {
+    #faq-intro h2 { font-size: 2rem; }
+    .faq-seccion h2 { font-size: 1.4rem; }
+    .faq-seccion article { padding: 18px 20px; }
+    .faq-seccion article h3 { font-size: 1.05rem; }
+    #faq-final h2 { font-size: 1.4rem; }
+}

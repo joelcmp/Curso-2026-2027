@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $nombre = '';
 $apellido = '';
@@ -14,12 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($_POST['action'] === 'registrar') {
         require_once __DIR__ . '/../php/registro.php';
-
     } else if ($_POST['action'] === 'login') {
         require_once __DIR__ . '/../php/login.php';
     }
 }
 
+if (isset($resultado['mensaje'])) {
+    $mensaje = $resultado['mensaje'];
+}
+
+if (!empty($error)) {
+    $mensaje = 'Error: ' . $error;
+}
 
 
 ?>
@@ -32,9 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DinoCards | Tu colección de cartas</title>
     <link rel="stylesheet" href="../styles/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -45,10 +50,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </a>
             <nav class="nav-links">
                 <a href="../src/index.php">Inicio</a>
-                <a href="../src/cartas.php">Colección</a>
+                <a href="../src/coleccion.php">Colección</a>
                 <a href="../src/noticias.php">Noticias</a>
                 <a href="../src/soporte.php">Soporte</a>
-                <a href="../src/cuenta.php" class="btn-cuenta">Cuenta</a>
+                <?php if (isset($_SESSION['id'])): ?>
+                    <a href="../php/logout.php" class="btn-cuenta">Cerrar sesión</a>
+                <?php else: ?>
+                    <a href="../src/cuenta.php" class="btn-cuenta">Cuenta</a>
+                <?php endif; ?>
             </nav>
         </div>
     </header>
@@ -57,48 +66,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div id="imagen-portada">
             <img src="../res/portadav.jpg" alt="Imagen portada principal">
         </div>
-        <div id="login-registro">
-            <div id="botones-tab">
-                <button type="button" id="boton-login" class="activo">Inicio sesión</button>
-                <button type="button" id="boton-registro">Registrarse</button>
+
+        <?php if (!isset($_SESSION['id'])): ?>
+
+            <div id="login-registro">
+                <div id="botones-tab">
+                    <button type="button" id="boton-login" class="activo">Inicio sesión</button>
+                    <button type="button" id="boton-registro">Registrarse</button>
+                </div>
+                <?php if (!empty($mensaje)): ?>
+                    <p class="mensaje"><?= htmlspecialchars($mensaje) ?></p>
+                <?php endif; ?>
+                <div id="login">
+                    <form method="POST" action="">
+
+                        <label for="usuario">Usuario o email</label>
+                        <input type="text" id="usuario" name="usuario" value="<?= htmlspecialchars($usuario) ?>" required>
+
+                        <label for="contrasena">Contraseña</label>
+                        <input type="password" id="contrasena" name="contrasena" required>
+
+                        <button type="submit" name="action" value="login">Iniciar sesion</button>
+                    </form>
+                    <button type="button" id="enlace-contrasena" class="enlace-texto">¿Has olvidado la contraseña?</button>
+                    <button type="button" id="enlace-usuario" class="enlace-texto">¿Has olvidado el usuario?</button>
+                    <button type="button" id="enlace-registro" class="enlace-texto">No tengo cuenta</button>
+                </div>
+
+                <div id="registro" class="oculto">
+                    <form method="POST" action="">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($nombre) ?>" required>
+
+                        <label for="email-registro">Email</label>
+                        <input type="email" id="email" name="email-registro" value="<?= htmlspecialchars($email) ?>" required>
+
+                        <label for="usuario-registro">Usuario</label>
+                        <input type="text" id="usuario" name="usuario-registro" value="<?= htmlspecialchars($usuario) ?>" required>
+
+                        <label for="contrasena-registro">Contraseña</label>
+                        <input type="password" id="contrasena-registro" name="contrasena" required>
+                        <label for="confirmaContrasena">Confirmar Contraseña</label>
+                        <input type="password" id="confirmaContrasena" name="confirmaContrasena" required>
+
+                        <button type="submit" name="action" value="registrar">Registrar</button>
+                    </form>
+                </div>
+
             </div>
-            <div id="login">
-                <form method="POST" action="">
 
-                    <label for="usuario">Usuario o email</label>
-                    <input type="text" id="usuario" name="usuario" value="<?= htmlspecialchars($usuario) ?>" required>
-
-                    <label for="contrasena">Contraseña</label>
-                    <input type="password" id="contrasena" name="contrasena" required>
-
-                    <button type="submit" name="action" value="login">Iniciar sesion</button>
-                </form>
-                <button type="button" id="enlace-contrasena" class="enlace-texto">¿Has olvidado la contraseña?</button>
-                <button type="button" id="enlace-usuario" class="enlace-texto">¿Has olvidado el usuario?</button>
-                <button type="button" id="enlace-registro" class="enlace-texto">No tengo cuenta</button>
+        <?php else: ?>
+            <div id="bienvenida">
+                <h2>¡Hola, <?= htmlspecialchars($_SESSION['username']) ?>!</h2>
+                <p>Ya has iniciado sesión. Puedes explorar tu colección desde el menú superior.</p>
             </div>
+        <?php endif; ?>
 
-            <div id="registro" class="oculto">
-                <form method="POST" action="">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($nombre) ?>" required>
-
-                    <label for="email-registro">Email</label>
-                    <input type="email" id="email" name="email-registro" value="<?= htmlspecialchars($email) ?>" required>
-
-                    <label for="usuario-registro">Usuario</label>
-                    <input type="text" id="usuario" name="usuario-registro" value="<?= htmlspecialchars($usuario) ?>" required>
-
-                    <label for="contrasena-registro">Contraseña</label>
-                    <input type="password" id="contrasena-registro" name="contrasena" required>
-                    <label for="confirmaContrasena">Confirmar Contraseña</label>
-                    <input type="password" id="confirmaContrasena" name="confirmaContrasena" required>
-
-                    <button type="submit" name="action" value="registrar">Registrar</button>
-                </form>
-            </div>
-
-        </div>
     </main>
 
     <footer>

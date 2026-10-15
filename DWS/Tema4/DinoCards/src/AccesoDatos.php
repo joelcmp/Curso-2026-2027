@@ -3,8 +3,8 @@
     $host = '127.0.0.1';
     $port = 3306;
     $database = 'dinocards';
-    $username = 'JoelcmpDB';
-    $password = 'Mbappedictador';
+    $username = 'root';
+    $password = '';
 
     mysqli_report(MYSQLI_REPORT_OFF);
     $connection = @new mysqli($host, $username, $password, $database, $port);
@@ -31,6 +31,13 @@
             throw new RuntimeException('Error al ejecutar el procedimiento: ' . $error);
         }
 
+        $filas = $stmt->get_result();
+        $usuario_datos = null;
+        if ($filas) {
+        $usuario_datos = $filas->fetch_assoc();
+        }
+        
+
         while ($stmt->more_results()) {
             $stmt->next_result();
         }
@@ -44,7 +51,10 @@
 
         $fila = $resultado->fetch_assoc();
         $resultado->free();
-        return $fila['resultado'];
+        return [
+            'resultado'=> $fila['resultado'],
+            'usuario' =>$usuario_datos
+        ];
     }
 
 
@@ -157,5 +167,54 @@
         return [
             'resultado' => $codigo,
             'dinosaurios' => $dinosaurios
+        ];
+    }
+
+        function PA_ObtenerTodasLasCartasConEstado(int $usuario_id)
+    {
+        global $connection;
+
+        if ($connection->connect_errno) {
+            throw new RuntimeException('Error de conexión: ' . $connection->connect_error);
+        }
+
+        $sql = 'CALL ObtenerTodasLasCartasConEstado(?, @resultado)';
+        $stmt = $connection->prepare($sql);
+
+        if (!$stmt) {
+            throw new RuntimeException('Error al preparar el procedimiento: ' . $connection->error);
+        }
+
+        $stmt->bind_param('i', $usuario_id);
+
+        if (!$stmt->execute()) {
+            $error = $stmt->error;
+            $stmt->close();
+            throw new RuntimeException('Error al ejecutar el procedimiento: ' . $error);
+        }
+
+        $filas = $stmt->get_result();
+        $cartas = [];
+        while ($c = $filas->fetch_assoc()) {
+            $cartas[] = $c;
+        }
+
+        while ($stmt->more_results()) {
+            $stmt->next_result();
+        }
+        $stmt->close();
+
+        $resultado = $connection->query('SELECT @resultado AS resultado');
+
+        if (!$resultado) {
+            throw new RuntimeException('Error al recuperar el parámetro OUT: ' . $connection->error);
+        }
+
+        $fila = $resultado->fetch_assoc();
+        $resultado->free();
+
+        return [
+            'resultado' => $fila['resultado'],
+            'cartas' => $cartas
         ];
     }
