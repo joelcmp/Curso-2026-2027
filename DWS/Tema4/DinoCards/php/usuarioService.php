@@ -28,17 +28,15 @@ function registrarUsuario(string $usuario, string $email, string $password, stri
 function loginUsuario(string $usuario, string $password)
 {
 
-    
-
-    if (empty($usuario) ) {
+    if (empty($usuario)) {
         return -15;
     }
     if (empty($password)) {
         return -16;
-    } 
+    }
 
     return  PA_Login(
-                $usuario,
-                $password
-            );
+        $usuario,
+        $password
+    );
 }

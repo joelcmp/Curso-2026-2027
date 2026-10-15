@@ -8,6 +8,7 @@ $usuario = '';
 $resultado = null;
 $error = null;
 $contrasena = '';
+$mensaje = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -18,6 +19,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+switch ($resultado) {
+    case -12:
+        
+        break;
+    
+    case -13:
+        
+        break;
+
+    case -14:
+
+        break;
+
+    case -15:
+
+        break;
+}
 
 ?>
 
@@ -79,9 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <form method="POST" action="">
                     <label for="nombre">Nombre</label>
                     <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($nombre) ?>" required>
-
-                    <label for="apellido">Apellido</label>
-                    <input type="text" id="apellido" name="apellido" value="<?= htmlspecialchars($apellido) ?>" required>
 
                     <label for="email-registro">Email</label>
                     <input type="email" id="email" name="email-registro" value="<?= htmlspecialchars($email) ?>" required>
