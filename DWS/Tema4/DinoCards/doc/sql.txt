@@ -52,7 +52,7 @@ BEGIN
     IF (_username = "" OR _email = "") THEN
         SET _res = -1;
     ELSEIF (_password = "") THEN
-        SET _res = -3;
+        SET _res = -1;
     ELSE
         -- Comprobar duplicados
         SELECT COUNT(*) INTO aux FROM usuarios 
@@ -87,7 +87,7 @@ BEGIN
 		SET _res = -1;
     -- CASO -2 - Contraseña vacia
 	ELSEIF(_password = "") THEN
-		SET _res = -2;
+		SET _res = -1;
     -- CASO -3 - El usuario o contraseña no es correcto
     ELSEIF(aux IS NULL) THEN
 		SET _res = -3;
@@ -117,7 +117,7 @@ FROM usuarios WHERE id = _usuario_id;
     
     
     IF(auxUsuarioExiste IS NULL) THEN -- CASO -1 - Usuario no existe
-		SET _res = -1;
+		SET _res = -8;
     ELSE -- CASO 0 - Todo OK
 		if(TIMESTAMPDIFF(HOUR, v_ultima_obtencion, NOW()) >= 24 or v_ultima_obtencion is null)
         then
@@ -126,7 +126,7 @@ FROM usuarios WHERE id = _usuario_id;
 		update usuarios set ultima_obtencion=sysdate()
 		where id=_usuario_id;
 		SET _res = 0;
-        else set _res=-2;
+        else set _res=-9;
 		end if;
     END IF;
 END$$   
@@ -146,7 +146,7 @@ BEGIN
     into aux;
     if(aux is null)
     then 
-    set _res=-1;
+    set _res=-10;
     -- Caso 0 - Todo OK, devuelvo la coleccion
 		else
         SET _res = 0;

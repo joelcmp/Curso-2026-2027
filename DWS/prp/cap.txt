@@ -1,0 +1,358 @@
+
+quiero que te hagas pasar por un experto en html css javascript php y sql
+¡Perfecto! A partir de ahora asumiré el rol de un experto senior en desarrollo web con amplia experiencia en:
+
+HTML5 — estructura semántica, accesibilidad, SEO técnico
+
+CSS3 — Flexbox, Grid, animaciones, diseño responsive, preprocesadores (SASS/LESS)
+
+JavaScript — ES6+, DOM, asincronía, fetch/AJAX, frameworks (React, Vue, etc.)
+
+PHP — POO, PDO, seguridad, APIs REST, frameworks (Laravel, Symfony)
+
+SQL — diseño de bases de datos, consultas optimizadas, MySQL/PostgreSQL, procedimientos almacenados
+
+Puedo ayudarte con:
+
+✅ Código desde cero (frontend o backend)
+✅ Depuración y corrección de errores
+✅ Optimización de rendimiento y seguridad
+✅ Buenas prácticas y arquitectura limpia
+✅ Consultas SQL complejas y modelado de datos
+✅ Integración entre frontend y backend
+✅ Explicaciones didácticas o soluciones avanzadas
+
+Cuéntame qué necesitas exactamente:
+
+¿Es un proyecto nuevo o estás trabajando sobre algo existente?
+
+¿Qué problema o funcionalidad quieres resolver?
+
+¿Tienes código que quieras que revise o sobre el que trabajar?
+
+Estoy listo. Dispara. 🚀
+
+este es el tipo de arquitectura qeu le gusta a mi profesor,reglas y buenas practicas de backend y frontend que suman y menos suman:
+¡Excelente material! Como experto, te digo que tu profesor tiene un enfoque muy profesional y bien estructurado. No quiere "código espagueti" que funcione a medias, quiere una arquitectura en 3 capas real, con separación de responsabilidades, seguridad y buenas prácticas.
+
+Basándome en la imagen y en las rúbricas que compartiste, he destilado exactamente qué suma puntos y qué resta puntos para que asegures la nota máxima (los 4 puntos en cada criterio del 20%).
+
+🏗️ La Arquitectura que quiere tu profesor (El plano)
+Capa 1: Vista (Frontend): HTML (estructura), CSS (estilos), JS (interacción). Envía peticiones HTTP (JSON/HTML).
+
+Capa 2: Servidor (Backend): PHP. Recibe peticiones, aplica lógica de negocio, validaciones, seguridad, y se comunica con la BD mediante Procedimientos Almacenados (SP).
+
+Capa 3: Base de Datos (MySQL): Almacena datos y ejecuta los SP (que contienen lógica, validaciones y seguridad).
+
+🎯 Backend: Lo que SUMA y lo que RESTA puntos
+1. Estructura del BackEnd (20%)
+✅ SUMA (Excelente): Separar responsabilidades en carpetas/archivos claros: config/ (conexión), controllers/ (lógica), services/ (reglas de negocio), models/ o repositories/ (acceso a datos), procedures/ (llamadas a SP) y errors/ (gestión de errores).
+
+❌ RESTA (Deficiente): Tener todo el código PHP en un solo archivo, mezclar consultas SQL con HTML, o no tener una estructura definida para Login y Registro.
+
+2. Lógica de Negocio PHP (20%)
+✅ SUMA: Validar todos los datos de entrada, usar password_hash() para las contraseñas, manejar excepciones con try/catch, y enviar la contraseña ya hasheada al Procedimiento Almacenado.
+
+❌ RESTA: No validar campos, guardar contraseñas en texto plano, o que el código PHP sea un desastre que no permita reutilizar funciones.
+
+3. Acceso Limpio a MySQL (20%)
+✅ SUMA: Usar PDO con prepared statements (para evitar inyección SQL), abrir la conexión solo cuando se necesita y cerrarla al terminar. Comunicar errores claros a PHP.
+
+❌ RESTA: Usar mysqli con concatenación de strings (peligro de inyección SQL), dejar conexiones abiertas, o no capturar los errores de la base de datos.
+
+4. Calidad de Procedimientos Almacenados (20%) — Ojo aquí, es clave
+✅ SUMA: El SP de Login/Registro debe validar datos internamente, controlar errores mediante parámetros de salida (ej. OUT mensaje_error), y aplicar lógica de negocio. No debe ser solo un INSERT o SELECT disfrazado.
+
+❌ RESTA: SP que solo encapsulan un CRUD, que no validan nada, o que no devuelven un código de error/éxito claro.
+
+5. Integración con FrontEnd (20%)
+✅ SUMA: El backend debe devolver respuestas claras (JSON con status, message, data), y los errores deben ser fáciles de mostrar en el frontend. Login y Registro deben funcionar de forma completa.
+
+❌ RESTA: Devolver HTML crudo en lugar de JSON, errores 500 sin mensaje, o que el frontend tenga que adivinar qué pasó.
+
+🎨 Frontend: Lo que SUMA y lo que RESTA puntos
+1. Estructura semántica HTML (20%)
+✅ SUMA: Usar <header>, <main>, <section>, <form>, <label>, <input>, <button>. Accesibilidad (atributos aria-*, alt). Estructura clara para Login y Registro.
+
+❌ RESTA: Usar <div> para todo, no asociar <label> con <input>, o una estructura que no se entienda.
+
+2. Funcionalidad JavaScript (20%)
+✅ SUMA: Validar formularios en el cliente antes de enviar (campos vacíos, formato de email, contraseñas seguras), gestionar eventos (click, submit) y mostrar feedback en tiempo real.
+
+❌ RESTA: No validar nada, que el formulario recargue la página sin control, o que los botones no hagan nada.
+
+3. Navegación entre vistas (20%)
+✅ SUMA: Transiciones fluidas entre Login y Registro. Puede ser MPA (multipágina) o SPA (Single Page Application) bien organizada. Enlaces claros.
+
+❌ RESTA: Enlaces rotos, navegación confusa, o que el usuario tenga que escribir la URL manualmente para cambiar de vista.
+
+4. Diseño visual y maquetación (20%)
+✅ SUMA: Estética coherente con un videoclub (colores, tipografía, iconos). Maquetación cuidada con Flexbox/Grid. Posicionamiento preciso de formularios, botones y paneles.
+
+❌ RESTA: Diseño desordenado, elementos superpuestos, colores ilegibles, o que no parezca un videoclub.
+
+5. Experiencia de usuario (20%)
+✅ SUMA: Mensajes de error claros (ej. "El usuario ya existe", "Contraseña incorrecta"), transiciones suaves, controles comprensibles. El personal de Sakila debe poder usarlo sin manual.
+
+❌ RESTA: Mensajes genéricos ("Error"), movimientos bruscos, o que el usuario no sepa qué está pasando.
+
+🚀 Resumen del "Viaje del Dato" que debes implementar
+Usuario interactúa en la Vista (HTML/CSS/JS).
+
+JS valida y envía petición HTTP (JSON) al PHP.
+
+PHP recibe, valida, hashea la contraseña y llama a un Procedimiento Almacenado en MySQL.
+
+MySQL ejecuta el SP (que valida, controla errores con parámetros de salida, y devuelve datos).
+
+PHP recibe el resultado, lo formatea en JSON y lo envía de vuelta.
+
+JS recibe la respuesta, actualiza la vista (éxito o error) sin recargar la página (o con recarga controlada).
+
+💡 Consejo final de experto:
+Si quieres asegurar el 4/4 en Calidad de Procedimientos Almacenados, asegúrate de que tus SP tengan:
+
+IN para los datos de entrada.
+
+OUT para códigos de error y mensajes.
+
+DECLARE EXIT HANDLER FOR SQLEXCEPTION para capturar errores.
+
+Lógica de validación interna (ej. verificar si el email ya existe antes de insertar).
+
+¿Quieres que te ayude a diseñar la estructura de carpetas o a escribir un Procedimiento Almacenado de Login/Registro que cumpla exactamente con esta rúbrica?
+
+
+
+Calidad BackEnd
+Estructura del BackEnd
+
+Peso 20%
+
+Excelente
+4 puntos
+Organiza el BackEnd de forma clara y coherente, separando responsabilidades entre configuración, lógica de negocio, acceso a datos, procedimientos almacenados y gestión de errores.
+
+
+Bueno
+3 puntos
+Presenta una estructura ordenada y mayoritariamente separada por responsabilidades, aunque mantiene algunas dependencias o agrupaciones mejorables.
+
+
+Normal
+2 puntos
+Incluye los ficheros principales del BackEnd, pero mezcla algunas responsabilidades o dificulta seguir el flujo de Login y Registro.
+
+
+Deficiente
+1 punto
+La estructura es desordenada, mezcla responsabilidades y dificulta localizar o mantener la lógica de Login, Registro y acceso a datos.
+
+Lógica de negocio PHP
+
+Peso 20%
+
+Excelente
+4 puntos
+Implementa en PHP una lógica clara, segura y reutilizable para Login y Registro, valida los datos, trata los errores y envía la contraseña hasheada al procedimiento almacenado.
+
+
+Bueno
+3 puntos
+Implementa correctamente las acciones de Login y Registro y valida la mayoría de los datos, aunque presenta pequeños aspectos mejorables en reutilización o gestión de errores.
+
+
+Normal
+2 puntos
+Las acciones principales funcionan de forma parcial, pero faltan validaciones, separación de responsabilidades o un tratamiento completo de los errores.
+
+
+Deficiente
+1 punto
+La lógica PHP no realiza correctamente el Login o el Registro, maneja mal los datos o presenta problemas importantes de seguridad y funcionamiento.
+
+Acceso limpio a MySQL
+
+Peso 20%
+
+Excelente
+4 puntos
+Usa consultas y parámetros de forma segura, abre las conexiones solo cuando son necesarias, las cierra al terminar y comunica correctamente los resultados y errores a PHP.
+
+
+Bueno
+3 puntos
+El acceso a MySQL es seguro y funcional, con una gestión adecuada de conexiones, aunque puede mejorar la liberación de recursos o la uniformidad del tratamiento de errores.
+
+
+Normal
+2 puntos
+El acceso a MySQL funciona en los casos habituales, pero presenta conexiones abiertas más tiempo del necesario, validaciones insuficientes o errores poco claros.
+
+
+Deficiente
+1 punto
+El acceso a MySQL es inseguro o inestable, no gestiona bien las conexiones y puede permitir errores, inyección SQL o pérdida de recursos.
+
+Calidad de procedimientos almacenados
+
+Peso 20%
+
+Excelente
+4 puntos
+Los procedimientos de Login y Registro validan los datos, controlan errores mediante parámetros de salida, aplican la lógica necesaria y no se limitan a encapsular operaciones CRUD.
+
+
+Bueno
+3 puntos
+Los procedimientos almacenados realizan correctamente Login y Registro y controlan los errores principales, aunque su validación o lógica adicional podría ser más completa.
+
+
+Normal
+2 puntos
+Los procedimientos permiten ejecutar las operaciones básicas, pero ofrecen un control de errores limitado o funcionan principalmente como una envoltura de instrucciones CRUD.
+
+
+Deficiente
+1 punto
+Los procedimientos están incompletos, no informan adecuadamente de los errores o no cumplen los requisitos de Login, Registro y parámetros de salida.
+
+Integración con FrontEnd
+
+Peso 20%
+
+Excelente
+4 puntos
+La pieza BackEnd se integra fácilmente con el FrontEnd, utiliza respuestas y errores claros y permite que las pantallas de Login y Registro funcionen de forma completa y coherente.
+
+
+Bueno
+3 puntos
+La integración con el FrontEnd funciona correctamente en la mayoría de los casos, aunque requiere pequeños ajustes en el formato de respuestas o en la gestión de errores.
+
+
+Normal
+2 puntos
+La integración permite realizar algunas operaciones, pero necesita adaptaciones importantes para coordinar formularios, respuestas, sesiones o mensajes de error.
+
+
+Deficiente
+1 punto
+El BackEnd no se comunica adecuadamente con el FrontEnd y las pantallas de Login o Registro no funcionan de forma fiable.
+
+Calidad de FrontEnd
+Estructura semántica HTML
+
+Peso 20%
+
+Excelente
+4 puntos
+Utiliza una estructura HTML semántica, ordenada y accesible para organizar correctamente las pantallas de Login y Registro de Sakila.
+
+
+Bueno
+3 puntos
+Utiliza principalmente etiquetas semánticas y mantiene una estructura clara, aunque presenta pequeños errores de organización o accesibilidad.
+
+
+Normal
+2 puntos
+La estructura permite mostrar las pantallas, pero utiliza etiquetas poco adecuadas o presenta un orden difícil de seguir.
+
+
+Deficiente
+1 punto
+La estructura HTML es confusa, poco semántica o incompleta, y dificulta el uso y mantenimiento de las pantallas.
+
+Funcionalidad JavaScript
+
+Peso 20%
+
+Excelente
+4 puntos
+Implementa con JavaScript todas las interacciones necesarias, valida los formularios y gestiona los eventos de forma clara y eficaz.
+
+
+Bueno
+3 puntos
+Implementa las interacciones principales y algunas validaciones, aunque contiene pequeños fallos que no impiden utilizar la aplicación.
+
+
+Normal
+2 puntos
+Incluye funciones básicas de JavaScript, pero varias interacciones o validaciones funcionan de manera incompleta.
+
+
+Deficiente
+1 punto
+Presenta poca o ninguna funcionalidad con JavaScript, y los formularios o sus interacciones no responden correctamente.
+
+Navegación entre vistas
+
+Peso 20%
+
+Excelente
+4 puntos
+Permite cambiar de forma fluida e intuitiva entre Login y Registro, tanto con un enfoque multipágina como mediante una SPA bien organizada.
+
+
+Bueno
+3 puntos
+Permite navegar correctamente entre Login y Registro, aunque algunas transiciones o elementos de navegación podrían ser más claros.
+
+
+Normal
+2 puntos
+La navegación entre las vistas es posible, pero resulta poco intuitiva, presenta errores ocasionales o requiere pasos innecesarios.
+
+
+Deficiente
+1 punto
+No permite navegar correctamente entre Login y Registro, o los enlaces y cambios de sección no funcionan.
+
+Diseño visual y maquetación
+
+Peso 20%
+
+Excelente
+4 puntos
+Presenta una estética coherente con un videoclub, una maquetación cuidada y un posicionamiento preciso de contenedores, formularios, botones y paneles.
+
+
+Bueno
+3 puntos
+Presenta un diseño atractivo y ordenado, con una buena distribución de los elementos, aunque puede mejorar algunos detalles visuales o de adaptación.
+
+
+Normal
+2 puntos
+La página es funcional y legible, pero la distribución, los estilos o la coherencia visual están poco trabajados.
+
+
+Deficiente
+1 punto
+La maquetación es desordenada o poco legible, y los elementos presentan problemas importantes de posición, tamaño o estilo.
+
+Experiencia de usuario
+
+Peso 20%
+
+Excelente
+4 puntos
+Ofrece una experiencia fluida y agradable, con mensajes claros, transiciones suaves, controles comprensibles y una interacción adecuada para el personal de Sakila.
+
+
+Bueno
+3 puntos
+La experiencia es sencilla y funcional, con transiciones y mensajes adecuados, aunque algunos aspectos podrían resultar más fluidos o intuitivos.
+
+
+Normal
+2 puntos
+La aplicación se puede utilizar, pero presenta una interacción poco uniforme, mensajes insuficientes o movimientos bruscos.
+
+
+Deficiente
+1 punto
+La experiencia resulta confusa o incómoda debido a errores de interacción, ausencia de indicaciones o transiciones poco cuidadas.
+

@@ -1,22 +1,22 @@
 <?php
 
 require_once __DIR__ . '/../src/AccesoDatos.php';
-
+require_once __DIR__ . '/../php/mensajes.php';
 
 function registrarUsuario(string $usuario, string $email, string $password, string $confirmarPassword)
 {
 
     if (empty($usuario)) {
 
-        return -12;
+        return ['exito' => false, 'mensaje' => $mensajes['servicio'][-12]];
     }
     if (empty($email)) {
 
-        return -13;
+        return ['exito' => false,'mensaje'=> $mensajes['servicio'][-13]];
     }
     if ($password !== $confirmarPassword) {
 
-        return -14;
+        return ['exito' => false,'mensaje'=> $mensajes['servicio'][-14]];
     }
 
     return PA_Registrar(
@@ -29,10 +29,10 @@ function loginUsuario(string $usuario, string $password)
 {
 
     if (empty($usuario)) {
-        return -15;
+        return ['exito' => false,'mensaje'=> $mensajes['servicio'][-15]];
     }
     if (empty($password)) {
-        return -16;
+        return ['exito' => false,'mensaje'=> $mensajes['servicio'][-16]];
     }
 
     return  PA_Login(
