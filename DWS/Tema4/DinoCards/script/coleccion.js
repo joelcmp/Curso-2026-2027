@@ -2,8 +2,8 @@ const cartas = document.querySelectorAll('.carta');
 const modal = document.getElementById('modal-carta');
 const cerrarModal = document.getElementById('cerrar-modal');
 
-cartas.forEach(function(carta) {
-    carta.addEventListener('click', function() {
+cartas.forEach(function (carta) {
+    carta.addEventListener('click', function () {
         document.getElementById('modal-img').src = carta.dataset.img;
         document.getElementById('modal-nombre').textContent = carta.dataset.nombre;
         document.getElementById('modal-especie').textContent = carta.dataset.especie;
@@ -21,7 +21,7 @@ cartas.forEach(function(carta) {
     });
 });
 
-cerrarModal.addEventListener('click', function() {
+cerrarModal.addEventListener('click', function () {
     modal.classList.add('oculto');
 });
 
@@ -30,9 +30,12 @@ const contador = document.getElementById('contador-tiempo');
 if (contador) {
     let segundos = parseInt(contador.dataset.segundos, 10);
 
-    const actualizar = function() {
+    const actualizar = function () {
         if (segundos <= 0) {
             contador.textContent = '¡Ya puedes abrir!';
+            setTimeout(function () {
+                location.reload();
+            }, 1500);
             return;
         }
 

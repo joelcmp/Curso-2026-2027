@@ -51,7 +51,7 @@ session_start();
                         <h3>Los combates están en camino</h3>
                         <p class="fecha">6 de octubre de 2026</p>
                         <p class="descripcion">Estamos trabajando en una nueva funcionalidad que permitirá utilizar las cartas de tu colección para enfrentarte a otros jugadores.</p>
-                        <a href="noticia-combates.html" class="leer-mas">Leer noticia →</a>
+                        <a href="noticias.php" class="leer-mas">Leer noticia →</a>
                     </div>
                 </article>
 
@@ -62,7 +62,7 @@ session_start();
                         <h3>Nuevas cartas disponibles</h3>
                         <p class="fecha">4 de octubre de 2026</p>
                         <p class="descripcion">Hemos añadido nuevas cartas a la colección. Entra cada 24 horas para descubrir cuál será tu próxima carta.</p>
-                        <a href="noticia-nuevas-cartas.html" class="leer-mas">Leer noticia →</a>
+                        <a href="noticias.php" class="leer-mas">Leer noticia →</a>
                     </div>
                 </article>
 
@@ -73,7 +73,7 @@ session_start();
                         <h3>Completa tu colección</h3>
                         <p class="fecha">1 de octubre de 2026</p>
                         <p class="descripcion">Descubre todas las cartas disponibles y comprueba cuáles has conseguido y cuáles todavía te faltan.</p>
-                        <a href="noticia-coleccion.html" class="leer-mas">Leer noticia →</a>
+                        <a href="noticias.php" class="leer-mas">Leer noticia →</a>
                     </div>
                 </article>
 
@@ -84,7 +84,7 @@ session_start();
                         <h3>Una nueva carta cada 24 horas</h3>
                         <p class="fecha">28 de septiembre de 2026</p>
                         <p class="descripcion">Recuerda que podrás conseguir una nueva carta cuando hayan pasado 24 horas desde tu última apertura.</p>
-                        <a href="noticia-apertura.html" class="leer-mas">Leer noticia →</a>
+                        <a href="noticias.php" class="leer-mas">Leer noticia →</a>
                     </div>
                 </article>
             </div>

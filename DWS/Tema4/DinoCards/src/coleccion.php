@@ -47,7 +47,7 @@ $tiempo_restante = 0;
 if (!empty($ultima)) {
     $timestamp_ultima = strtotime($ultima);
     $segundos_pasados = time() - $timestamp_ultima;
-    $segundos_24h = 24 * 60 * 60;
+    $segundos_24h = 5;
     if ($segundos_pasados < $segundos_24h) {
         $puede_abrir = false;
         $tiempo_restante = $segundos_24h - $segundos_pasados;
