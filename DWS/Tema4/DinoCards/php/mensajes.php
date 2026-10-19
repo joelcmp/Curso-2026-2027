@@ -37,6 +37,3 @@ $mensajes = [
         -99 => 'Error interno de la base de datos.',
     ],
 ];
-
-
-?>

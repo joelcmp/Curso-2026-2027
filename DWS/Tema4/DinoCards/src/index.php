@@ -53,10 +53,9 @@ if (!empty($error)) {
                 <a href="../src/coleccion.php">Colección</a>
                 <a href="../src/noticias.php">Noticias</a>
                 <a href="../src/soporte.php">Soporte</a>
+                <a href="../src/cuenta.php" class="btn-cuenta">Cuenta</a>
                 <?php if (isset($_SESSION['id'])): ?>
-                    <a href="../php/logout.php" class="btn-cuenta">Cerrar sesión</a>
-                <?php else: ?>
-                    <a href="../src/cuenta.php" class="btn-cuenta">Cuenta</a>
+                    <a href="../php/logout.php" class="btn-cuenta btn-logout">Cerrar sesión</a>
                 <?php endif; ?>
             </nav>
         </div>

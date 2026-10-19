@@ -7,7 +7,7 @@ const tarjeta = document.getElementById('login-registro');
 
 const cambiarTab = (mostrarLogin) => {
     const alturaActual = tarjeta.offsetHeight;
-    
+
     if (mostrarLogin) {
         loginTab.classList.remove('oculto');
         registroTab.classList.add('oculto');
@@ -19,13 +19,13 @@ const cambiarTab = (mostrarLogin) => {
         botonRegistro.classList.add('activo');
         botonLogin.classList.remove('activo');
     }
-    
+
     const nuevaAltura = tarjeta.offsetHeight;
-    
+
     tarjeta.style.height = alturaActual + 'px';
     tarjeta.offsetHeight;
     tarjeta.style.height = nuevaAltura + 'px';
-    
+
     setTimeout(() => {
         tarjeta.style.height = '';
     }, 300);

@@ -76,10 +76,9 @@ if (!empty($ultima)) {
                 <a href="../src/coleccion.php">Colección</a>
                 <a href="../src/noticias.php">Noticias</a>
                 <a href="../src/soporte.php">Soporte</a>
+                <a href="../src/cuenta.php" class="btn-cuenta">Cuenta</a>
                 <?php if (isset($_SESSION['id'])): ?>
-                    <a href="../php/logout.php" class="btn-cuenta">Cerrar sesión</a>
-                <?php else: ?>
-                    <a href="../src/cuenta.php" class="btn-cuenta">Cuenta</a>
+                    <a href="../php/logout.php" class="btn-cuenta btn-logout">Cerrar sesión</a>
                 <?php endif; ?>
             </nav>
         </div>
@@ -113,9 +112,9 @@ if (!empty($ultima)) {
         <section id="cartas-grid">
             <?php foreach ($cartas as $carta): ?>
                 <?php
-                    $tiene = (int)$carta['tiene'] === 1;
-                    $clase = $tiene ? 'carta tiene' : 'carta no-tiene';
-                    $img = !empty($carta['image_url']) ? $carta['image_url'] : '../res/cartas/' . $carta['id'] . '.jpg';
+                $tiene = (int)$carta['tiene'] === 1;
+                $clase = $tiene ? 'carta tiene' : 'carta no-tiene';
+                $img = !empty($carta['image_url']) ? $carta['image_url'] : '../res/cartas/' . $carta['id'] . '.jpg';
                 ?>
                 <article class="<?= $clase ?>"
                     data-id="<?= $carta['id'] ?>"
@@ -189,10 +188,18 @@ if (!empty($ultima)) {
             <div class="footer-col">
                 <h3>Enlaces</h3>
                 <div id="zona-ayuda">
-                    <a href="../src/preguntasFrecuentes.php"><h3>Preguntas frecuentes</h3></a>
-                    <a href="../src/sobreNosotros.php"><h3>Sobre nosotros</h3></a>
-                    <a href="../src/noticias.php"><h3>Noticias</h3></a>
-                    <a href="../src/trabajaConNosotros.php"><h3>Trabaja con nosotros</h3></a>
+                    <a href="../src/preguntasFrecuentes.php">
+                        <h3>Preguntas frecuentes</h3>
+                    </a>
+                    <a href="../src/sobreNosotros.php">
+                        <h3>Sobre nosotros</h3>
+                    </a>
+                    <a href="../src/noticias.php">
+                        <h3>Noticias</h3>
+                    </a>
+                    <a href="../src/trabajaConNosotros.php">
+                        <h3>Trabaja con nosotros</h3>
+                    </a>
                 </div>
             </div>
 

@@ -39,11 +39,11 @@ function loginUsuario(string $usuario, string $password)
     }
 
     $codigo = PA_Login($usuario, $password);
-    
+
     $exito = ((int)$codigo['resultado'] === 0);
 
     $mensaje = $mensajes['sp_login'][$codigo['resultado']] ?? 'Error desconocido en el login.';
-    
 
-    return ['exito' => $exito, 'mensaje' => $mensaje,'usuario'=>$codigo['usuario']];
+
+    return ['exito' => $exito, 'mensaje' => $mensaje, 'usuario' => $codigo['usuario']];
 }

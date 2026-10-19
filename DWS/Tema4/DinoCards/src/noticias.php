@@ -12,7 +12,7 @@ session_start();
     <title>DinoCards | Tu colección de cartas</title>
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/noticias.css">
-    
+
 
 </head>
 
@@ -27,68 +27,67 @@ session_start();
                 <a href="../src/coleccion.php">Colección</a>
                 <a href="../src/noticias.php">Noticias</a>
                 <a href="../src/soporte.php">Soporte</a>
+                <a href="../src/cuenta.php" class="btn-cuenta">Cuenta</a>
                 <?php if (isset($_SESSION['id'])): ?>
-                    <a href="../php/logout.php" class="btn-cuenta">Cerrar sesión</a>
-                <?php else: ?>
-                    <a href="../src/cuenta.php" class="btn-cuenta">Cuenta</a>
+                    <a href="../php/logout.php" class="btn-cuenta btn-logout">Cerrar sesión</a>
                 <?php endif; ?>
             </nav>
         </div>
     </header>
 
-    <main>
-        <main class="pagina-noticias">
-            <div id="noticias-intro">
-                <h2>ÚLTIMAS NOTICIAS</h2>
-                <p>Descubre las últimas novedades de nuestra colección, nuevas cartas, actualizaciones y futuras funcionalidades.</p>
-            </div>
 
-            <div class="noticias-grid">
-                <article class="noticia-card">
-                    <img src="../res/fotosNoticias/noticia1.jpg" alt="Cartas preparadas para un combate">
-                    <div class="contenido">
-                        <span class="categoria">PRÓXIMAMENTE</span>
-                        <h3>Los combates están en camino</h3>
-                        <p class="fecha">6 de octubre de 2026</p>
-                        <p class="descripcion">Estamos trabajando en una nueva funcionalidad que permitirá utilizar las cartas de tu colección para enfrentarte a otros jugadores.</p>
-                        <a href="noticias.php" class="leer-mas">Leer noticia →</a>
-                    </div>
-                </article>
+    <main class="pagina-noticias">
+        <div id="noticias-intro">
+            <h2>ÚLTIMAS NOTICIAS</h2>
+            <p>Descubre las últimas novedades de nuestra colección, nuevas cartas, actualizaciones y futuras funcionalidades.</p>
+        </div>
 
-                <article class="noticia-card">
-                    <img src="../res/fotosNoticias/noticia2.jpg" alt="Nueva carta añadida a la colección">
-                    <div class="contenido">
-                        <span class="categoria">ACTUALIZACIÓN</span>
-                        <h3>Nuevas cartas disponibles</h3>
-                        <p class="fecha">4 de octubre de 2026</p>
-                        <p class="descripcion">Hemos añadido nuevas cartas a la colección. Entra cada 24 horas para descubrir cuál será tu próxima carta.</p>
-                        <a href="noticias.php" class="leer-mas">Leer noticia →</a>
-                    </div>
-                </article>
+        <div class="noticias-grid">
+            <article class="noticia-card">
+                <img src="../res/fotosNoticias/noticia1.jpg" alt="Cartas preparadas para un combate">
+                <div class="contenido">
+                    <span class="categoria">PRÓXIMAMENTE</span>
+                    <h3>Los combates están en camino</h3>
+                    <p class="fecha">6 de octubre de 2026</p>
+                    <p class="descripcion">Estamos trabajando en una nueva funcionalidad que permitirá utilizar las cartas de tu colección para enfrentarte a otros jugadores.</p>
+                    <a href="noticias.php" class="leer-mas">Leer noticia →</a>
+                </div>
+            </article>
 
-                <article class="noticia-card">
-                    <img src="../res/fotosNoticias/noticia3.jpg" alt="Colección de diferentes cartas">
-                    <div class="contenido">
-                        <span class="categoria">COLECCIÓN</span>
-                        <h3>Completa tu colección</h3>
-                        <p class="fecha">1 de octubre de 2026</p>
-                        <p class="descripcion">Descubre todas las cartas disponibles y comprueba cuáles has conseguido y cuáles todavía te faltan.</p>
-                        <a href="noticias.php" class="leer-mas">Leer noticia →</a>
-                    </div>
-                </article>
+            <article class="noticia-card">
+                <img src="../res/fotosNoticias/noticia2.jpg" alt="Nueva carta añadida a la colección">
+                <div class="contenido">
+                    <span class="categoria">ACTUALIZACIÓN</span>
+                    <h3>Nuevas cartas disponibles</h3>
+                    <p class="fecha">4 de octubre de 2026</p>
+                    <p class="descripcion">Hemos añadido nuevas cartas a la colección. Entra cada 24 horas para descubrir cuál será tu próxima carta.</p>
+                    <a href="noticias.php" class="leer-mas">Leer noticia →</a>
+                </div>
+            </article>
 
-                <article class="noticia-card">
-                    <img src="../res/fotosNoticias/noticia4.jpg" alt="Apertura de una nueva carta">
-                    <div class="contenido">
-                        <span class="categoria">FUNCIONAMIENTO</span>
-                        <h3>Una nueva carta cada 24 horas</h3>
-                        <p class="fecha">28 de septiembre de 2026</p>
-                        <p class="descripcion">Recuerda que podrás conseguir una nueva carta cuando hayan pasado 24 horas desde tu última apertura.</p>
-                        <a href="noticias.php" class="leer-mas">Leer noticia →</a>
-                    </div>
-                </article>
-            </div>
-        </main>
+            <article class="noticia-card">
+                <img src="../res/fotosNoticias/noticia3.jpg" alt="Colección de diferentes cartas">
+                <div class="contenido">
+                    <span class="categoria">COLECCIÓN</span>
+                    <h3>Completa tu colección</h3>
+                    <p class="fecha">1 de octubre de 2026</p>
+                    <p class="descripcion">Descubre todas las cartas disponibles y comprueba cuáles has conseguido y cuáles todavía te faltan.</p>
+                    <a href="noticias.php" class="leer-mas">Leer noticia →</a>
+                </div>
+            </article>
+
+            <article class="noticia-card">
+                <img src="../res/fotosNoticias/noticia4.jpg" alt="Apertura de una nueva carta">
+                <div class="contenido">
+                    <span class="categoria">FUNCIONAMIENTO</span>
+                    <h3>Una nueva carta cada 24 horas</h3>
+                    <p class="fecha">28 de septiembre de 2026</p>
+                    <p class="descripcion">Recuerda que podrás conseguir una nueva carta cuando hayan pasado 24 horas desde tu última apertura.</p>
+                    <a href="noticias.php" class="leer-mas">Leer noticia →</a>
+                </div>
+            </article>
+        </div>
+    </main>
 
     </main>
 

@@ -1,33 +1,26 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['id'])) {
-    header('Location: ../src/index.php');
-    exit;
+$logueado = isset($_SESSION['id']);
+
+if ($logueado) {
+    require_once __DIR__ . '/../php/coleccionService.php';
+    $usuario_id = (int)$_SESSION['id'];
+    $cartas = [];
+    $error = '';
+    try {
+        $resultado = obtenerTodasLasCartas($usuario_id);
+        $cartas = $resultado['cartas'] ?? [];
+    } catch (Throwable $e) {
+        $error = $e->getMessage();
+    }
+    $cartas_obtenidas = 0;
+    $total_cartas = count($cartas);
+    foreach ($cartas as $c) {
+        if ((int)$c['tiene'] === 1) $cartas_obtenidas++;
+    }
+    $cartas_restantes = $total_cartas - $cartas_obtenidas;
 }
-
-require_once __DIR__ . '/../php/coleccionService.php';
-
-$usuario_id = (int)$_SESSION['id'];
-$cartas = [];
-$error = '';
-
-try {
-    $resultado = obtenerTodasLasCartas($usuario_id);
-    $cartas = $resultado['cartas'] ?? [];
-} catch (Throwable $e) {
-    $error = $e->getMessage();
-}
-
-$cartas_obtenidas = 0;
-$total_cartas = count($cartas);
-
-foreach ($cartas as $c) {
-    if ((int)$c['tiene'] === 1) $cartas_obtenidas++;
-}
-
-$cartas_restantes = $total_cartas - $cartas_obtenidas;
-$porcentaje = $total_cartas > 0 ? round(($cartas_obtenidas / $total_cartas) * 100) : 0;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -51,8 +44,9 @@ $porcentaje = $total_cartas > 0 ? round(($cartas_obtenidas / $total_cartas) * 10
                 <a href="../src/coleccion.php">Colección</a>
                 <a href="../src/noticias.php">Noticias</a>
                 <a href="../src/soporte.php">Soporte</a>
-                <?php if (isset($_SESSION['id'])): ?>
-                    <a href="../php/logout.php" class="btn-cuenta">Cerrar sesión</a>
+                <?php if ($logueado): ?>
+                    <a href="../src/cuenta.php" class="btn-cuenta">Hola, <?= htmlspecialchars($_SESSION['username']) ?></a>
+                    <a href="../php/logout.php" class="btn-cuenta btn-logout">Cerrar sesión</a>
                 <?php else: ?>
                     <a href="../src/cuenta.php" class="btn-cuenta">Cuenta</a>
                 <?php endif; ?>
@@ -61,66 +55,61 @@ $porcentaje = $total_cartas > 0 ? round(($cartas_obtenidas / $total_cartas) * 10
     </header>
 
     <main>
-        <section id="cuenta-cabecera">
-            <h2>Mi cuenta</h2>
-            <p>Gestiona tu perfil y consulta tu progreso en DinoCards.</p>
-        </section>
+        <?php if (!$logueado): ?>
+            <section id="cuenta-no-logueado">
+                <h3>No has iniciado sesión</h3>
+                <p>Para ver tu carnet y las estadísticas de tu colección, necesitas iniciar sesión primero.</p>
+                <a href="../src/index.php" class="btn-accion">Iniciar sesión</a>
+            </section>
+        <?php else: ?>
 
-        <?php if (!empty($error)): ?>
-            <p class="mensaje-error"><?= htmlspecialchars($error) ?></p>
-        <?php endif; ?>
+            <?php if (!empty($error)): ?>
+                <p class="mensaje-error"><?= htmlspecialchars($error) ?></p>
+            <?php endif; ?>
 
-        <section id="cuenta-datos">
-            <h3>Datos del usuario</h3>
-            <div class="datos-grid">
-                <div class="dato">
-                    <span>Usuario</span>
-                    <strong><?= htmlspecialchars($_SESSION['username']) ?></strong>
+            <div id="carnet">
+                <div id="carnet-franja">
+                    <span>DinoCards · Carnet de Paleontólogo</span>
+                    <span>Nº <?= $usuario_id ?></span>
                 </div>
-                <div class="dato">
-                    <span>Email</span>
-                    <strong><?= htmlspecialchars($_SESSION['email']) ?></strong>
-                </div>
-                <div class="dato">
-                    <span>Fecha de registro</span>
-                    <strong><?= htmlspecialchars($_SESSION['fecha_registro'] ?? 'No disponible') ?></strong>
-                </div>
-                <div class="dato">
-                    <span>Última obtención</span>
-                    <strong><?= htmlspecialchars($_SESSION['ultima_obtencion'] ?? 'Aún no has abierto ninguna carta') ?></strong>
-                </div>
-            </div>
-        </section>
 
-        <section id="cuenta-estadisticas">
-            <h3>Estadísticas de colección</h3>
-            <div class="stats-grid">
-                <div class="stat">
-                    <strong><?= $cartas_obtenidas ?></strong>
-                    <span>Cartas obtenidas</span>
+                <div id="carnet-cuerpo">
+                    <h2><?= htmlspecialchars($_SESSION['username']) ?></h2>
+                    <p><?= htmlspecialchars($_SESSION['email']) ?></p>
                 </div>
-                <div class="stat">
-                    <strong><?= $cartas_restantes ?></strong>
-                    <span>Cartas por conseguir</span>
-                </div>
-                <div class="stat">
-                    <strong><?= $porcentaje ?>%</strong>
-                    <span>Colección completada</span>
+
+                <div id="carnet-pie">
+                    <div>
+                        <span>Miembro desde</span>
+                        <strong><?= htmlspecialchars(substr($_SESSION['fecha_registro'] ?? '—', 0, 10)) ?></strong>
+                    </div>
+                    <div>
+                        <span>Última extracción</span>
+                        <strong><?= htmlspecialchars(substr($_SESSION['ultima_obtencion'] ?? 'Sin actividad', 0, 10)) ?></strong>
+                    </div>
                 </div>
             </div>
 
-            <div class="barra-progreso">
-                <div class="barra-relleno" style="width: <?= $porcentaje ?>%;"></div>
-            </div>
-        </section>
+            <section id="cuenta-stats">
+                <h3>Estadísticas</h3>
+                <div class="stats-grid">
+                    <div class="stat">
+                        <strong><?= $cartas_obtenidas ?></strong>
+                        <span>Fósiles desenterrados</span>
+                    </div>
+                    <div class="stat">
+                        <strong><?= $cartas_restantes ?></strong>
+                        <span>Fósiles por descubrir</span>
+                    </div>
+                </div>
+            </section>
 
-        <section id="cuenta-acciones">
-            <h3>Acciones</h3>
-            <div class="acciones-grid">
-                <a href="../src/cartas.php" class="btn-accion">Ver mi colección</a>
+            <section id="cuenta-acciones">
+                <a href="../src/coleccion.php" class="btn-accion">Explorar yacimiento</a>
                 <a href="../php/logout.php" class="btn-accion btn-peligro">Cerrar sesión</a>
-            </div>
-        </section>
+            </section>
+
+        <?php endif; ?>
     </main>
 
     <footer>
@@ -154,10 +143,18 @@ $porcentaje = $total_cartas > 0 ? round(($cartas_obtenidas / $total_cartas) * 10
             <div class="footer-col">
                 <h3>Enlaces</h3>
                 <div id="zona-ayuda">
-                    <a href="../src/preguntasFrecuentes.php"><h3>Preguntas frecuentes</h3></a>
-                    <a href="../src/sobreNosotros.php"><h3>Sobre nosotros</h3></a>
-                    <a href="../src/noticias.php"><h3>Noticias</h3></a>
-                    <a href="../src/trabajaConNosotros.php"><h3>Trabaja con nosotros</h3></a>
+                    <a href="../src/preguntasFrecuentes.php">
+                        <h3>Preguntas frecuentes</h3>
+                    </a>
+                    <a href="../src/sobreNosotros.php">
+                        <h3>Sobre nosotros</h3>
+                    </a>
+                    <a href="../src/noticias.php">
+                        <h3>Noticias</h3>
+                    </a>
+                    <a href="../src/trabajaConNosotros.php">
+                        <h3>Trabaja con nosotros</h3>
+                    </a>
                 </div>
             </div>
 

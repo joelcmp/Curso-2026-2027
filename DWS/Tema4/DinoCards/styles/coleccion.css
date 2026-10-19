@@ -262,9 +262,25 @@ body {
 }
 
 @media (max-width: 768px) {
-    #cartas-cabecera h2 { font-size: 2rem; }
-    #contador-tiempo { font-size: 1.8rem; padding: 12px 20px; }
-    #cartas-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
-    .carta h3 { font-size: .85rem; }
-    #modal-stats { grid-template-columns: 1fr; }
+    #cartas-cabecera h2 {
+        font-size: 2rem;
+    }
+
+    #contador-tiempo {
+        font-size: 1.8rem;
+        padding: 12px 20px;
+    }
+
+    #cartas-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+    }
+
+    .carta h3 {
+        font-size: .85rem;
+    }
+
+    #modal-stats {
+        grid-template-columns: 1fr;
+    }
 }

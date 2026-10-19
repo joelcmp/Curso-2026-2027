@@ -3,8 +3,8 @@
     $host = '127.0.0.1';
     $port = 3306;
     $database = 'dinocards';
-    $username = 'JoelcmpDB';
-    $password = 'Mbappedictador';
+    $username = 'root';
+    $password = '';
 
     mysqli_report(MYSQLI_REPORT_OFF);
     $connection = @new mysqli($host, $username, $password, $database, $port);
@@ -34,9 +34,9 @@
         $filas = $stmt->get_result();
         $usuario_datos = null;
         if ($filas) {
-        $usuario_datos = $filas->fetch_assoc();
+            $usuario_datos = $filas->fetch_assoc();
         }
-        
+
 
         while ($stmt->more_results()) {
             $stmt->next_result();
@@ -52,8 +52,8 @@
         $fila = $resultado->fetch_assoc();
         $resultado->free();
         return [
-            'resultado'=> $fila['resultado'],
-            'usuario' =>$usuario_datos
+            'resultado' => $fila['resultado'],
+            'usuario' => $usuario_datos
         ];
     }
 
@@ -170,7 +170,7 @@
         ];
     }
 
-        function PA_ObtenerTodasLasCartasConEstado(int $usuario_id)
+    function PA_ObtenerTodasLasCartasConEstado(int $usuario_id)
     {
         global $connection;
 

@@ -93,6 +93,27 @@ header {
     box-shadow: 0 4px 10px rgba(199, 249, 204, 0.4);
 }
 
+.nav-links:has(.btn-logout) .btn-cuenta:not(.btn-logout) {
+    background-color: transparent;
+    padding: 0;
+    color: #e6f7f5 !important;
+    font-style: italic;
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.nav-links:has(.btn-logout) .btn-cuenta:not(.btn-logout)::after {
+    display: none;
+}
+
+.nav-links:has(.btn-logout) .btn-cuenta:not(.btn-logout):hover {
+    background-color: transparent;
+    color: #c7f9cc !important;
+    box-shadow: none;
+    opacity: 1;
+}
+
 main {
     position: relative;
     display: flex;
@@ -114,18 +135,6 @@ main {
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-#bienvenida {
-    position: relative;
-    z-index: 1;
-    background-color: #ffffff;
-    padding: 40px 60px;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(34, 87, 122, 0.4);
-    color: #22577A;
-    text-align: center;
-    max-width: 500px;
 }
 
 #login-registro {
@@ -257,6 +266,28 @@ main {
 
 #login-registro .oculto {
     display: none;
+}
+
+#bienvenida {
+    position: relative;
+    z-index: 1;
+    background-color: #ffffff;
+    padding: 40px 60px;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(34, 87, 122, 0.4);
+    color: #22577A;
+    text-align: center;
+    max-width: 500px;
+}
+
+#bienvenida h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+#bienvenida p {
+    font-size: 1.1rem;
+    line-height: 1.5;
 }
 
 footer {

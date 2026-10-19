@@ -12,7 +12,7 @@ $password = $_POST['contrasena'] ?? '';
 
 try {
     $resultado = loginUsuario($usuario, $password);
-    
+
 
     if ($resultado['exito']) {
         $_SESSION['id'] = $resultado['usuario']['id'];
