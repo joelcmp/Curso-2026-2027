@@ -3,8 +3,8 @@
     $host = '127.0.0.1';
     $port = 3306;
     $database = 'dinocards';
-    $username = 'root';
-    $password = '';
+    $username = 'JoelcmpDB';
+    $password = 'Mbappedictador';
 
     mysqli_report(MYSQLI_REPORT_OFF);
     $connection = @new mysqli($host, $username, $password, $database, $port);
