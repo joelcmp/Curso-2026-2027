@@ -1,10 +1,8 @@
 <?php
 // PASO A: Iniciar o reanudar la sesión (OBLIGATORIO al principio)
-session_start();
+
 // PASO B: Inicializar el array de citas 'lista_citas'en la sesión si no existe aún
-if (!isset($_SESSION["lista_citas"])) {
-    $_SESSION["lista_citas"] = [];
-}
+
 // PASO C: Comprobar si se ha solicitado borrar todas las citas
 
 // PASO D: Si se recibe una nueva cita individual por $_POST, se procesa
@@ -12,6 +10,12 @@ if (!isset($_SESSION["lista_citas"])) {
 // 1. Capturamos los datos que viajan en el POST
 
 // 2. Acumulamos la nueva cita dentro del array guardado en la SESIÓN
+
+session_start();
+
+if (!isset($_SESSION["lista_citas"])) {
+    $_SESSION["lista_citas"] = [];
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST["action"]=="reservar") {
@@ -31,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Mensaje para mostrar
-$mensaje = "El código de esta página no está completo.";
+$mensaje = "Su cita ha sido programada";
 ?>
 
 <!DOCTYPE html>

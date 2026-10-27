@@ -1,11 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="..//SimForest/styles/styles.css" />
+    <script src="../SimForest/script/script.js" defer></script>
+    <title>SimForest</title>
+  </head>
+  <body>
+    <main>
+        <h1>SimForest</h1>
+      <div id="panel_config">
+        <form action="">
+          <div id="dimensiones">
+            <label for="">Filas</label>
+            <input type="text" required placeholder="0"/>
+            <label for="">Columnas</label>
+            <input type="text" required placeholder="0"/>
+          </div>
+          <div id="probabilidad_estado">
+            <label for="">Probabilidad nacimiento arbol</label>
+            <input type="text" required placeholder="0"/>
+            <label for="">Probabilidad de incendio</label>
+            <input type="text" required placeholder="0"/>
+          </div>
+        </form>
+      </div>
+      <div id="btn_iniciar_simulacion">
+        <button>Iniciar somulación</button>
+      </div>
+      <div id="panel_simulador" class="oculto">
+        <div id="tablero">
+            
+        </div>
+        
+      </div>
+      <div id="controles">
+            <button>&#9194;</button>
+            <button>&#9658;</button>
+            <button>&#10074;&#10074;</button>
+            <button>&#9632;</button>
+            <button>&#9193;</button>
+        </div>
+    </main>
+  </body>
 </html>
