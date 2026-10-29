@@ -17,7 +17,10 @@ if (!isset($_SESSION["lista_citas"])) {
     $_SESSION["lista_citas"] = [];
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//TO DO: Comprobación de post para que no se asigne nueva cita igual a al aanterior introducida
+
+    
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST["action"]=="reservar") {
         $cita=[
         "paciente"=>$_POST["paciente"],
@@ -33,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["lista_citas"] = [];
     }
 }
+
 
 // Mensaje para mostrar
 $mensaje = "Su cita ha sido programada";

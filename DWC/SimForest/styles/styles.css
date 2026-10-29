@@ -6,4 +6,30 @@ body {
     background-attachment: fixed;
     margin: 0;
     height: 100vh;
+    
+}
+
+/*TO DO:  */
+
+#panel_config{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    background-color: rgba(1, 1, 1, 0.4);
+    height: 800px;
+    width: 800px;
+    gap: 10px;
+}
+#dimensiones,#probabilidad_estado{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.imp{
+    background-color: #fadf45;
+    border-color: #e46704;
+    border-radius: 10px;
+
 }
