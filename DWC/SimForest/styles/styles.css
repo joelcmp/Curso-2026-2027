@@ -4,47 +4,143 @@ body {
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
-    
-    
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/*TO DO:  */
-main{
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    padding: 20px;
 }
-#panel_config{
+
+h1 {
+    color: #fadf45;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin: 10px 0;
+}
+
+.oculto {
+    display: none !important;
+}
+
+#panel_config {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 15px;
     border-radius: 10px;
     background-color: rgba(1, 1, 1, 0.4);
-    height: 270px;
-    width: 250px;
+    padding: 20px;
+    width: 280px;
 }
-form div{
+
+form div {
     padding: 10px;
     color: #e46704;
 }
-#dimensiones,#probabilidad_estado{
+
+#dimensiones,
+#probabilidad_estado {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
-.imp{
-    background-color: #fadf45;
-    border-color: #e46704;
-    border-radius: 10px;
 
+#dimensiones label,
+#probabilidad_estado label {
+    font-weight: bold;
+    text-align: center;
 }
-.btn_iniciar_simulacion{
+
+.imp {
+    background-color: #fadf45;
+    border: 2px solid #e46704;
+    border-radius: 10px;
+    padding: 6px 10px;
+    width: 140px;
+    text-align: center;
+    outline: none;
+}
+
+.imp:focus {
+    border-color: #fadf45;
+    box-shadow: 0 0 6px #fadf45;
+}
+
+.btn_iniciar_simulacion {
     background-color: #e46704;
-    border-color: rgba(1, 1, 1, 0.4);
+    border: 1px solid rgba(1, 1, 1, 0.4);
+    border-radius: 8px;
     color: white;
-    
+    font-weight: bold;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn_iniciar_simulacion:hover {
+    background-color: #ff7f1a;
+}
+
+.btn_iniciar_simulacion:active {
+    transform: scale(0.97);
+}
+
+#panel_simulador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: rgba(1, 1, 1, 0.4);
+}
+
+#tablero {
+    display: grid;
+    gap: 1px;
+    padding: 4px;
+    background-color: #2b2b2b;
+    border-radius: 8px;
+    max-width: 90vw;
+    max-height: 70vh;
+    overflow: auto;
+}
+
+.celda {
+    width: 20px;
+    height: 20px;
+    background-color: #8bc34a;
+    border-radius: 2px;
+}
+
+#controles {
+    display: flex;
+    gap: 10px;
+}
+
+#controles button {
+    background-color: #e46704;
+    color: white;
+    border: 1px solid rgba(1, 1, 1, 0.4);
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+#controles button:hover {
+    background-color: #ff7f1a;
+}
+
+#controles button:active {
+    transform: scale(0.95);
 }
