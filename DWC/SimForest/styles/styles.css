@@ -26,7 +26,7 @@ h1 {
 .oculto {
     display: none !important;
 }
-
+//
 #panel_config {
     display: flex;
     flex-direction: column;
