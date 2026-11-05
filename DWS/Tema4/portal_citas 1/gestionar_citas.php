@@ -1,44 +1,55 @@
 <?php
 // PASO A: Iniciar o reanudar la sesión (OBLIGATORIO al principio)
-
-// PASO B: Inicializar el array de citas 'lista_citas'en la sesión si no existe aún
-
-// PASO C: Comprobar si se ha solicitado borrar todas las citas
-
-// PASO D: Si se recibe una nueva cita individual por $_POST, se procesa
-
-// 1. Capturamos los datos que viajan en el POST
-
-// 2. Acumulamos la nueva cita dentro del array guardado en la SESIÓN
-
 session_start();
 
+// PASO B: Inicializar el array de citas 'lista_citas' en la sesión si no existe aún
 if (!isset($_SESSION["lista_citas"])) {
     $_SESSION["lista_citas"] = [];
 }
 
-//TO DO: Comprobación de post para que no se asigne nueva cita igual a al aanterior introducida
+// PASO C: Comprobar si se ha solicitado borrar todas las citas
+if ($_SERVER["REQUEST_METHOD"] == "POST" && ($_POST["action"] ?? "") == "borrar_todas") {
+    $_SESSION["lista_citas"] = [];
+}
 
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($_POST["action"]=="reservar") {
-        $cita=[
-        "paciente"=>$_POST["paciente"],
-        "especialidad"=>$_POST["especialidad"],
-        "fecha_hora"=>$_POST["fecha_hora"]
+// PASO D: Si se recibe una nueva cita individual por $_POST, se procesa
+if ($_SERVER["REQUEST_METHOD"] == "POST" && ($_POST["action"] ?? "") == "reservar") {
+
+    // 1. Capturamos los datos que viajan en el POST y validamos en servidor
+    $paciente     = trim($_POST["paciente"] ?? "");
+    $especialidad = trim($_POST["especialidad"] ?? "");
+    $fecha_hora   = trim($_POST["fecha_hora"] ?? "");
+
+    if ($paciente !== "" && $especialidad !== "" && $fecha_hora !== "") {
+
+        $cita = [
+            "paciente"     => $paciente,
+            "especialidad" => $especialidad,
+            "fecha_hora"   => $fecha_hora
         ];
-    
 
-        $_SESSION["lista_citas"][]=$cita;
+        // Punto 1: comprobación de que no se asigna una nueva cita igual a una anterior
+        $duplicada = false;
 
-        
-    } else if($_POST["accion"] == "borrar_todas") {
-        $_SESSION["lista_citas"] = [];
+        foreach ($_SESSION["lista_citas"] as $cita_guardada) {
+            if (
+                $cita_guardada["paciente"]     === $cita["paciente"] &&
+                $cita_guardada["especialidad"] === $cita["especialidad"] &&
+                $cita_guardada["fecha_hora"]   === $cita["fecha_hora"]
+            ) {
+                $duplicada = true;
+                break;
+            }
+        }
+
+        // 2. Acumulamos la nueva cita dentro del array guardado en la SESIÓN
+        if (!$duplicada) {
+            $_SESSION["lista_citas"][] = $cita;
+        }
     }
 }
 
-
-// Mensaje para mostrar
+// Punto 4 NO corregido: mensaje siempre definido (tal como estaba)
 $mensaje = "Su cita ha sido programada";
 ?>
 
@@ -73,9 +84,9 @@ $mensaje = "Su cita ha sido programada";
             <tbody>
                 <?php foreach ($_SESSION['lista_citas'] as $cita): ?>
                     <tr>
-                        <td><?php echo $cita["paciente"] ?></td>
-                        <td><?php echo $cita["especialidad"] ?></td>
-                        <td><?php echo $cita["fecha_hora"] ?></td>
+                        <td><?php echo htmlspecialchars($cita["paciente"]); ?></td>
+                        <td><?php echo htmlspecialchars($cita["especialidad"]); ?></td>
+                        <td><?php echo htmlspecialchars($cita["fecha_hora"]); ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -84,7 +95,7 @@ $mensaje = "Su cita ha sido programada";
 
         <!-- Formulario para vaciar la sesión -->
         <form action="gestionar_citas.php" method="post">
-            <input type="hidden" name="accion" value="borrar_todas">
+            <input type="hidden" name="action" value="borrar_todas">
             <button type="submit">
                 Cancelar todas las citas
             </button>
@@ -96,7 +107,7 @@ $mensaje = "Su cita ha sido programada";
 
     <br>
     <hr>
-    <a href="portal_citas.html"> +Pedir otra cita</a>
+    <a href="portal_citas.html">+ Pedir otra cita</a>
 
 </body>
 
