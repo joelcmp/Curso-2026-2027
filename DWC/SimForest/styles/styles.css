@@ -26,7 +26,7 @@ h1 {
 .oculto {
     display: none !important;
 }
-//
+
 #panel_config {
     display: flex;
     flex-direction: column;
@@ -114,10 +114,28 @@ form div {
     overflow: auto;
 }
 
-.celda {
+.celda_fertil {
     width: 20px;
     height: 20px;
-    background-color: #8bc34a;
+    background-color: #ccff33;
+    border-radius: 2px;
+}
+.celda_nacimiento {
+    width: 20px;
+    height: 20px;
+    background-color: #004b23;
+    border-radius: 2px;
+}
+.celda_fuego {
+    width: 20px;
+    height: 20px;
+    background-color: #f0800a;
+    border-radius: 2px;
+}
+.celda_infertil {
+    width: 20px;
+    height: 20px;
+    background-color: #945122;
     border-radius: 2px;
 }
 
