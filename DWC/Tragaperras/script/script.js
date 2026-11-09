@@ -4,14 +4,18 @@ const slot3 = document.getElementById("slot3");
 const btn_throw = document.getElementById("btn_throw");
 const creditsScreen=document.getElementById("credits");
 
-creditsScreen.textContent="Credits: "+credits;
+
+let credits = 100;
+creditsScreen.textContent="Credits: "+ credits;
 
 // 0 campana, 1 ciruela, 2 limon, 3 naranja,4 siete
 
-let credits = 100;
-updateCredits();
 
 btn_throw.addEventListener("click", throwLever);
+
+function updateCredits() {
+  creditsScreen.textContent="Credits: "+ credits;
+}
 
 function throwLever() {
   let pSlot1 = Math.floor(Math.random() * 5);
@@ -19,11 +23,11 @@ function throwLever() {
   let pSlot3 = Math.floor(Math.random() * 5);
 
     if (credits<10) {
-        alert("You have run out of credits");
+        alert("END GAME");
+        return;
     }
 
   credits -= 10;
-
   if (pSlot1 == 0) {
     document.querySelector("#slot1 img").src = "../Tragaperras/res/campana.png";
   } else if (pSlot1 == 1) {
@@ -40,11 +44,11 @@ function throwLever() {
   } else if (pSlot2 == 1) {
     document.querySelector("#slot2 img").src = "../Tragaperras/res/ciruela.png";
   } else if (pSlot2 == 2) {
-    document.querySelector("#slot3 img").src = "../Tragaperras/res/limon.png";
+    document.querySelector("#slot2 img").src = "../Tragaperras/res/limon.png";
   } else if (pSlot2 == 3) {
     document.querySelector("#slot2 img").src = "../Tragaperras/res/naranja.png";
   } else {
-    document.querySelector("#slot1 img").src = "../Tragaperras/res/siete.png";
+    document.querySelector("#slot2 img").src = "../Tragaperras/res/siete.png";
   }
   if (pSlot3 == 0) {
     document.querySelector("#slot3 img").src = "../Tragaperras/res/campana.png";

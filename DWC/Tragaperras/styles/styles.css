@@ -45,5 +45,13 @@ h1{
 
 }
 .credits{
-    color: green;
+    color: black;
+    font-size: 40px;
+}
+#credits{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(100, 1, 1, 0.5);
+    border-radius: 10px;
+    
 }
