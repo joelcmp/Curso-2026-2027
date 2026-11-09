@@ -1,0 +1,49 @@
+body{
+    background-image: url("../res/fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial;
+    text-align: center;
+}
+h1{
+    color: gold;
+}
+
+#slots{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 400px;
+    width: 800px;
+    background-color: rgba(239, 184, 16, 0.5);
+    justify-content: center;
+    align-content: center;
+    border-radius: 20px;
+    margin: auto;
+    gap: 10px;
+}
+
+#slots  img{
+    border-radius: 20px;
+}
+
+#slots .pSlot{
+    height: 280px;
+    width: 240px;
+}
+#btn_throw{
+    background-color: goldenrod;
+    color: green;
+    width: 300px;
+    height: 100px;
+    font-size: 40px;
+    border-radius: 30px;
+
+}
+.credits{
+    color: green;
+}
