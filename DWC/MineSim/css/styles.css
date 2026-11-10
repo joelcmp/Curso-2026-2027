@@ -1,7 +1,4 @@
-* {
-    border: 1px solid red;
 
-}
 
 body {
     background-color: aliceblue;
@@ -36,6 +33,7 @@ main {
 #config_panel input {
     border-radius: 7px;
     background-color: aliceblue;
+    border-color: antiquewhite;
 }
 
 #config_panel {
@@ -46,7 +44,17 @@ main {
     width: 160px;
     background-color: aliceblue;
     border-radius: 10px;
+    border-color: aqua;
+    
 }
 .hidden{
     display: none !important;
+}
+
+#game{
+    background-color:aqua ;
+    width: 200px;
+    border-color: aqua;
+    
+
 }

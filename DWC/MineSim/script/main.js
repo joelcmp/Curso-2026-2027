@@ -10,23 +10,23 @@ buttonStart.addEventListener("click", () => {
   configPanel.classList.add("hidden");
   game.classList.remove("hidden");
 
-  let columns = document.textContent("columns");
-  let rows = document.textContent("rows");
-  let probability = document.textContent("probability");
+  let columns = parseInt(document.getElementById("columns").value);
+  let rows = parseInt(document.getElementById("rows").value);
+  let probability = parseFloat(document.getElementById("probability").value);
+  console.log(columns);
   let randomNumber;
   const cell = Array.from({ length: rows }, () => Array(columns).fill(0));
 
-  for (let i = 0; fila < cuadricula.length; fila++) {
-    for (let j = 0; columna < cuadricula[fila].length; columna++) {
+  for (let i = 0; i < cell.length; i++) {
+    for (let j = 0; j < cell[i].length; j++) {
       randomNumber = Math.random(0, 1);
       if (randomNumber == probability) {
         cell[i][j] = 1;
       } else {
         cell[i][j] = 0;
       }
+      let newCell = document.createElement("div");
+      game.appendChild(newCell);
     }
-    let newCell=document.createElement("div");
-    
-
   }
 });
