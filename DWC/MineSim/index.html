@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="script/main.js" defer></script>
+    <title>Mine Sim</title>
+</head>
+<body>
+    <main>
+        <h1>Mine Sim</h1>
+        <div id="config_panel">
+            <form action="">
+                <label for="">Columns</label>
+                <input type="text" placeholder="0" id="columns" required>
+
+                <label for="">Rows</label>
+                <input type="text" placeholder="0" id="rows" required>
+                
+                <label for="">Mine probability</label>
+                <input type="text" placeholder="0" id="probability" required>
+
+                <button id="btn_start" >Start</button>
+            </form>
+        </div>
+        <div id="game" class="hidden">
+            
+        </div>
+    </main>
+</body>
+</html>

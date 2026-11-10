@@ -1,0 +1,52 @@
+* {
+    border: 1px solid red;
+
+}
+
+body {
+    background-color: aliceblue;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#config_panel {
+    width: 600px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(100, 200, 200, 0.3);
+    border-radius: 20px;
+}
+
+#config_panel form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    gap: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#config_panel input {
+    border-radius: 7px;
+    background-color: aliceblue;
+}
+
+#config_panel {
+    font-family: sans-serif;
+}
+
+#btn_start {
+    width: 160px;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+.hidden{
+    display: none !important;
+}
