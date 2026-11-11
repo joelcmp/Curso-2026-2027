@@ -14,9 +14,7 @@
     {
         global $connection;
 
-        if ($connection->connect_errno) {
-            throw new RuntimeException('Error de conexión: ' . $connection->connect_error);
-        }
+        
         $sql = 'CALL Login(?,?,@resultado)';
         $stmt = $connection->prepare($sql);
         if (!$stmt) {

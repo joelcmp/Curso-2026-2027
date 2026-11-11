@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>GEestionar conciertos</title>
+</head>
+<body>
+    <h2>Alta de concierto</h2>
+    <form action="../php/manageConcerts.php" method="post">
+        <label for="band_name">Nombre banda</label><br>
+        <input type="text" name="name_band" maxlength="64">
+        <br>
+        <label for="data_concert">Fecha concierto</label><br>
+        <input type="date" id="date_concert" name="date_concert">
+        <br>
+        <label for="price">Precio</label><br>
+        <input type="number" name="price" step="0.01" min="0">
+        <br>
+        <input type="hidden" name="accion" value="alta_concierto">
+        <button type="submit">Alta concierto</button> 
+    </form>
+        <a href="../php/manageConcerts.php">Ir a los conciertos</a>
+
+    <h2>Alta entrada</h2>
+    <form action="../php/manageEntrances.php" method="post">
+        <label for="adquisition_date">Fecha adquisicion</label><br>
+        <input type="date" id="adquisition_date" name="adquisition_date"><br><br>
+        <label for="id_concert">Id concierto</label><br>
+        <input type="text" name="id_concert" maxlength="1000"><br><br>
+        <input type="hidden" name="accion" value="alta_entrada">
+        <button type="submit">Registrar entrada</button>
+    </form>
+    <a href="../php/manageEntrances.php">Ir a las entradas</a>
+</body>
+</html>
