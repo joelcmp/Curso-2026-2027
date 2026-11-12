@@ -81,7 +81,7 @@ function PA_DameDoctor(int $n_licencia)
     $sql = 'CALL DameDoctor(?)';
     $stmt = $connection->prepare($sql);
 
-    $stmt->bind_param('i',$n_licencia);
+    $stmt->bind_param('i', $n_licencia);
 
     if (!$stmt->execute()) {
         $error = $stmt->error;
@@ -106,19 +106,17 @@ function PA_DameDoctor(int $n_licencia)
     $stmt->close();
 
     return $doctores;
-
-
 }
 
-function PA_AltaDoctor(string $n_licencia, string $nombre ,string $apellidos)
+function PA_AltaDoctor(string $n_licencia, string $nombre, string $apellidos)
 {
     global $connection;
 
     $sql = 'CALL AltaDoctor(?, ?, ?, @resultado)';
     $stmt = $connection->prepare($sql);
 
-   
-    $stmt->bind_param('sss',$n_licencia, $nombre, $apellidos);
+
+    $stmt->bind_param('sss', $n_licencia, $nombre, $apellidos);
 
     if (!$stmt->execute()) {
         $error = $stmt->error;
@@ -138,18 +136,19 @@ function PA_AltaDoctor(string $n_licencia, string $nombre ,string $apellidos)
 
     return $fila['resultado'];
 }
-function PA_AltaCita(string $nombre_paciente,
-                    string $especialidad,                    
-                    string $fecha,
-                    int $doctor_asignado)
-{
+function PA_AltaCita(
+    string $nombre_paciente,
+    string $especialidad,
+    string $fecha,
+    int $doctor_asignado
+) {
     global $connection;
 
     $sql = 'CALL AltaCita(?, ?, ?, ?, @resultado)';
     $stmt = $connection->prepare($sql);
 
-   
-    $stmt->bind_param('sssi',$nombre_paciente, $especialidad, $fecha, $doctor_asignado);
+
+    $stmt->bind_param('sssi', $nombre_paciente, $especialidad, $fecha, $doctor_asignado);
 
     if (!$stmt->execute()) {
         $error = $stmt->error;
@@ -169,19 +168,20 @@ function PA_AltaCita(string $nombre_paciente,
 
     return $fila['resultado'];
 }
-function PA_ActualizarCita( string $idCita,
-                            string $nombre_paciente,
-                            string $especialidad,                    
-                            string $fecha,
-                            int $doctor_asignado)
-{
+function PA_ActualizarCita(
+    string $idCita,
+    string $nombre_paciente,
+    string $especialidad,
+    string $fecha,
+    int $doctor_asignado
+) {
     global $connection;
 
     $sql = 'CALL ModificarCita(?, ?, ?, ?, ?, @resultado)';
     $stmt = $connection->prepare($sql);
 
-   
-    $stmt->bind_param('ssssi',$idCita, $nombre_paciente, $especialidad, $fecha, $doctor_asignado);
+
+    $stmt->bind_param('ssssi', $idCita, $nombre_paciente, $especialidad, $fecha, $doctor_asignado);
 
     if (!$stmt->execute()) {
         $error = $stmt->error;

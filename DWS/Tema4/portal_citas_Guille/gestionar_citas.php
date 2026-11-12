@@ -9,24 +9,22 @@ session_start();
 //EDICION DE CITAS
 
 $estaEditando = 0;
-if(isset($_POST['accion']) && $_POST['accion'] === 'mostrar_zona_edicion')
-{    
+if (isset($_POST['accion']) && $_POST['accion'] === 'mostrar_zona_edicion') {
     $estaEditando = 1;
     $_SESSION['citaModificandose'] = $_POST['idCita'];
-}
-else
-{
+} else {
     $estaEditando = 0;
 }
 
-if(isset($_POST['accion']) && $_POST['accion'] === 'actualizar_cita')
-{
+if (isset($_POST['accion']) && $_POST['accion'] === 'actualizar_cita') {
 
-    PA_ActualizarCita($_SESSION['citaModificandose'],
-                    $_POST['paciente'],
-                    $_POST['especialidad'],
-                    $_POST['fecha_hora'],
-                    $_POST['doctor_asignado']);
+    PA_ActualizarCita(
+        $_SESSION['citaModificandose'],
+        $_POST['paciente'],
+        $_POST['especialidad'],
+        $_POST['fecha_hora'],
+        $_POST['doctor_asignado']
+    );
     $estaEditando = 0;
     $idCitaModificandose = 0;
 }
@@ -40,8 +38,7 @@ $citasExistentes = [];
 //LEO DE LA BASE DE DATOS LAS CITAS QUE YA EXISTAN
 $citasExistentes = PA_ListaCitas();
 //Y LOS METO EN $_SESSION
-foreach ($citasExistentes as $indice => $cita)
-{
+foreach ($citasExistentes as $indice => $cita) {
     $nueva_cita = [];
     $nueva_cita['id_cita'] = $cita['id_cita'];
     $nueva_cita['paciente'] = $cita['nombre_paciente'];
@@ -49,24 +46,22 @@ foreach ($citasExistentes as $indice => $cita)
     $nueva_cita['fecha_hora'] = $cita['fecha'];
     $nueva_cita['doctor_asignado'] = $cita['licencia_doctor'];
 
-    $_SESSION['lista_citas'] [] = $nueva_cita;
+    $_SESSION['lista_citas'][] = $nueva_cita;
 }
 
 
 // PASO B2: Averiguar si existe el doctor asignado
-if(isset($_POST['doctor_asignado']))
-{
+if (isset($_POST['doctor_asignado'])) {
     $licenciaBuscar = (int)($_POST['doctor_asignado']);
     $doctorEncontrado = PA_DameDoctor($licenciaBuscar);
-    
-    if(count($doctorEncontrado) == 0)
-    {
+
+    if (count($doctorEncontrado) == 0) {
         $mensaje = "Doctor no encontrado. Pruebe otro numero de licencia.";
         header('Location: portal_citas.html'); //Vuelta al inicio
     }
 }
 // PASO C: Comprobar si se ha solicitado borrar todas las citas
-if(isset($_POST['accion']) && $_POST['accion'] === 'borrar_todas') {
+if (isset($_POST['accion']) && $_POST['accion'] === 'borrar_todas') {
     // Borrar todas las citas de la sesión
     unset($_SESSION['lista_citas']);
     $_SESSION['lista_citas'] = [];
@@ -76,40 +71,40 @@ if(isset($_POST['accion']) && $_POST['accion'] === 'borrar_todas') {
 
 
 // PASO D: Si se recibe una nueva cita individual por $_POST, se procesa
-if(isset($_POST['paciente']) &&
+if (
+    isset($_POST['paciente']) &&
     isset($_POST['especialidad']) &&
     isset($_POST['fecha_hora']) &&
     isset($_POST['doctor_asignado']) &&
-    $_POST['accion'] === 'alta_cita') {
+    $_POST['accion'] === 'alta_cita'
+) {
     // 1. Capturamos los datos que viajan en el POST
     $nueva_cita = [];
     $nueva_cita['paciente'] = $_POST['paciente'];
     $nueva_cita['especialidad'] = $_POST['especialidad'];
     $nueva_cita['fecha_hora'] = $_POST['fecha_hora'];
     $nueva_cita['doctor_asignado'] = $_POST['doctor_asignado'];
-    
+
     // 2. Acumulamos la nueva cita dentro del array guardado en la SESIÓN
     $_SESSION['lista_citas'][] = $nueva_cita;
 
     // 3. Mandar a Base de Datos la nueva Cita
-    $resultado = PA_AltaCita($_POST['paciente'],
-                            $_POST['especialidad'],
-                            $_POST['fecha_hora'],
-                            $_POST['doctor_asignado']);
-                
-    if($resultado === "-1"){
+    $resultado = PA_AltaCita(
+        $_POST['paciente'],
+        $_POST['especialidad'],
+        $_POST['fecha_hora'],
+        $_POST['doctor_asignado']
+    );
+
+    if ($resultado === "-1") {
         $mensaje = "Nombre vacio";
-    }
-    else if($resultado === "-2"){
+    } else if ($resultado === "-2") {
         $mensaje = "Especialidad vacia";
-    }
-    else if($resultado === "-3"){
+    } else if ($resultado === "-3") {
         $mensaje = "Fecha vacía";
-    }
-    else if($resultado === "-4"){
+    } else if ($resultado === "-4") {
         $mensaje = "Fecha anterior al presente";
-    }
-    else{
+    } else {
         $mensaje = "Cita insertada con éxito.";
     }
 }
@@ -117,10 +112,12 @@ if(isset($_POST['paciente']) &&
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Centro Médico - Mis Citas</title>
 </head>
+
 <body>
 
     <h2>Gestión de Citas Médicas</h2>
@@ -152,12 +149,12 @@ if(isset($_POST['paciente']) &&
                         <td><?php echo $cita['especialidad'] ?></td>
                         <td><?php echo $cita['fecha_hora'] ?></td>
                         <td><?php echo $cita['doctor_asignado'] ?></td>
-                        <td> 
+                        <td>
                             <form action="gestionar_citas.php" method="post">
-                                <input type="hidden" name="idCita" value=<?php echo $cita['id_cita'] ?> >
+                                <input type="hidden" name="idCita" value=<?php echo $cita['id_cita'] ?>>
                                 <input type="hidden" name="accion" value="mostrar_zona_edicion">
                                 <button type="submit">Modificar Cita</button>
-                            </form>  
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -170,7 +167,7 @@ if(isset($_POST['paciente']) &&
                 <!-- Campo para el nombre del paciente -->
                 <label for="paciente">Nombre del Paciente:</label><br>
                 <input type="text" id="paciente" name="paciente">
-                
+
                 <br><br>
                 <!-- Selección de especialidad -->
                 <label for="especialidad">Especialidad:</label><br>
@@ -191,27 +188,29 @@ if(isset($_POST['paciente']) &&
                 <label for="n_licencia">Asignar Doctor:</label><br>
                 <input type="text" id="n_licencia" name="doctor_asignado">
                 <br><br>
-                
+
                 <input type="hidden" name="accion" value="actualizar_cita">
                 <button type="submit">Actualizar Cita</button>
             </form>
         </div>
         <!-- Formulario para vaciar la sesión -->
-        
+
         <form action="gestionar_citas.php" method="post">
             <input type="hidden" name="accion" value="borrar_todas">
             <button type="submit">
                 Cancelar todas las citas
             </button>
         </form>
-        
+
 
     <?php else: ?>
         <p>No hay citas agendadas actualmente.</p>
     <?php endif; ?>
 
-    <br><hr>
+    <br>
+    <hr>
     <a href="portal_citas.html"> +Pedir otra cita</a>
 
 </body>
+
 </html>
