@@ -1,0 +1,132 @@
+body {
+    background-color: #0b0c10; /* Fondo oscuro espacial */
+    margin: 0;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+.panel {
+    border: 1px solid #45a29e;
+    background-color: #1f2833aa;
+    text-align: center;
+}
+
+/* ESCENARIO */
+#escenario {
+    position: relative;
+    width: 600px;
+    height: 450px;
+    flex: 0 0 auto;
+    order: 1;
+    margin: auto;
+    border: 2px solid #45a29e;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-image: radial-gradient(circle, #1f2833 0%, #0b0c10 100%);
+}
+
+/* NAVE ENEMIGA */
+#naveEnemiga {
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    width: 60px;
+    height: 40px;
+    background-color: #ff0000;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 0 10px red;
+}
+#naveEnemiga.impacto {
+    animation: explotar 0.4s ease-in-out;
+}
+
+/* LÁSER */
+#laser {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    left: calc(50% - 3px);
+    width: 6px;
+    height: 40px;
+    background-color: #00ffff;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+/* CAÑÓN */
+#canon {
+    position: absolute;
+    bottom: 10px;
+    left: calc(50% - 20px);
+    width: 40px;
+    height: 30px;
+    background-color: #45a29e;
+    border-radius: 5px;
+}
+#canon.disparo {
+    animation: retroceso 0.3s ease-out;
+}
+
+/* PUNTOS FLOTANTES */
+.punto-flotante {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: #66fcf1;
+    text-shadow: 1px 1px 0 #000;
+    animation: subir-desaparecer 1s ease-out forwards;
+}
+
+@keyframes explotar {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+}
+@keyframes retroceso {
+    0% { transform: translateY(0); }
+    40% { transform: translateY(8px); }
+    100% { transform: translateY(0); }
+}
+@keyframes subir-desaparecer {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-50px); opacity: 0; }
+}
+
+/* ESTRUCTURA DEL PANEL (Copiada del profe) */
+#panel-juego {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+#main {
+    display: flex;
+    flex: 1 1 0;
+    align-items: stretch;
+}
+#barra_control, #panel_estadisticas {
+    padding: 1rem;
+    border: 2px solid #45a29e;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    max-width: 400px;
+    margin: auto 30px;
+    background-color: #1f283355;
+}
+#barra_control { order: 0; }
+#panel_estadisticas { order: 2; }
+
+.btn {
+    margin: 10px;
+    min-height: 50px;
+    padding: 0 20px;
+    font-weight: bold;
+    color: #0b0c10;
+    border: 2px solid #45a29e;
+    border-radius: 12px;
+    background-image: linear-gradient(to bottom, #66fcf1, #45a29e);
+    cursor: pointer;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+#panel-config > div { display: flex; flex-direction: column; margin: 10px auto; color: white; }
+#panel-config > div input { align-self: center; width: 50px; }
