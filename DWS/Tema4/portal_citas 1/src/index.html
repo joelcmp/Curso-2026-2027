@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal Clínica</title>
+</head>
+<body>
+    <h2>Alta de Doctor</h2>
+    <form action="../php/manageDoctors.php" method="post">
+        <label for="name_doctor">Nombre:</label><br>
+        <input type="text" name="name_doctor" maxlength="50"><br>
+        <label for="surname_doctor">Apellidos:</label><br>
+        <input type="text" name="surname_doctor" maxlength="50"><br>
+        <input type="hidden" name="accion" value="alta_doctor">
+        <button type="submit">Alta Doctor</button> 
+    </form>
+    <a href="../php/manageDoctors.php">Ir al cuadro de doctores</a>
+
+    <h2>Solicitud de Cita Médica</h2>
+    <form action="../php/manageAppointments.php" method="post">
+        <label for="patient_name">Nombre del Paciente:</label><br>
+        <input type="text" name="patient_name" maxlength="50"><br><br>
+
+        <label for="specialty">Especialidad:</label><br>
+        <select name="specialty">
+            <option value="">-- Seleccione --</option>
+            <option value="Medicina General">Medicina General</option>
+            <option value="Pediatría">Pediatría</option>
+            <option value="Dermatología">Dermatología</option>
+            <option value="Traumatología">Traumatología</option>
+        </select><br><br>
+
+        <label for="date_appointment">Fecha y Hora:</label><br>
+        <input type="datetime-local" name="date_appointment"><br><br>
+
+        <label for="id_doctor">ID del Doctor:</label><br>
+        <input type="number" name="id_doctor" min="1"><br><br>
+        
+        <input type="hidden" name="accion" value="alta_cita">
+        <button type="submit">Reservar Cita</button>
+    </form>
+    <a href="../php/manageAppointments.php">Ir a las citas actuales</a>
+</body>
+</html>

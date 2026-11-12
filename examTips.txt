@@ -1,0 +1,105 @@
+🚑 GUÍA DE RESCATE - EXAMEN BACKEND (PHP + SQL)
+🔴 REGLA DE ORO: El Flujo de Datos
+Antes de escribir código, localiza dónde está el fallo. El flujo siempre es este:
+HTML (name="x") ➡️ Controlador ($_POST['x']) ➡️ AccesoDatos (PA_Funcion($x)) ➡️ SQL (IN _x).
+Si los nombres no coinciden exactamente, el código no funciona.
+
+🧱 1. NIVEL SQL (La Base de Datos)
+Si te piden rellenar un procedure:
+
+Declaración: CREATE PROCEDURE Nombre(in _param1 TIPO, out _res INT)
+
+Variables locales: DECLARE aux INT; SET aux = NULL; (¡Ojo! Inicializar a NULL para poder usarlo en un SELECT INTO).
+
+Validaciones en cascada:
+
+Textos: IF (_nombre = "" OR _nombre IS NULL) THEN SET _res = -1;
+
+Fechas/Números: ELSEIF (_fecha IS NULL) THEN SET _res = -2; (NUNCA pongas = "" en un número o fecha).
+
+Reglas: ELSEIF (_fecha < CURDATE()) THEN SET _res = -3;
+
+La instrucción nuclear (El caso OK):
+
+Alta: INSERT INTO tabla(...) VALUES(...); SET _res = 0;
+
+Editar: UPDATE tabla SET col = _param WHERE id = _id; SET _res = 0; (¡Nunca olvides el WHERE!).
+
+Comprobar si existe una FK (Validación doble en SQL):
+
+sql
+SELECT id INTO aux FROM tabla WHERE id = _id;
+IF (aux IS NULL) THEN SET _res = -2; -- No existe
+🔌 2. NIVEL ACCESO A DATOS (dataAccess.php)
+Conexión: mysqli_report(MYSQLI_REPORT_OFF); $connection = @new mysqli(...);
+
+Lectura (List_ / Get_): Devuelve un Array.
+
+if ($stmt->field_count > 0) { $res = $stmt->get_result(); while ($fila = $res->fetch_assoc()) { $array[] = $fila; } }
+
+Escritura (Add_ / Modify_): Devuelve un Int (el _res).
+
+Llamada: CALL Nombre(?, ?, @resultado)
+
+Bind: $stmt->bind_param('ssi', $param1, $param2, $param3); (Letras: s=string/date, i=int, d=decimal/float).
+
+Recoger el OUT: $resultado = $connection->query('SELECT @resultado AS res'); $fila = $resultado->fetch_assoc(); return $fila['res'];
+
+🧠 3. NIVEL CONTROLADOR (manageX.php)
+Arranque: session_start(); (SIEMPRE lo primero).
+
+Detectar acción: if (isset($_POST['accion']) && $_POST['accion'] === 'nombre_accion') { ... }
+
+Sincronía SESSION ↔ BD (Paso obligatorio):
+
+php
+$_SESSION['lista_datos'] = []; // 1. Vaciar
+$datosBD = PA_List_...();      // 2. Leer de BD
+foreach ($datosBD as $dato) {  // 3. Volcar a sesión
+    $_SESSION['lista_datos'][] = $dato;
+}
+Traducción de errores:
+
+php
+if ($resultado == -1) { $mensaje = "Error..."; } 
+else if ($resultado == 0) { $mensaje = "Éxito"; }
+Modo Edición (El jefe final):
+
+Recibir ID: $_SESSION['editando'] = $_POST['id'];
+Saber si estamos editando: $estaEditando = isset($_SESSION['editando']);
+Al guardar: usar el ID de la sesión, no del POST.
+Limpiar: if ($resultado == 0) { unset($_SESSION['editando']); }
+🌐 4. NIVEL HTML (index.html / Vistas)
+Formulario: <form action="../php/manageX.php" method="post">
+
+Inputs: <input type="text" name="igual_que_el_post">
+
+Ocultos (No los olvides):
+
+<input type="hidden" name="accion" value="alta_dato">
+
+<input type="hidden" name="id" value="<?php echo $fila['id']; ?>"> (Para el botón modificar).
+
+Mostrar Mensaje: <?php if(isset($mensaje)) echo "<p>$mensaje</p>"; ?>
+
+Pintar Tabla: <?php foreach ($_SESSION['lista_datos'] as $dato): ?> ... <?php endforeach; ?>
+
+🚨 LOS 5 ERRORES FATALES (Revisa esto antes de entregar)
+Rutas rotas: Si el HTML está en src/ y el PHP en php/, usa ../php/archivo.php en los action y href. Si están juntos, usa solo archivo.php.
+
+El $ olvidado: En PHP las variables llevan $. En SQL los parámetros llevan _ (ej. _id), no $.
+
+El WHERE fantasma: Si te piden un UPDATE o un DELETE, cuentas las letras de WHERE antes de entregar. Sin WHERE borras todo.
+
+Comillas en SQL: Las variables del procedure van sin comillas (_id), los textos fijos sí llevan ('Medicina General').
+
+Cerrar conexiones: Asegúrate de que cierras el statement ($stmt->close();), no la conexión global ($connection->close();), o el resto de la página petará.
+
+🎯 Estrategia de examen (Cómo atacar el código a medias)
+Lee de arriba a abajo: Si falta el HTML, mira qué espera el $_POST en el PHP.
+
+Sigue la variable: Si falta el bind_param, mira los ? que hay en el CALL.
+
+Mira los códigos de error: Si el SQL devuelve -1 y -2, en el PHP debe haber un if ($res == -1) y un else if ($res == -2).
+
+No te bloquees: Si no sabes cómo hacer el "Modo Edición", haz el Alta y el Listado primero. Rascarás la mayor parte de la nota.

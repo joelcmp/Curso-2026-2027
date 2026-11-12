@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal Biblioteca</title>
+</head>
+<body>
+    <h2>Alta de Libro</h2>
+    <form action="../php/manageBooks.php" method="post">
+        <label>Título:</label><br>
+        <input type="text" name="title" maxlength="100"><br>
+        <label>Autor:</label><br>
+        <input type="text" name="author" maxlength="50"><br>
+        <input type="hidden" name="accion" value="alta_libro">
+        <button type="submit">Alta Libro</button> 
+    </form>
+    <a href="../php/manageBooks.php">Ir a los libros</a>
+
+    <h2>Registrar Préstamo</h2>
+    <form action="../php/manageLoans.php" method="post">
+        <label>Nombre del Lector:</label><br>
+        <input type="text" name="borrower" maxlength="50"><br><br>
+        <label>Fecha del Préstamo:</label><br>
+        <input type="date" name="loan_date"><br><br>
+        <label>ID del Libro:</label><br>
+        <input type="number" name="id_book" min="1"><br><br>
+        <input type="hidden" name="accion" value="alta_prestamo">
+        <button type="submit">Registrar Préstamo</button>
+    </form>
+    <a href="../php/manageLoans.php">Ir a los préstamos</a>
+</body>
+</html>
