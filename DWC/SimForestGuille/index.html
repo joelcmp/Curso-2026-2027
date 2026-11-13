@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SimForest v1.0</title>
+        <link rel="stylesheet" href="estilos/estilos.css">
+        <script src="js/simforest.js" defer></script>
+    </head>
+    <body>
+        <div id="cabecera">
+            <h1>SimForest</h1>
+            <p>¡Bienvenido!</p>
+        </div>
+        <div id="panel-config" class="panel">
+            <h2>Configuración</h2>
+            <div>
+                <span>Anchura del bosque M:</span>
+                <input type="number" id="spin_anchura_bosque" min="1" max="20">
+            </div>
+            <div>
+                <span>Altura del bosque N:</span>
+                <input type="number" id="spin_altura_bosque" min="1" max="20">
+            </div>
+            <div>
+                <span>Probabilidad de nacimiento de árbol:</span>
+                <input type="number" id="spin_probabilidad_arbol" min="0" max="1" step="0.01">
+            </div>
+            <div>
+                <span>Probabilidad de incendio:</span>
+                <input type="number" id="spin_probabilidad_incendio" min="0" max="1" step="0.01">
+            </div>     
+            <button id="btn_iniciar_simulacion" class="btn">Iniciar Simulación</button>
+        </div>
+        <div id="panel-simulador" class="panel">
+            <div>
+                <h2>Simulación</h2>
+            </div>
+            <div id="main">
+                <div id="barra_control">
+                    <button id="btn_avanzar1" class="btn">Avanzar 1</button>
+                    <button id="btn_play" class="btn">Play</button>
+                    <button id="btn_stop" class="btn">Pausa</button>
+                    <button id="btn_acelerar" class="btn">Acelerar</button>
+                    <button id="btn_frenar" class="btn">Frenar</button>
+                </div>
+                <div id="tablero">
+                </div>
+                <div id="panel_estadisticas">
+                    <h3>Estado de la Simulación</h3>
+                    <span>TIEMPO </span><span id="tiempo">0</span>
+                    <br>
+                    <span>Infertil </span><span id="n_infertil">0</span>
+                    <span>Fertil </span><span id="n_fertil">0</span>
+                    <span>Árbol </span><span id="n_arbol">0</span>
+                    <span>Fuego </span><span id="n_fuego">0</span>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>

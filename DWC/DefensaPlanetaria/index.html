@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Defensa Planetaria</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="cabecera">
+        <h1>Defensa Planetaria</h1>
+        <p>¡Esquiva los meteoritos!</p>
+    </div>
+
+    <div id="panel-config" class="panel">
+        <h2>Configuración</h2>
+        <div>
+            <span>Velocidad de caída (1-10):</span>
+            <input type="number" id="spin_velocidad" min="1" max="10" value="5">
+        </div>
+        <div>
+            <span>Número de Vidas:</span>
+            <!-- [HUECO 1 CORREGIDO] type="number" en lugar de "text" -->
+            <input type="number" id="spin_vidas" min="1" max="5" value="3">
+        </div>
+        <button id="btn_iniciar" class="btn">Iniciar Defensa</button>
+    </div>
+
+    <div id="panel-juego" class="panel">
+        <div>
+            <h2>Consola de Vuelo</h2>
+        </div>
+        <div id="main">
+            <div id="barra_control">
+                <button id="btn_play" class="btn">Play</button>
+                <button id="btn_stop" class="btn">Pausa</button>
+                <button id="btn_acelerar" class="btn">Acelerar</button>
+                <button id="btn_frenar" class="btn">Frenar</button>
+                <button id="btn_reiniciar" class="btn">Reiniciar</button>
+            </div>
+            
+            <div id="escenario">
+                <div id="nave"></div>
+                <div id="meteorito"></div>
+            </div>
+
+            <div id="panel_estadisticas">
+                <h3>Estado de la Nave</h3>
+                <span>VIDAS </span><span id="n_vidas">0</span>
+                <br>
+                <span>Puntos </span><span id="n_puntos">0</span>
+                <p id="mensaje">¡Pulsa Iniciar!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

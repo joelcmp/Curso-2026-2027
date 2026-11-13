@@ -1,0 +1,115 @@
+==================================================
+CHULETA CSS - EXAMEN DESARROLLO ENTORNO CLIENTE
+==================================================
+Enfocado en los estilos usados en los proyectos del profe (Flexbox, posiciones, animaciones).
+
+--------------------------------------------------
+1. SELECTORES BÁSICOS (Cómo apuntar a los elementos)
+--------------------------------------------------
+*   etiqueta { ... }       -> Afecta a todas las etiquetas (ej: body, h1).
+*   #id { ... }            -> Afecta a un ID específico (ej: #escenario, #btn_play).
+*   .clase { ... }         -> Afecta a una clase (ej: .panel, .btn).
+*   etiqueta, etiqueta2    -> Múltiples selectores a la vez (ej: h1, h2 { ... }).
+*   #padre > hijo         -> Selecciona un hijo directo (ej: #main > div).
+*   #padre .hijo          -> Selecciona un descendiente (ej: .tablero .celda).
+
+--------------------------------------------------
+2. MODELO DE CAJA (Tamaños y márgenes)
+--------------------------------------------------
+*   width: 100%;           -> Ancho (px, %, vw).
+*   height: 450px;         -> Alto (px, %, vh).
+*   margin: 0 auto;        -> Centra horizontalmente un elemento en bloque.
+*   padding: 1rem;         -> Espacio interno.
+*   box-sizing: border-box; -> EL MÁS IMPORTANTE. Hace que el padding y el border no aumenten el tamaño total del elemento. (El profe lo usa siempre).
+*   overflow: hidden;      -> Oculta lo que se sale de la caja (vital para el #escenario para que la flecha no se vea fuera).
+
+--------------------------------------------------
+3. FLEXBOX (El rey del layout en estos proyectos)
+--------------------------------------------------
+*   display: flex;         -> Activa flexbox en un contenedor.
+*   flex-direction: row;   -> Elementos en fila (por defecto).
+*   flex-direction: column;-> Elementos en columna (ej: el panel de configuración).
+*   justify-content: center; -> Centra horizontalmente (si es row) o verticalmente (si es column).
+*   align-items: center;   -> Centra verticalmente (si es row) o horizontalmente (si es column).
+*   gap: 10px;             -> Espacio entre los elementos hijos.
+*   flex: 1 1 0;           -> Hace que un elemento crezca para ocupar el espacio sobrante (ej: #tablero o #escenario).
+*   flex: 0 0 auto;        -> Evita que el elemento se encoja o crezca (el profe lo usa en la barra de control).
+
+--------------------------------------------------
+4. POSICIONAMIENTO (Para el juego)
+--------------------------------------------------
+*   position: relative;    -> El padre (ej: #escenario). Sirve de referencia para los hijos.
+*   position: absolute;    -> El hijo (ej: #diana, #nave, #flecha). Se posiciona respecto al padre relative.
+*   top: 0px;              -> Distancia desde arriba.
+*   bottom: 10px;          -> Distancia desde abajo (el profe lo usa para el arco/nave).
+*   left: 50%;             -> Distancia desde la izquierda.
+*   right: 0px;            -> Distancia desde la derecha.
+*   z-index: 10;           -> Capas (el que tiene número más alto se pone delante).
+
+--------------------------------------------------
+5. COLORES Y FONDOS
+--------------------------------------------------
+*   color: white;          -> Color del texto.
+*   background-color: #0d1117; -> Color de fondo.
+*   background-color: rgba(0, 0, 0, 0.5); -> Fondo con transparencia.
+*   background-color: #000000aa; -> Hex con transparencia (el profe lo usa mucho, 'aa' es el nivel de opacidad).
+*   background-image: url('res/fondo.png'); -> Imagen de fondo.
+*   background-image: linear-gradient(to bottom, red, blue); -> Degradado lineal.
+*   background-image: radial-gradient(circle, red, yellow); -> Degradado circular (el profe lo usa para la diana).
+*   background-blend-mode: difference; -> Mezcla la imagen con el color de fondo.
+
+--------------------------------------------------
+6. BORDES Y FORMAS
+--------------------------------------------------
+*   border: 2px solid black; -> Borde sólido.
+*   border-radius: 50%;      -> Hace un círculo perfecto (la diana, la moneda).
+*   border-radius: 10px;     -> Esquinas redondeadas.
+*   border-bottom: none;     -> Quita el borde de abajo (el profe lo usa para el arco).
+*   box-shadow: 0 0 10px #ff0000; -> Sombra (el brillo del meteorito o el fuego).
+*   cursor: pointer;         -> Cambia el cursor a una mano (en los botones).
+*   cursor: not-allowed;     -> Cursor de prohibido (cuando el botón está deshabilitado).
+
+--------------------------------------------------
+7. ANIMACIONES Y TRANSICIONES (Vital para los bonus)
+--------------------------------------------------
+*   transition: transform 0.2s; -> Hace que los cambios sean suaves (ej: el hover del botón).
+*   @keyframes nombre_animacion {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(-50px); }
+    }
+    - Aquí defines la animación. Se pueden usar 0%, 50%, 100% en lugar de from/to.
+*   animation: nombre_animacion 1s ease-out forwards;
+    - Se aplica al elemento.
+    - "1s": duración. "ease-out": efecto. "forwards": se queda en el último estado.
+    - "infinite": se repite infinitamente.
+    - "alternate": va y vuelve.
+
+Propiedades de transformación (Se usan dentro de @keyframes):
+*   transform: translateY(-50px); -> Mueve el elemento en el eje Y (el texto flotante de los puntos).
+*   transform: scale(1.5);        -> Hace el elemento más grande (el impacto del meteorito).
+*   transform: rotate(45deg);     -> Rota el elemento.
+
+--------------------------------------------------
+8. PSEUDO-CLASES Y PSEUDO-ELEMENTOS
+--------------------------------------------------
+*   .btn:hover { ... }      -> Cuando pasas el ratón por encima.
+*   .btn:active { ... }     -> Cuando haces clic.
+*   .btn:disabled { opacity: 0.5; cursor: not-allowed; } -> Botón desactivado.
+*   ::before / ::after      -> Crea contenido falso (el profe lo usa para la punta de la flecha).
+    Ejemplo:
+    #flecha::before {
+        content: "";
+        position: absolute;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 10px solid #444;
+    }
+
+--------------------------------------------------
+9. COSAS QUE TE PUEDEN PEDIR AÑADIR (Predicciones)
+--------------------------------------------------
+*   Un estilo para un nuevo botón (.btn-rojo, .btn-peligro).
+*   Una animación de "parpadeo" o "sacudida" para cuando el jugador pierde.
+*   Un estilo para el texto de las estadísticas (font-size, color, text-shadow).
+*   Cambiar el fondo del escenario usando un gradiente.
+*   Ocultar un elemento con display: none; (El profe lo hace desde JS, pero en CSS se puede).

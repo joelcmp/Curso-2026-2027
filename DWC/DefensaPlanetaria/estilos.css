@@ -1,0 +1,99 @@
+body {
+    background-color: #0d1117;
+    margin: 0;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+.panel {
+    border: 1px solid #58a6ff;
+    background-color: #161b22aa;
+    text-align: center;
+}
+
+#escenario {
+    position: relative;
+    width: 600px;
+    height: 450px;
+    flex: 0 0 auto;
+    order: 1;
+    margin: auto;
+    border: 2px solid #58a6ff;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-image: radial-gradient(circle, #1f2429 0%, #0d1117 100%);
+}
+
+#nave {
+    position: absolute;
+    bottom: 10px;
+    left: 275px; /* Centrada */
+    width: 50px;
+    height: 30px;
+    background-color: #58a6ff;
+    border-radius: 10px 10px 0 0;
+}
+
+#meteorito {
+    display: none;
+    position: absolute;
+    top: -30px;
+    left: 0px;
+    width: 30px;
+    height: 30px;
+    background-color: #ff7b72;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff7b72;
+}
+
+/* [HUECO 2 CORREGIDO] Animación de impacto limpia */
+@keyframes impacto {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* CLAVE: La clase que activa la animación */
+#meteorito.impacto {
+    animation: impacto 0.3s ease-out;
+}
+
+#panel-juego {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+#main {
+    display: flex;
+    flex: 1 1 0;
+    align-items: stretch;
+}
+#barra_control, #panel_estadisticas {
+    padding: 1rem;
+    border: 2px solid #58a6ff;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    max-width: 400px;
+    margin: auto 30px;
+    background-color: #161b2255;
+}
+#barra_control { order: 0; }
+#panel_estadisticas { order: 2; }
+
+.btn {
+    margin: 10px;
+    min-height: 50px;
+    padding: 0 20px;
+    font-weight: bold;
+    color: #0d1117;
+    border: 2px solid #58a6ff;
+    border-radius: 12px;
+    background-image: linear-gradient(to bottom, #58a6ff, #1f6feb);
+    cursor: pointer;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+#panel-config > div { display: flex; flex-direction: column; margin: 10px auto; color: white; }
+#panel-config > div input { align-self: center; width: 50px; }

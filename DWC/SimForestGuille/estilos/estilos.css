@@ -1,0 +1,223 @@
+body
+{
+    background-image: url('../res/fondo.png');
+    background-color: #064019;
+    background-blend-mode: difference;
+    margin: 0;
+}
+.panel
+{
+    border: 1px solid #ddff00ff;
+    background-color: #000000aa;
+    text-align: center;
+}
+.tablero
+{
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    max-width: 800px;
+    margin: 0;
+    background-color: rgb(245, 245, 245,0.5);
+}
+
+.tablero .fila
+{
+    display: flex;
+}
+
+.tablero .celda
+{
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+}
+.tablero .celdaInfertil
+{
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    background-color: #7a7a7aaa;
+}
+.tablero .celdaFertil
+{
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    background-color: #925d00aa;
+}
+.tablero .celdaArbol
+{
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    background-color: #009202aa;
+}
+.tablero .celdaFuego
+{
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    background-image: radial-gradient(ellipse at center, #fff34a 0%, #ff9a00 38%, #f60f0f 72%, #9b1000 100%);
+    background-size: 180% 180%;
+    animation: fuego-gradiente 1.8s ease-in-out infinite alternate,
+               fuego-aura 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes fuego-gradiente
+{
+    from { background-position: 0% 60%; }
+    to { background-position: 100% 60%; }
+}
+
+@keyframes fuego-aura
+{
+    from { box-shadow: 0 0 5px 1px #ff6500aa; }
+    to { box-shadow: 0 0 12px 4px #ffb000dd; }
+}
+
+#panel-simulador
+{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+#panel-simulador > div:first-child
+{
+    flex: 0 0 auto;
+}
+#panel-simulador h2
+{
+    float: right;
+    margin-right: 30px;
+}
+
+#main
+{
+    display: flex;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 0;
+    align-items: stretch;
+}
+
+#barra_control, #panel_estadisticas
+{
+    box-sizing: border-box;
+    padding: 1rem;
+    border: 2px solid #000000;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    max-width: 400px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 30px;
+    margin-right: 30px;
+    background-color: rgb(245, 245, 245,0.5);
+}
+
+#barra_control
+{
+    order: 0;
+}
+
+#tablero
+{
+    display: flex;
+    flex: 1 1 0;
+    order: 1;
+    box-sizing: border-box;
+    width: auto;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 24px;
+}
+
+#panel_estadisticas
+{
+    order: 2;
+    background-color: #00000089;
+}
+#panel_estadisticas > span, h3
+{
+    color:whitesmoke;
+}
+.btn{
+    margin: 20px;
+    min-height: 50px;
+
+    border-radius: 10%;
+    border-color: burlywood;
+    background-color:antiquewhite;
+
+
+}
+/*TO DO: Currarse un poco más la tipografía de la cabecera*/
+h1, #cabecera p{
+    display: flex;
+    flex-direction: row-reverse;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:gold;
+}
+h2
+{
+    color: rgb(117, 72, 5);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+#panel-config > div{
+    display: flex;
+    flex-direction: column;
+    /*TODO: ¿Cómo coloco esto sin dar vergüenza ajena*/
+    color: whitesmoke;
+    margin: 0 auto;
+}
+#panel-config > div input{
+    align-self: center;
+    width: 50px;
+    background-color: #ffcd88aa;
+} 
+#spin_anchura_bosque, #spin_anchura_bosque
+{
+    background-color: #ffcd88aa;
+}
+#spin_probabilidad_arbol
+{
+    background-color: #13e225aa;
+}
+#spin_probabilidad_incendio
+{
+    background-color: #fa2424aa;
+}
+#tiempo{
+     color: whitesmoke !important;
+     font-size: 40px;
+}
+#n_infertil{
+    color: gainsboro !important;
+    font-size: 30px;
+}
+#n_fertil{
+    color:burlywood !important;
+    font-size: 30px;
+}
+#n_arbol{
+    color:greenyellow !important;
+    font-size: 30px;
+}
+#n_fuego{
+    color: coral !important;
+    font-size: 30px;
+}

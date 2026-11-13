@@ -1,0 +1,99 @@
+==================================================
+CHULETA HTML - EXAMEN DESARROLLO ENTORNO CLIENTE
+==================================================
+Enfocado en proyectos tipo SPA (SimForest, TiroArco, Tragaperras, Space Defender).
+
+--------------------------------------------------
+1. ESTRUCTURA BÁSICA (Lo que siempre va en el index.html)
+--------------------------------------------------
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título de la Página</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- CONTENIDO -->
+</body>
+</html>
+* Nota: "defer" es OBLIGATORIO en el script para que cargue después del HTML.
+
+--------------------------------------------------
+2. CONTENEDORES Y TEXTO (Para estructurar)
+--------------------------------------------------
+<div id="id_contenedor" class="clase"> ... </div>  -> Caja genérica (se usa para todo).
+<span> ... </span>  -> Texto en línea (ej: para mostrar los puntos o estadísticas).
+<p> ... </p>        -> Párrafo (ej: para el mensaje de "Juego Terminado").
+<h1>, <h2>, <h3>    -> Títulos (cabeceras y paneles).
+<main>              -> Contenedor principal del contenido (buena práctica).
+
+--------------------------------------------------
+3. FORMULARIOS E INPUTS (Panel de Configuración)
+--------------------------------------------------
+* Te pedirán añadir un input para M, N, P, Q, velocidad, vidas, etc.
+
+<input type="number" id="spin_velocidad" min="1" max="10" step="1" value="5">
+  - type="number" -> Solo números (si te piden que no metan letras).
+  - min="1"       -> Valor mínimo.
+  - max="10"      -> Valor máximo.
+  - step="0.01"   -> Para decimales (probabilidades).
+  - value="5"     -> Valor por defecto con el que empieza.
+  
+<input type="text" id="nombre" placeholder="Escribe tu nombre">
+  - type="text"   -> Para texto normal.
+  - placeholder   -> Texto de fondo.
+
+<input type="range" id="volumen" min="0" max="100" value="50">
+  - type="range"  -> Barra deslizante (por si piden regular volumen).
+
+<select id="dificultad">
+    <option value="1">Fácil</option>
+    <option value="2" selected>Normal</option>
+    <option value="3">Difícil</option>
+</select>
+  - Desplegable. Se usa mucho si te piden elegir un modo de juego.
+
+<label for="spin_velocidad">Velocidad:</label>
+  - Etiqueta para el input (buena práctica, aunque el profe use <span>).
+
+--------------------------------------------------
+4. BOTONES (Barra de control y Configuración)
+--------------------------------------------------
+<button id="btn_iniciar" class="btn">Iniciar Simulación</button>
+  - El atributo "disabled" se puede añadir desde JS cuando el juego termina:
+    <button id="btn_disparar" disabled>Disparar</button>
+
+--------------------------------------------------
+5. IMÁGENES (Tragaperras, fondos, personajes)
+--------------------------------------------------
+<img id="imagen1" src="res/foto.png" alt="Descripción de la foto">
+  - src = ruta de la imagen.
+  - alt = texto alternativo (si la imagen no carga, o para accesibilidad).
+
+--------------------------------------------------
+6. ATRIBUTOS GLOBALES (Se pueden usar en casi todas las etiquetas)
+--------------------------------------------------
+* id="identificador"  -> Único para cada elemento. Se usa con getElementById.
+* class="nombre"      -> Se usa para los estilos CSS. Varios elementos pueden tener la misma.
+* style="..."         -> CSS en línea (ej: <div style="display: none;">). El profe lo usa en JS.
+
+--------------------------------------------------
+7. EVENTOS EN LÍNEA (Cuidado, el profe prefiere addEventListener)
+--------------------------------------------------
+* Aunque el profe usa addEventListener en JS, si te piden añadir un evento rápido en el HTML:
+<button onclick="miFuncion()">Click</button>
+<input onchange="actualizar()"> 
+* En el examen, si puedes, usa addEventListener desde JS (como en los proyectos).
+
+--------------------------------------------------
+8. COSAS QUE TE PUEDEN PEDIR AÑADIR (Predicciones)
+--------------------------------------------------
+* Un campo de texto para el nombre del jugador (type="text").
+* Un selector (select) para elegir la dificultad del juego.
+* Un botón extra de "Reiniciar" o "Volver al menú".
+* Un contador visible con <span> para los puntos o vidas.
+* Un div extra en el escenario para una segunda diana o un obstáculo.
+* Un input tipo color (type="color") para cambiar el color de la nave/diana.

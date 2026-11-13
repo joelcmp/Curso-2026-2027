@@ -1,0 +1,127 @@
+==================================================
+CHULETA JAVASCRIPT - EXAMEN DESARROLLO ENTORNO CLIENTE
+==================================================
+Enfocado en DOM, Eventos, Timers, Matemáticas y la lógica del profe.
+
+--------------------------------------------------
+1. SELECCIÓN DEL DOM (Variables Vista)
+--------------------------------------------------
+*   document.getElementById('id');          // El que más usa el profe.
+*   document.querySelector('#id');          // Selector CSS (más moderno).
+*   document.querySelectorAll('.clase');    // Devuelve un array de nodos.
+
+--------------------------------------------------
+2. MODIFICAR EL DOM
+--------------------------------------------------
+*   elemento.innerText = "Hola";            // Cambia el texto (el profe lo usa).
+*   elemento.textContent = "Hola";          // Similar, más seguro y rápido.
+*   elemento.value = "10";                  // Cambia el valor de un input.
+*   elemento.style.display = 'none';        // Ocultar (SPA).
+*   elemento.style.display = 'block';       // Mostrar (o 'flex').
+*   elemento.style.left = x + 'px';         // Mover en X.
+*   elemento.style.top = y + 'px';          // Mover en Y.
+*   elemento.classList.add('clase');        // Añadir clase CSS (animaciones).
+*   elemento.classList.remove('clase');     // Quitar clase CSS.
+*   elemento.disabled = true;               // Deshabilitar un botón.
+
+--------------------------------------------------
+3. CREAR Y BORRAR ELEMENTOS
+--------------------------------------------------
+// Crear e insertar
+let nuevoDiv = document.createElement('div');
+nuevoDiv.className = 'punto-flotante';
+nuevoDiv.innerText = '+10';
+padre.appendChild(nuevoDiv); 
+
+// Borrar (El profe usa esto para el tablero y los puntos)
+contenedor.replaceChildren(nuevoElemento); // Vacía el contenedor y pone el nuevo.
+elemento.remove();                         // Autodestrucción (útil con setTimeout).
+
+--------------------------------------------------
+4. EVENTOS (Clics y Teclado)
+--------------------------------------------------
+*   btn.addEventListener('click', miFuncion);
+*   // Evento de teclado (Para mover naves/personajes):
+    document.addEventListener('keydown', function(evento) {
+        if (evento.key === 'ArrowLeft') { /* Mover izquierda */ }
+        if (evento.key === 'ArrowRight') { /* Mover derecha */ }
+        if (evento.key === ' ') { /* Barra espaciadora */ }
+    });
+
+--------------------------------------------------
+5. TEMPORIZADORES (El motor del juego)
+--------------------------------------------------
+// 1. setInterval: Se repite infinitamente (Para mover objetos)
+let timerDiana = setInterval(moverDiana, 30); // cada 30ms
+
+// SIEMPRE limpiar antes de arrancar (Truco del profe para no duplicar)
+clearInterval(timerDiana); 
+timerDiana = setInterval(moverDiana, 30);
+
+// 2. clearInterval: Para parar el timer (Botón Pausa)
+clearInterval(timerDiana);
+
+// 3. setTimeout: Se ejecuta UNA SOLA VEZ (Para efectos o retardos)
+setTimeout(function() {
+    flotante.remove(); // Borrar el texto flotante a los 1000ms
+}, 1000);
+
+--------------------------------------------------
+6. MATEMÁTICAS Y ALEATORIEDAD
+--------------------------------------------------
+*   Math.random()              // Genera un decimal entre 0 y 1.
+*   Math.random() * 5          // Genera un decimal entre 0 y 5 (sin incluir el 5).
+*   Math.floor(Math.random() * 5) // Entero entre 0 y 4 (Tragaperras).
+*   Math.abs(numero)           // Valor absoluto (quita el signo negativo) - Para distancias.
+*   parseInt(valor)            // Convierte texto a número entero (para inputs).
+*   parseFloat(valor)          // Convierte texto a decimal (probabilidades).
+
+--------------------------------------------------
+7. VALIDACIÓN DE INPUTS (Evitar errores)
+--------------------------------------------------
+let vidas = parseInt(document.getElementById('spin_vidas').value);
+// isNaN = "Is Not a Number" (Es verdadero si el usuario dejó el campo vacío)
+if (isNaN(vidas) || vidas < 1) {
+    vidas = 3; // Valor por defecto
+}
+
+--------------------------------------------------
+8. MATRICES 2D (Como en el SimForest)
+--------------------------------------------------
+// Crear matriz vacía:
+let matriz = new Array(M);
+for (let i = 0; i < M; i++) {
+    matriz[i] = new Array(N);
+}
+
+// Recorrer matriz:
+for (let i = 0; i < M; i++) {
+    for (let j = 0; j < N; j++) {
+        // Hacer algo con matriz[i][j]
+    }
+}
+
+// COPIAR MATRIZ (¡Cuidado! Esto es una trampa de examen)
+// MAL: let copia = matriz; (Copia la referencia, si cambias una, cambias la otra).
+// BIEN: Bucle anidado para copiar celda por celda.
+for (let i = 0; i < M; i++) {
+    for (let j = 0; j < N; j++) {
+        copia[i][j] = matriz[i][j];
+    }
+}
+
+--------------------------------------------------
+9. TRUCOS "PRO" QUE TE VAN A PEDIR EN LOS HUECOS
+--------------------------------------------------
+// 1. Reiniciar una animación CSS:
+elemento.classList.remove('clase-animacion');
+void elemento.offsetWidth; // ¡MAGIA! Obliga al navegador a recalcular.
+elemento.classList.add('clase-animacion');
+
+// 2. Guardar datos entre páginas (Para el bonus de MPA):
+localStorage.setItem('config', JSON.stringify({M: 10, N: 10})); // Guardar
+let config = JSON.parse(localStorage.getItem('config'));        // Leer
+
+// 3. Colisión por cajas (Bounding Box) - Tiro con Arco:
+let distancia = Math.abs(centroA - centroB);
+if (distancia <= 10) { /* Acierto */ }
