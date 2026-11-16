@@ -1,0 +1,117 @@
+Estructura del documento
+Etiqueta	Qué hace
+<!DOCTYPE html>	Dice al navegador qué versión de HTML usar. No es una etiqueta HTML. En HTML 4.01 hay 3 tipos (Strict, Transitional, Frameset).
+<html>	Contiene toda la página. Atributos: lang (idioma), dir (sentido de lectura), version (obsoleto).
+<head>	Cabecera con información que no se ve en la página.
+<body>	Cuerpo: todo lo que se ve. Atributos: id, class, style, title, onload, onunload.
+<!-- -->	Comentario que el navegador ignora. No se pueden anidar.
+Dentro de <head>
+Etiqueta	Qué hace
+<title>	Título que sale en la pestaña. Es el único obligatorio.
+<base href>	Dirección raíz para resolver los enlaces relativos.
+<meta>	Metadatos (autor, descripción, codificación). Atributos: name, content, http-equiv, scheme, charset.
+<link>	Vincula otro recurso: hoja de estilos o favicon (rel="icon"). Atributos: href, rel, rev, type, media, hreflang, charset.
+<script>	Inserta o enlaza JavaScript. Atributos: src, type, charset, defer.
+<style>	CSS dentro del propio documento. Atributos: type, media, title.
+<object>	Incrusta un objeto externo. El PDF solo lo nombra, no lo explica.
+Texto
+Etiqueta	Qué hace
+<h1>…<h6>	Títulos de mayor (h1) a menor (h6) tamaño. Bloque. align es obsoleto.
+<p>	Párrafo. Bloque.
+<br>	Salto de línea. Sin cierre.
+<hr>	Línea horizontal. Sin cierre.
+<b>	Negrita.
+<i>	Cursiva.
+<big>	Texto grande.
+<small>	Texto pequeño.
+<s> / <strike>	Texto tachado.
+<tt>	Aspecto de teletipo (monoespaciado).
+<u>	Subrayado.
+<font> (obsoleta)	Tamaño, color y tipo de letra (size, color, face).
+&nbsp;	Espacio que no se rompe de línea.
+&lt; &gt; &copy;	Símbolos <, > y ©.
+Listas
+Etiqueta	Qué hace
+<ul>	Lista con viñetas. type (obsoleto): disc, square, circle.
+<ol>	Lista numerada. type (1, a, A, i, I) y start (obsoleto).
+<li>	Cada elemento de <ul> u <ol>.
+<dl>	Lista de definiciones, como un diccionario.
+<dt>	Término a definir.
+<dd>	Definición del término anterior.
+Enlaces, imágenes y mapas
+Etiqueta	Qué hace
+<a>	Enlace o ancla. href (destino), name (marcador), target (_blank abre en pestaña nueva), rel, type, accesskey, tabindex.
+<img>	Inserta una imagen. Sin cierre. src, alt, width, height, longdesc, name, usemap, ismap.
+<map>	Define un mapa de imagen. name.
+<area>	Zona pulsable del mapa. shape (rect, circle, poly, default), coords, href, alt, target, title.
+Formularios
+Etiqueta	Qué hace
+<form>	Contenedor del formulario. action (a dónde se envía), method (get/post), enctype, accept, accept-charset, target, onsubmit, onreset.
+<input>	Control de entrada. Sin cierre. Su función depende de type.
+<button>	Botón con más formato que <input>. type (submit, reset, button).
+<select>	Menú desplegable. size, multiple.
+<option>	Cada opción del menú. selected, value, label.
+<optgroup>	Agrupa opciones. label.
+<textarea>	Texto de varias líneas. rows, cols.
+<label>	Rótulo de un control. for debe coincidir con el id del control.
+<fieldset>	Agrupa controles en un recuadro.
+<legend>	Título del <fieldset>.
+
+Atributos comunes de <input>: name, value, size, maxlength, checked, disabled, readonly, src, alt, accept, tabindex, accesskey.
+
+Valores de type en <input>:
+
+text: una línea de texto.
+password: oculta lo escrito con puntos.
+checkbox: casilla; se pueden marcar varias.
+radio: opción excluyente; comparten el mismo name.
+submit: envía el formulario.
+reset: vuelve a los valores iniciales.
+button: botón genérico para scripts.
+file: sube un archivo; necesita enctype="multipart/form-data" en el <form>.
+hidden: dato oculto.
+image: botón con imagen.
+HTML5: search, number, range, time, url, email, date, datetime. También placeholder (texto de ayuda) y required (no puede quedar vacío).
+Tablas
+Etiqueta	Qué hace
+<table>	Tabla.
+<tr>	Fila.
+<td>	Celda de datos.
+<th>	Celda de cabecera.
+<thead> / <tbody> / <tfoot>	Cabecera, cuerpo y pie de la tabla.
+<caption>	Título de la tabla.
+
+Atributos de celda: colspan y rowspan (combinan columnas o filas), headers, scope (row, col, rowgroup, colgroup, auto), abbr.
+
+Contenedores
+Etiqueta	Qué hace
+<div>	Caja de bloque que agrupa contenido. Atributos: id, class, title, style, lang, dir.
+<span>	Contenedor en línea para dar estilo a un trozo de texto. Mismos atributos.
+HTML5 (etiquetas semánticas)
+Etiqueta	Qué hace
+<header>	Cabecera: título, logo.
+<nav>	Bloque de enlaces de navegación.
+<main>	Contenido principal (sale en el esquema).
+<section>	Sección general.
+<article>	Contenido independiente y reutilizable (post, comentario).
+<aside>	Contenido relacionado indirectamente: barra lateral, publicidad.
+<footer>	Pie de página o sección.
+<hgroup>	Agrupa encabezados h1–h6.
+Atributos generales
+%i18n: lang, dir.
+%coreattrs: id, class, style, title.
+%events: onload, onunload, onblur, onchange, onfocus, onreset, onselect, onsubmit.
+%attrs es la suma de los tres.
+XHTML
+
+Es HTML con reglas de XML:
+
+Etiquetas y atributos en minúscula.
+Todo cerrado, incluso <br />.
+Sin solapar etiquetas.
+Atributos siempre entre comillas.
+Atributos con valor, p. ej. checked="checked".
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">.
+Errores del PDF
+Pone dir="ltl" en varios ejemplos, y lo correcto es ltr.
+Escribe <texarea> en el título de una diapositiva, aunque en el código aparece bien (<textarea>).

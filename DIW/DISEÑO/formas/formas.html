@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa formas</title>
+</head>
+<body>
+    <h1>Mapa formas</h1>
+
+    <img src="IMG/figurasGeometricas.jpg" alt="Figuras geométricas" usemap="#figurasGeometricas">
+
+    <map name="figurasGeometricas">
+        <map name="figurasGeometricas">
+    <area shape="rect" coords="64,65,256,348" href="rectangulo.html" alt="Rectángulo rojo">
+    <!-- rect: 4 números = esquina superior izquierda (x1,y1) + esquina inferior derecha (x2,y2) -->
+
+    <area shape="circle" coords="388,119,74" href="circulo.html" alt="Círculo amarillo">
+    <!-- circle: 3 números = centro (x,y) + radio -->
+
+    <area shape="poly" coords="394,229,329,275,353,349,434,349,458,275" href="pentagono.html" alt="Pentágono azul">
+    <!-- poly: un par (x,y) por cada esquina. Pentágono = 5 esquinas = 10 números -->
+</map>
+    </map>
+</body>
+</html>

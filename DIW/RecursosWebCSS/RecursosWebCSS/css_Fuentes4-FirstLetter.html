@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First-letter</title>
+    <style>
+        *{
+            margin: 50px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        p {
+            width: 500px;
+            line-height: 1.5;
+        }
+
+        p::first-letter {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: orange;
+        }
+
+        h1+p::first-letter {
+            color: white;
+            background-color: green;
+            border-radius: 2px;
+            box-shadow: 3px 3px 0 greenyellow;
+            font-size: 250%;
+            padding: 6px 3px;
+            margin-right: 6px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Peter Pan</h1>
+    <p>Hace tiempo, allá por 1880, vivía en la ciudad de Londres la familia Darling. Estaba formada por el señor y la
+        señora Darling y sus hijos: Wendy, Michael y John. Sin olvidarnos de Nana, por supuesto, el perro niñera.</p>
+    <p>Vivían felices y tranquilos hasta que Peter Pan llegó a sus vidas. Todo comenzó la noche en que Nana tenía el día
+        libre y la señora Darling se quedó a cargo de sus hijos. Cuando todos, incluida ella, estuvieron dormidos el
+        muchacho entró por la ventana. Pero entonces ella se despertó y se asustó tanto al verle que lanzó un fuerte
+        grito. Entonces apareció Nana, que cerró la ventana para evitar que saliera y acabó atrapando su sombra. Y así
+        fue como la sombra de Peter Pan acabó en un cajón de la casa de los Darling.</p>
+</body>
+
+</html>
