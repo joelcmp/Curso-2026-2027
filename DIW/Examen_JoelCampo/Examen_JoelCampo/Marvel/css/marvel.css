@@ -1,0 +1,39 @@
+
+@font-face {
+    font-family: "Marvel-Regular";
+            src: url("Marvel-Regular.ttf");
+}
+header{
+    background-color: red;
+}
+header a{
+    margin-left: 25%;
+
+}
+#personajes{
+    background-color: red;
+    color: white;
+    font-size: 35px;
+    font-family: url("Marvel-Regular.tft");
+    text-align: center;
+}
+
+footer p{
+    margin-left: 42%;
+}
+body{
+    padding-bottom: 5px;
+}
+.foto{
+    border: solid;
+    border-color: red;
+}
+.fondo{
+    background-color: black;
+    color: white;
+}
+table{
+    background-color: white;
+    margin-left: 25%;
+    margin-right: 25%;
+}
