@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 9 - Formulario Cyberwall</title>
+    <link rel="stylesheet" href="ejercicio9.css">
+</head>
+
+<body>
+    <h1>Formulari d'inscripció Cyberwall</h1>
+    <form>
+        <section>
+            <label for="nombre">Name:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nom i cognoms..." required>
+        </section>
+        <section>
+            <label for="usuario">Create a user name:</label>
+            <input type="text" id="usuario" name="usuario" required>
+        </section>
+        <section>
+            <label for="password">Create a password:</label>
+            <input type="password" id="password" name="password" minlength="6" maxlength="12" required>
+        </section>
+        <section class="situacion">
+            <label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" name="birthday">
+        </section>
+        <section class="situacion">
+            <label for="situacion">I am</label>
+            <select id="situacion" name="situacion">
+                <option value="student">a student</option>
+                <option value="teacher">a teacher</option>
+                <option value="business_owner">a business owner</option>
+                <option value="self-employed">self-employed</option>
+                <option value="other">other</option>
+            </select>
+        </section>
+        <section>
+            <label for="telefono">Mobile phone:</label>
+            <input type="tel" id="telefono" name="telefono" required>
+        </section>
+        <section>
+            <label for="ingles">Select your English level (0-10):</label>
+            <input type="range" id="ingles" name="ingles" min="0" max="10" value="5">
+        </section>
+        <section>
+            <button type="submit">Sign me up</button>
+        </section>
+    </form>
+</body>
+</html>

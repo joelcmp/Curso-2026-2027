@@ -1,0 +1,137 @@
+// =============================================================
+// ESTILOS BASE DE ELEMENTOS HTML  (RA2 · CE a)
+// Aquí se redefinen las ETIQUETAS, sin clases. Todo lo que un
+// elemento debe parecer "por defecto" en este proyecto.
+// =============================================================
+@use "../abstracts" as *;
+
+@layer base {
+  body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--fuente-base);
+    font-size: var(--paso-0);
+    line-height: var(--interlineado-texto);
+  }
+
+  // Contenido principal: añade espacio vertical para separarlo de la cabecera y el pie.
+  main {
+    padding-block: var(--espacio-l);
+  }
+
+  h1,
+  h2,
+  h3 {
+    line-height: var(--interlineado-titulo);
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: var(--paso-4);
+  }
+
+  h2 {
+    font-size: var(--paso-3);
+  }
+
+  h3 {
+    font-size: var(--paso-2);
+  }
+
+  a {
+    color: var(--color-acento);
+    text-underline-offset: 0.2em;
+
+    &:hover {
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  :focus-visible {
+    @include foco-visible;
+  }
+
+  code {
+    font-family: var(--fuente-mono);
+    font-size: 0.9em;
+  }
+
+  // Párrafos y texto
+  p {
+    max-inline-size: 65ch;
+    text-wrap: pretty;
+  }
+
+  small {
+    color: var(--color-texto-suave);
+    font-size: var(--paso-menos-1);
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  // Listas
+  ul,
+  ol {
+    padding-inline-start: var(--espacio-m);
+  }
+
+  li {
+    margin-block-end: var(--espacio-3xs);
+  }
+
+  // Separadores
+  hr {
+    border: 0;
+    border-block-start: 1px solid var(--color-borde);
+    margin-block: var(--espacio-m);
+  }
+
+  // Tablas
+  table {
+    inline-size: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: var(--espacio-2xs);
+    border-block-end: 1px solid var(--color-borde);
+    text-align: start;
+  }
+
+  th.numero,
+  td.numero {
+    text-align: end;
+  }
+
+  // Formularios
+  fieldset {
+    border: 1px solid var(--color-borde-control);
+    border-radius: var(--radio-control);
+    padding: var(--espacio-s);
+  }
+
+  legend {
+    padding-inline: var(--espacio-2xs);
+    font-weight: 700;
+  }
+
+  label {
+    display: block;
+    margin-block-end: var(--espacio-3xs);
+  }
+
+  input:not(:where([type="radio"], [type="checkbox"])),
+  select {
+    @include objetivo-tactil;
+
+    inline-size: 100%;
+    border: 1px solid var(--color-borde-control);
+    border-radius: var(--radio-control);
+    padding-inline: var(--espacio-2xs);
+    background-color: var(--color-superficie);
+    color: var(--color-texto);
+  }
+}

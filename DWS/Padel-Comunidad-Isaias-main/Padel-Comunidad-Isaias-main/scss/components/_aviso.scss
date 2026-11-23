@@ -1,0 +1,42 @@
+// =============================================================
+// COMPONENTE · AVISO DE PAGO
+// -------------------------------------------------------------
+// Informa del importe, teléfono Bizum y concepto del pago.
+// =============================================================
+@use "../abstracts" as *;
+
+@layer components {
+  // AVISO: fondo tenue y borde con el color de acento
+  .aviso {
+    display: grid;
+    gap: var(--espacio-2xs);
+    padding: var(--espacio-s);
+    border: 1px solid var(--color-acento);
+    border-radius: var(--radio-tarjeta);
+    background-color: var(--color-acento-tenue);
+  }
+
+  // TÍTULO: identifica el método de pago
+  .aviso__titulo {
+    margin: 0;
+    font-size: var(--paso-1);
+  }
+
+  // IMPORTE: destaca la cantidad que debe abonarse
+  .aviso__importe {
+    margin: 0;
+    font-size: var(--paso-3);
+    font-weight: 700;
+  }
+
+  // TELÉFONO: facilita el número para realizar el Bizum
+  .aviso__telefono {
+    margin: 0;
+  }
+
+  // CONCEPTO: utiliza tipografía monoespaciada
+  .aviso__concepto {
+    margin: 0;
+    font-family: var(--fuente-mono);
+  }
+}

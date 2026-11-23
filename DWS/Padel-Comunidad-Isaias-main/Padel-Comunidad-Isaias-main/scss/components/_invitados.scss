@@ -1,0 +1,74 @@
+// =============================================================
+// COMPONENTE · CONTADOR DE INVITADOS
+// -------------------------------------------------------------
+// Selección del número de invitados mediante radios.
+// Opciones segmentadas en una fila, sin JavaScript.
+// =============================================================
+@use "../abstracts" as *;
+
+@layer components {
+  // CONTENEDOR: agrupa las opciones en una fila
+  .invitados {
+    border: 0;
+    padding: 0;
+
+    // LEYENDA: identifica el grupo de opciones
+    legend {
+      margin-block-end: var(--espacio-xs);
+      font-weight: 700;
+    }
+  }
+
+  // OPCIONES: distribución horizontal
+  .invitados__opciones {
+    display: flex;
+    gap: var(--espacio-2xs);
+  }
+
+  // OPCIÓN: botón segmentado y objetivo táctil mínimo de 44 px
+  .invitados__opcion {
+    @include objetivo-tactil;
+
+    display: grid;
+    flex: 1;
+    place-items: center;
+    border: 1px solid var(--color-borde-control);
+    border-radius: var(--radio-control);
+    background-color: var(--color-superficie);
+    cursor: pointer;
+
+    // SELECCIONADO: borde destacado y fondo diferenciado
+    &:has(:checked) {
+      border: 2px solid var(--color-acento);
+      background-color: var(--color-acento-tenue);
+      font-weight: 700;
+    }
+
+    // DESACTIVADO: identifica la opción no permitida
+    &:has(:disabled) {
+      border-style: dashed;
+      color: var(--color-texto-suave);
+      cursor: not-allowed;
+    }
+
+    // FOCO: indicador visible al navegar con teclado
+    &:has(:focus-visible) {
+      @include foco-visible;
+    }
+  }
+
+  // RADIO: oculto visualmente, pero accesible por teclado
+  .invitados__control {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  // VALOR: muestra el número de invitados
+  .invitados__valor {
+    font-weight: 700;
+  }
+}

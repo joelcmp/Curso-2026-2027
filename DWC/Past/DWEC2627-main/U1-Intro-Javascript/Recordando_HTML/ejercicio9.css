@@ -1,0 +1,42 @@
+h1 {
+    text-align: center;
+}
+
+form {
+    width: 400px;
+    margin: auto;
+}
+
+section {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+}
+
+input {
+    display: block;
+}
+
+.situacion {
+    display: flex;
+    align-items: center;
+}
+
+.situacion label {
+    display: inline;
+    margin-right: 5px;
+}
+
+.situacion select {
+    display: inline;
+}
+
+input[type="range"] {
+    width: 300px;
+}
+
+button {
+    margin-top: 10px;
+}

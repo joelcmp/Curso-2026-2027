@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirmar reserva · Pádel Residencial Los Sauces</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="cabecera__interior contenedor">
+      <a class="cabecera__marca" href="index.html">Pádel Residencial Los Sauces</a>
+      <nav class="menu" aria-label="Principal">
+        <ul class="menu__lista">
+          <li><a class="menu__enlace" href="index.html">Turnos</a></li>
+          <li><a class="menu__enlace" href="mis-turnos.html">Mis turnos</a></li>
+          <li><a class="menu__enlace" href="normas.html">Normas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" class="contenedor">
+    <h1>Confirmar reserva</h1>
+
+    <form action="justificante.html" method="get">
+
+      <section aria-labelledby="resumen-turno">
+        <h2 id="resumen-turno">Resumen del turno</h2>
+        <p>Fecha: [Fecha seleccionada]</p>
+        <p>Hora: [Hora seleccionada]</p>
+        <p>Pista: Central</p>
+      </section>
+
+      <fieldset class="invitados">
+        <legend>Número de invitados no residentes</legend>
+
+        <div class="invitados__opciones">
+          <label class="invitados__opcion">
+            <input class="invitados__control" type="radio" name="invitados" value="0" checked>
+            <span class="invitados__valor">0</span>
+          </label>
+
+          <label class="invitados__opcion">
+            <input class="invitados__control" type="radio" name="invitados" value="1">
+            <span class="invitados__valor">1</span>
+          </label>
+
+          <label class="invitados__opcion">
+            <input class="invitados__control" type="radio" name="invitados" value="2">
+            <span class="invitados__valor">2</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <section class="aviso" aria-labelledby="aviso-pago">
+        <h2 class="aviso__titulo" id="aviso-pago">Pago mediante Bizum</h2>
+
+        <p class="aviso__importe">2,00 € por invitado no residente</p>
+
+        <p class="aviso__telefono">Teléfono Bizum: <strong>600 000 000</strong></p>
+
+        <p class="aviso__concepto">Concepto: <code>PADEL 4.ºB [día y mes]</code></p>
+      </section>
+
+      <p>
+        <label>
+          <input type="checkbox" name="acepta-normas" required>
+          Acepto las <a href="normas.html">normas de uso</a>.
+        </label>
+      </p>
+
+      <button class="boton" type="submit">Confirmar reserva</button>
+
+    </form>
+  </main>
+
+  <footer class="pie">
+    <div class="pie__interior contenedor">
+      <address class="pie__datos">
+        Comunidad de Propietarios Residencial Los Sauces · CIF H-00000010<br>
+        Calle de Los Sauces, 30 · 00000 Localidad Ficticia<br>
+        <a href="mailto:administracion@lossauces.example">administracion@lossauces.example</a>
+      </address>
+      <nav aria-label="Legal">
+        <ul class="pie__enlaces">
+          <li><a href="aviso-legal.html">Aviso legal</a></li>
+          <li><a href="privacidad.html">Privacidad</a></li>
+          <li><a href="normas.html">Normas de uso</a></li>
+        </ul>
+      </nav>
+      <p class="pie__nota"><small>Proyecto académico ficticio · DIW 0615 · 2.º DAW</small></p>
+    </div>
+  </footer>
+</body>
+
+</html>
