@@ -7,6 +7,7 @@
     <title>DinoCards | Tu colección de cartas</title>
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/preguntasFrecuentes.css">
+    <link rel="icon" href="../res/logo sin fondo.png">
 </head>
 
 <body>
@@ -17,6 +18,7 @@
             </a>
             <nav class="nav-links">
                 <a href="../src/index.php">Inicio</a>
+                <a href="../src/intercambiar.php">Intercambiar</a>
                 <a href="../src/coleccion.php">Colección</a>
                 <a href="../src/noticias.php">Noticias</a>
                 <a href="../src/soporte.php">Soporte</a>
@@ -31,7 +33,7 @@
     <main>
         <div id="primer_usuario">
             <div id="info_trading">
-
+                
             </div>
             <div id="trading_cartas">
 

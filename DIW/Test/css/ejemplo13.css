@@ -1,0 +1,53 @@
+
+#contenedor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: green;
+    gap: 20px;
+}
+#contenedor header{
+    background-color: red;
+    width: 100%;
+    text-align: center;
+    color: aliceblue;
+    border-top: 2px solid;
+    border-bottom: 3px dotted ;
+    
+    border-color: black;
+}
+#content article{
+    display: flex;
+    border-bottom: 2px solid;
+    justify-content: space-between;
+
+    width: 600px;
+
+}
+li a{
+    color: coral;    
+    text-decoration: none;
+    font-weight: 900;
+}
+nav ul {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+#content article h2{
+    color: blue;
+}
+#content article p{
+    color: brown;
+}
+footer{
+    background-color: black;
+    color: whitesmoke;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
