@@ -6,7 +6,7 @@ body {
     background-attachment: fixed;
     margin: 0;
     min-height: 100vh;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
 }
 
 main {
@@ -34,14 +34,18 @@ h1 {
     justify-content: center;
     gap: 15px;
     border-radius: 10px;
-    background-color: rgba(1, 1, 1, 0.4);
+    background-color: rgba(1, 1, 1, 0.6);
     padding: 20px;
-    width: 280px;
+    width: 320px;
+    color: white;
 }
 
 form div {
     padding: 10px;
-    color: #e46704;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
 }
 
 #dimensiones,
@@ -57,6 +61,7 @@ form div {
 #probabilidad_estado label {
     font-weight: bold;
     text-align: center;
+    color: #e46704;
 }
 
 .imp {
@@ -70,8 +75,8 @@ form div {
 }
 
 .imp:focus {
-    border-color: #fadf45;
-    box-shadow: 0 0 6px #fadf45;
+    border-color: #fff;
+    box-shadow: 0 0 10px #fadf45;
 }
 
 .btn_iniciar_simulacion {
@@ -83,6 +88,7 @@ form div {
     padding: 10px 18px;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: 15px;
 }
 
 .btn_iniciar_simulacion:hover {
@@ -100,7 +106,7 @@ form div {
     gap: 15px;
     padding: 15px;
     border-radius: 10px;
-    background-color: rgba(1, 1, 1, 0.4);
+    background-color: rgba(1, 1, 1, 0.6);
 }
 
 #tablero {
@@ -114,30 +120,17 @@ form div {
     overflow: auto;
 }
 
-.celda_fertil {
+.celda_fertil, .celda_nacimiento, .celda_fuego, .celda_infertil {
     width: 20px;
     height: 20px;
-    background-color: #ccff33;
     border-radius: 2px;
+    transition: background-color 0.3s ease;
 }
-.celda_nacimiento {
-    width: 20px;
-    height: 20px;
-    background-color: #004b23;
-    border-radius: 2px;
-}
-.celda_fuego {
-    width: 20px;
-    height: 20px;
-    background-color: #f0800a;
-    border-radius: 2px;
-}
-.celda_infertil {
-    width: 20px;
-    height: 20px;
-    background-color: #945122;
-    border-radius: 2px;
-}
+
+.celda_fertil { background-color: #ccff33; }
+.celda_nacimiento { background-color: #004b23; }
+.celda_fuego { background-color: #f0800a; box-shadow: 0 0 5px #f0800a; }
+.celda_infertil { background-color: #945122; }
 
 #controles {
     display: flex;
@@ -155,10 +148,15 @@ form div {
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-#controles button:hover {
+#controles button:hover:not(:disabled) {
     background-color: #ff7f1a;
 }
 
-#controles button:active {
+#controles button:active:not(:disabled) {
     transform: scale(0.95);
+}
+
+#controles button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

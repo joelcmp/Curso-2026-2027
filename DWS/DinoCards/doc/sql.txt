@@ -38,13 +38,15 @@ CREATE TABLE colecciones(id INT primary key auto_increment,
 CREATE TABLE solicitudes(id INT primary key auto_increment,
 						solicita_negociar int default 0,
                         usuario_id int not null,
-                        foreign key (usuario_id) references usuario(id)
+                        estado enum("Rechazada","Aceptada","Pendiente"),
+                        foreign key (usuario_id) references usuarios(id)
 			);
-CREATE TABLE negociaciones(id INT primary key auto_increment,
+CREATE TABLE negociaciones(solicitud_id INT primary key auto_increment,
 						fecha date not null,
 						usuario1_id int not null,
                         usuario2_id int not null,
-                        
+                        coleccion1_id int not null,
+                        coleccion2_id int not null
 			);
 
 -- PROCEDIMIENTOS ALMACENADOS

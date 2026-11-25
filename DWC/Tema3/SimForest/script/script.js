@@ -1,111 +1,152 @@
 const panelConfig = document.getElementById("panel_config");
 const panelSimulador = document.getElementById("panel_simulador");
-const botonSimulacion = document.getElementById("btn_iniciar");
+const botonIniciar = document.getElementById("btn_iniciar");
 const formConfig = document.getElementById("form_config");
-const tablero = document.getElementById("tablero");
-const avanzar = document.getElementById("avanzar");
+const tableroDIV = document.getElementById("tablero");
 
-const fertil = 0;
-const arbol = 1;
-const fuego = 2;
-const infertil = 3;
+const btn_avanzar = document.getElementById("btn_avanzar");
+const btn_play = document.getElementById("btn_play");
+const btn_pausa = document.getElementById("btn_pausa");
+const btn_stop = document.getElementById("btn_stop");
 
-function cambiarTab(mostrarSimulador) {
-  if (mostrarSimulador) {
+const FERTIL = 0;
+const ARBOL = 1;
+const FUEGO = 2;
+const INFERTIL = 3;
+
+let filas, columnas, pNacimiento, pIncendio;
+let bosque = [];
+let bosque_futuro = [];
+let celdasDOM = [];
+
+let timer = null;
+let velocidad = 500;
+
+formConfig.addEventListener("submit", (e) => e.preventDefault());
+
+botonIniciar.addEventListener("click", iniciarSimulacion);
+btn_avanzar.addEventListener("click", avanzar);
+btn_play.addEventListener("click", play);
+btn_pausa.addEventListener("click", pausa);
+btn_stop.addEventListener("click", reiniciar);
+
+function iniciarSimulacion() {
+    if (!formConfig.reportValidity()) return;
+
+    filas = parseInt(document.getElementById("filas").value);
+    columnas = parseInt(document.getElementById("columnas").value);
+    pNacimiento = parseFloat(document.getElementById("p_nacimiento").value);
+    pIncendio = parseFloat(document.getElementById("p_incendio").value);
+
+    bosque = crearMatriz(filas, columnas, FERTIL);
+    bosque_futuro = crearMatriz(filas, columnas, FERTIL);
+
+    construirDOM();
+
     panelConfig.classList.add("oculto");
     panelSimulador.classList.remove("oculto");
-  } else {
-    panelConfig.classList.remove("oculto");
-    panelSimulador.classList.add("oculto");
-  }
 }
 
-function crearTablero(filas, columnas) {
-  const fragmento = document.createDocumentFragment();
-  let celdas = Array.from({ length: filas }, () => []);
-
-  tablero.style.gridTemplateColumns = `repeat(${columnas}, 20px)`;
-
-  for (let i = 0; i < filas; i++) {
-    for (let j = 0; j < columnas; j++) {
-      const celda = document.createElement("div");
-      celda.classList.add("celda_fertil");
-      fragmento.appendChild(celda);
-      celdas[i][j] = {
-        celda,
-        estado: 0,
-      };
+function crearMatriz(f, c, valorInicial) {
+    let matriz = new Array(f);
+    for (let i = 0; i < f; i++) {
+        matriz[i] = new Array(c);
+        for (let j = 0; j < c; j++) {
+            matriz[i][j] = valorInicial;
+        }
     }
-  }
-
-  tablero.appendChild(fragmento);
-  return celdas;
+    return matriz;
 }
 
-formConfig.addEventListener("submit", (e) => {
-  e.preventDefault();
-});
+function construirDOM() {
+    tableroDIV.replaceChildren();
+    celdasDOM = crearMatriz(filas, columnas, null);
 
-botonSimulacion.addEventListener("click", () => {
-  if (!formConfig.reportValidity()) return;
+    tableroDIV.style.gridTemplateColumns = `repeat(${columnas}, 20px)`;
 
-  const filas = Number(document.getElementById("filas").value);
-  const columnas = Number(document.getElementById("columnas").value);
-  const pNacimiento = Number(document.getElementById("p_nacimiento").value);
-  const pIncendio = Number(document.getElementById("p_incendio").value);
-  const celdas = crearTablero(filas, columnas);
+    const fragmento = document.createDocumentFragment();
 
-  window.simForestConfig = {
-    filas,
-    columnas,
-    pNacimiento,
-    pIncendio,
-    celdas,
-  };
+    for (let i = 0; i < filas; i++) {
+        for (let j = 0; j < columnas; j++) {
+            const celda = document.createElement("div");
+            celda.className = "celda_fertil";
+            fragmento.appendChild(celda);
+            celdasDOM[i][j] = celda; 
+        }
+    }
+    tableroDIV.appendChild(fragmento);
+}
 
-  cambiarTab(true);
-});
+function avanzar() {
+    for (let i = 0; i < filas; i++) {
+        for (let j = 0; j < columnas; j++) {
+            let estadoActual = bosque[i][j];
 
-avanzar.addEventListener("click", () => {
-  let pAleatoriaNacimiento = Math.random(0, 1);
-  let pAleatoriaIcendio = Math.random(0, 1);
-  let filaAleatoria = Math.random(0, window.simForestConfig.filas);
-  let columnaAleatoria = Math.random(0, window.simForestConfig.columnas);
+            if (estadoActual === FERTIL) {
+                if (Math.random() <= pNacimiento) {
+                    bosque_futuro[i][j] = ARBOL;
+                } else {
+                    bosque_futuro[i][j] = FERTIL;
+                }
+            } else if (estadoActual === ARBOL) {
+                let hayFuegoCerca = false;
 
-  if (
-    window.simForestConfig.celdas[filaAleatoria][columnaAleatoria].estado ==
-      0 &&
-    pAleatoriaNacimiento == window.simForestConfig.pNacimiento
-  ) {
-    window.simForestConfig.celdas[filaAleatoria][columnaAleatoria].estado = 1;
-    celda.classList.remove("celda_fertil");
-    celda.classList.add("celda_nacimiento");
-  }
-  if (
-    (window.simForestConfig.celdas[filaAleatoria][columnaAleatoria].estado ==
-      1 &&
-      pAleatoriaIncendio == window.simForestConfig.pIncendio) ||
-    window.simForestConfig.celdas[filaAleatoria - 1][columnaAleatoria] == 1 ||
-    window.simForestConfig.celdas[filaAleatoria + 1][columnaAleatoria] == 1 ||
-    window.simForestConfig.celdas[filaAleatoria][columnaAleatoria - 1] == 1 ||
-    window.simForestConfig.celdas[filaAleatoria][columnaAleatoria + 1]
-  ) {
-    window.simForestConfig.celdas[filaAleatoria][columnaAleatoria].estado = 2;
-    celda.classList.remove("celda_nacimiento");
-    celda.classList.add("celda_fuego");
-  }
-  if (
-    (window.simForestConfig.celdas[filaAleatoria][columnaAleatoria].estado = 2)
-  ) {
-    window.simForestConfig.celdas[filaAleatoria][columnaAleatoria].estado = 3;
-    celda.classList.remove("celda_fuego");
-    celda.classList.add("celda_infertil");
-  }
-  if (
-    (window.simForestConfig.celdas[filaAleatoria][columnaAleatoria].estado = 3)
-  ) {
-    window.simForestConfig.celdas[filaAleatoria][columnaAleatoria].estado = 0;
-    celda.classList.remove("celda_infertil");
-    celda.classList.add("celda_fertil");
-  }
-});
+                if (i > 0 && bosque[i - 1][j] === FUEGO) hayFuegoCerca = true;
+                if (i < filas - 1 && bosque[i + 1][j] === FUEGO) hayFuegoCerca = true;
+                if (j > 0 && bosque[i][j - 1] === FUEGO) hayFuegoCerca = true;
+                if (j < columnas - 1 && bosque[i][j + 1] === FUEGO) hayFuegoCerca = true;
+
+                if (hayFuegoCerca || Math.random() <= pIncendio) {
+                    bosque_futuro[i][j] = FUEGO;
+                } else {
+                    bosque_futuro[i][j] = ARBOL;
+                }
+            } else if (estadoActual === FUEGO) {
+                bosque_futuro[i][j] = INFERTIL;
+            } else if (estadoActual === INFERTIL) {
+                bosque_futuro[i][j] = FERTIL;
+            }
+        }
+    }
+
+    for (let i = 0; i < filas; i++) {
+        for (let j = 0; j < columnas; j++) {
+            bosque[i][j] = bosque_futuro[i][j];
+        }
+    }
+
+    actualizarVista();
+}
+
+function actualizarVista() {
+    for (let i = 0; i < filas; i++) {
+        for (let j = 0; j < columnas; j++) {
+            let celda = celdasDOM[i][j];
+            let estado = bosque[i][j];
+
+            celda.className = ""; 
+
+            if (estado === FERTIL) celda.classList.add("celda_fertil");
+            if (estado === ARBOL) celda.classList.add("celda_nacimiento");
+            if (estado === FUEGO) celda.classList.add("celda_fuego");
+            if (estado === INFERTIL) celda.classList.add("celda_infertil");
+        }
+    }
+}
+
+function play() {
+    if (timer !== null) return;
+    timer = setInterval(avanzar, velocidad);
+}
+
+function pausa() {
+    clearInterval(timer);
+    timer = null;
+}
+
+function reiniciar() {
+    pausa();
+    panelSimulador.classList.add("oculto");
+    panelConfig.classList.remove("oculto");
+    tableroDIV.replaceChildren();
+}
