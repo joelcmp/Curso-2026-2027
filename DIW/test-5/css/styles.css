@@ -1,0 +1,28 @@
+
+#contenedor{
+    background-image: url("../doc/O6DXT80.jpg");
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding-bottom: 30px
+}
+h1{
+    color: black;
+}
+#primer,#segundo{
+    color: red;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+#btn{
+    background-color: goldenrod;
+    width: 150px;
+    height: 40px;
+    color: aliceblue;
+    border-radius: 6px;
+    border: none;
+}
