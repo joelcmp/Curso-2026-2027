@@ -36,17 +36,30 @@ CREATE TABLE colecciones(id INT primary key auto_increment,
               foreign key (dinosaurio_id) REFERENCES dinosaurios(id)
 			);
 CREATE TABLE solicitudes(id INT primary key auto_increment,
-						solicita_negociar int default 0,
-                        usuario_id int not null,
-                        estado enum("Rechazada","Aceptada","Pendiente"),
-                        foreign key (usuario_id) references usuarios(id)
-			);
-CREATE TABLE negociaciones(solicitud_id INT primary key auto_increment,
-						fecha date not null,
-						usuario1_id int not null,
+                        usuario1_id int not null,
                         usuario2_id int not null,
-                        coleccion1_id int not null,
-                        coleccion2_id int not null
+                        fecha_solicitud datetime default current_timestamp,
+                        estado enum("Rechazada","Aceptada","Pendiente"),
+                        foreign key (usuario1_id) references usuarios(id),
+                        foreign key (usuario2_id) references usuarios(id)
+			);
+
+CREATE TABLE ofertas(id int primary key auto_increment,
+					solicitud_id int,
+                    fecha_oferta datetime default current_timestamp,
+                    estado enum("Pendiente","Rechazada","Aceptada"),
+                    usuario_id_oferta int not null,
+                    foreign key (solicitud_id) references solicitudes(id),
+                    foreign key (usuario_id_oferta) references usuarios(id) 
+                    
+			);
+CREATE TABLE detalle_oferta(id int primary key auto_increment,
+                            oferta_id int,	
+                            coleccion_id int,
+                            bando int ,
+                            foreign key (oferta_id) references ofertas(id),
+                            foreign key (coleccion_id) references colecciones(id)
+                            
 			);
 
 -- PROCEDIMIENTOS ALMACENADOS
